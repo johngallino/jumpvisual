@@ -1,0 +1,737 @@
+city, state_id, state_name, county, longitude, latitude, zips, fips id
+Old Bridge,NJ,New Jersey,Middlesex,40.3946,-74.3323,8857,1840005416
+Somers Point,NJ,New Jersey,Atlantic,39.3167,-74.6069,8244,1840001537
+Franklinville,NJ,New Jersey,Gloucester,39.6182,-75.0757,8322,1840033280
+Allamuchy,NJ,New Jersey,Warren,40.9223,-74.8114,07840 07820,1840024215
+Laurel Springs,NJ,New Jersey,Camden,39.8213,-75.0054,8021,1840001513
+West Belmar,NJ,New Jersey,Monmouth,40.1707,-74.0376,7719,1840005453
+Pomona,NJ,New Jersey,Atlantic,39.4687,-74.5501,08215 08205,1840005596
+Avon-by-the-Sea,NJ,New Jersey,Monmouth,40.1914,-74.0163,7717,1840003676
+Columbia,NJ,New Jersey,Warren,40.926,-75.0945,7832,1840024222
+Singac,NJ,New Jersey,Passaic,40.8848,-74.243,7424,1840033411
+Ralston,NJ,New Jersey,Morris,40.7712,-74.6252,7945,1840016754
+Bayonne,NJ,New Jersey,Hudson,40.6659,-74.1141,7002,1840003595
+Ridgefield Park,NJ,New Jersey,Bergen,40.8544,-74.0199,7660,1840000898
+Towaco,NJ,New Jersey,Morris,40.922,-74.3454,7082,1840033429
+Sewell,NJ,New Jersey,Gloucester,39.7665,-75.1443,8080,1840033406
+Navesink,NJ,New Jersey,Monmouth,40.402,-74.0387,07716 07760,1840005443
+Lake Pine,NJ,New Jersey,Burlington,39.8659,-74.8493,8055,1840033319
+Cinnaminson,NJ,New Jersey,Burlington,39.9968,-74.9927,8077,1840033463
+Budd Lake,NJ,New Jersey,Morris,40.8733,-74.7375,07828 07836,1840005195
+Pottersville,NJ,New Jersey,Somerset,40.7137,-74.7218,7979,1840033390
+Closter,NJ,New Jersey,Bergen,40.9733,-73.9606,7624,1840003538
+Robertsville,NJ,New Jersey,Monmouth,40.3395,-74.2939,07751 07726 07746,1840026509
+Buttzville,NJ,New Jersey,Warren,40.8311,-75.0052,07823 07863,1840024221
+Belmar,NJ,New Jersey,Monmouth,40.18,-74.0257,07719 07715,1840001355
+Independence Corner,NJ,New Jersey,Sussex,41.2101,-74.5513,7461,1840033306
+Millhurst,NJ,New Jersey,Monmouth,40.2537,-74.3415,7726,1840033347
+Island Heights,NJ,New Jersey,Ocean,39.9423,-74.1452,8732,1840003758
+Beach Haven West,NJ,New Jersey,Ocean,39.6702,-74.2337,8050,1840005526
+Wenonah,NJ,New Jersey,Gloucester,39.7913,-75.1484,8090,1840001525
+Leisure Village,NJ,New Jersey,Ocean,40.0444,-74.1852,8701,1840005534
+Cedar Glen Lakes,NJ,New Jersey,Ocean,39.9527,-74.3995,8759,1840033477
+Etra,NJ,New Jersey,Mercer,40.2526,-74.5068,8520,1840033269
+Sicklerville,NJ,New Jersey,Camden,39.7173,-74.9693,8081,1840033409
+Somerdale,NJ,New Jersey,Camden,39.8454,-75.0217,8083,1840001512
+Libertyville,NJ,New Jersey,Sussex,41.2398,-74.6543,7461,1840033328
+Millstone,NJ,New Jersey,Somerset,40.5006,-74.5922,8844,1840001058
+Springside,NJ,New Jersey,Burlington,40.0604,-74.8504,8016,1840033419
+Bloomingdale,NJ,New Jersey,Passaic,41.03,-74.3319,07403 07465,1840000832
+Windsor,NJ,New Jersey,Mercer,40.2423,-74.5813,8561,1840033447
+Burleigh,NJ,New Jersey,Cape May,39.0489,-74.8464,8210,1840024493
+Avenel,NJ,New Jersey,Middlesex,40.5839,-74.2722,7001,1840005410
+Swedesboro,NJ,New Jersey,Gloucester,39.7458,-75.3118,8085,1840001524
+Allentown,NJ,New Jersey,Monmouth,40.1778,-74.5872,8501,1840003683
+Lakehurst,NJ,New Jersey,Ocean,40.0132,-74.3203,8733,1840001491
+Moonachie,NJ,New Jersey,Bergen,40.8409,-74.0587,07074 07608,1840000907
+Burlington,NJ,New Jersey,Burlington,40.0783,-74.8523,8016,1840001477
+South Branch,NJ,New Jersey,Somerset,40.544,-74.6968,8844,1840033453
+Peapack,NJ,New Jersey,Somerset,40.7168,-74.6565,7977,1840033374
+Somerset,NJ,New Jersey,Somerset,40.5082,-74.501,08873 08875,1840005375
+Morganville,NJ,New Jersey,Monmouth,40.3757,-74.2445,7751,1840005442
+Ocean City,NJ,New Jersey,Cape May,39.2687,-74.602,8226,1840001598
+Hibernia,NJ,New Jersey,Morris,40.944,-74.4927,7866,1840033297
+Diamond Beach,NJ,New Jersey,Cape May,38.9588,-74.852,8260,1840005865
+Metuchen,NJ,New Jersey,Middlesex,40.5422,-74.3628,8840,1840003633
+Hamilton,NJ,New Jersey,Monmouth,40.2071,-74.0813,7753,1840033294
+Hammonton,NJ,New Jersey,Atlantic,39.6571,-74.7679,8037,1840003800
+Atco,NJ,New Jersey,Camden,39.7698,-74.8874,8004,1840033217
+Manalapan,NJ,New Jersey,Monmouth,40.2573,-74.3957,8535,1840033335
+Highlands,NJ,New Jersey,Monmouth,40.4037,-73.9898,7732,1840003688
+Paramus,NJ,New Jersey,Bergen,40.9455,-74.0712,07652 07653,1840000916
+Seabrook Farms,NJ,New Jersey,Cumberland,39.5015,-75.219,08302 08313,1840005753
+Seaside Heights,NJ,New Jersey,Ocean,39.9451,-74.0786,8751,1840001487
+Hoboken,NJ,New Jersey,Hudson,40.7452,-74.0279,7030,1840003599
+Victory Lakes,NJ,New Jersey,Gloucester,39.6304,-74.9661,8094,1840005566
+Slackwoods,NJ,New Jersey,Mercer,40.2532,-74.7346,8648,1840033412
+Mystic Island,NJ,New Jersey,Ocean,39.5659,-74.3831,8087,1840005530
+Hurdtown,NJ,New Jersey,Morris,40.9701,-74.599,7849,1840033302
+Lyons,NJ,New Jersey,Somerset,40.6854,-74.5471,7920,1840033331
+Deal,NJ,New Jersey,Monmouth,40.2497,-73.9976,7723,1840003678
+Woodcliff Lake,NJ,New Jersey,Bergen,41.0256,-74.0605,7677,1840000924
+Eatontown,NJ,New Jersey,Monmouth,40.2913,-74.0558,07703 07724 07799,1840003679
+Cedarville,NJ,New Jersey,Cumberland,39.3382,-75.2069,8311,1840005749
+Stanhope,NJ,New Jersey,Sussex,40.9138,-74.7024,7874,1840000788
+Allenwood,NJ,New Jersey,Monmouth,40.1385,-74.103,07719 08720 08724,1840005438
+New Providence,NJ,New Jersey,Union,40.6996,-74.4037,7974,1840001095
+North Caldwell,NJ,New Jersey,Essex,40.8629,-74.2576,7006,1840002793
+North Middletown,NJ,New Jersey,Monmouth,40.439,-74.1184,7748,1840005444
+Cherry Hill Mall,NJ,New Jersey,Camden,39.9384,-75.0116,08002 08034,1840033469
+Belford,NJ,New Jersey,Monmouth,40.4262,-74.0803,07718 07737,1840005439
+Magnolia,NJ,New Jersey,Camden,39.8562,-75.0364,8049,1840003769
+South River,NJ,New Jersey,Middlesex,40.4454,-74.3783,8882,1840001335
+Fort Dix,NJ,New Jersey,Burlington,40.006,-74.6091,8640,1840005516
+Crestwood Village,NJ,New Jersey,Ocean,39.9568,-74.3524,8759,1840005527
+Hopatcong,NJ,New Jersey,Sussex,40.9541,-74.6592,07821 07843 07837,1840003482
+Pluckemin,NJ,New Jersey,Somerset,40.6457,-74.639,7921,1840033385
+Kenvil,NJ,New Jersey,Morris,40.8747,-74.6275,07876 07847,1840024234
+Columbus,NJ,New Jersey,Burlington,40.0726,-74.7207,8022,1840033253
+Franklin Lakes,NJ,New Jersey,Bergen,41.0085,-74.2082,7417,1840003553
+Mount Holly,NJ,New Jersey,Burlington,39.9929,-74.7877,8060,1840033357
+Leonardo,NJ,New Jersey,Monmouth,40.419,-74.0599,7737,1840005448
+Longport,NJ,New Jersey,Atlantic,39.3135,-74.5262,8403,1840003792
+Colts Neck,NJ,New Jersey,Monmouth,40.2876,-74.1724,7722,1840033252
+Vernon,NJ,New Jersey,Sussex,41.1984,-74.4832,7462,1840033433
+Mount Freedom,NJ,New Jersey,Morris,40.8262,-74.5702,7869,1840033355
+Brainards,NJ,New Jersey,Warren,40.7718,-75.17,8865,1840024219
+New Vernon,NJ,New Jersey,Morris,40.7454,-74.4974,7960,1840033365
+Bloomsbury,NJ,New Jersey,Hunterdon,40.6537,-75.084,8804,1840001037
+Manville,NJ,New Jersey,Somerset,40.5422,-74.5892,8835,1840003610
+Chatsworth,NJ,New Jersey,Burlington,39.8176,-74.5349,8019,1840033243
+Cedar Glen West,NJ,New Jersey,Ocean,40.0417,-74.2852,8759,1840033465
+Califon,NJ,New Jersey,Hunterdon,40.7191,-74.8365,7830,1840001038
+Tinton Falls,NJ,New Jersey,Monmouth,40.2708,-74.0949,07712 07753 07724,1840001368
+Westmont,NJ,New Jersey,Camden,39.9098,-75.0479,8108,1840033439
+Harvey Cedars,NJ,New Jersey,Ocean,39.6994,-74.1424,8008,1840003757
+Madison,NJ,New Jersey,Morris,40.7585,-74.417,7940,1840003574
+Glen Rock,NJ,New Jersey,Bergen,40.96,-74.1248,7452,1840003555
+Emerson,NJ,New Jersey,Bergen,40.9749,-74.0239,7630,1840003545
+Flanders,NJ,New Jersey,Morris,40.8457,-74.6949,7836,1840033277
+Atlantic Highlands,NJ,New Jersey,Monmouth,40.4112,-74.0297,7716,1840003685
+Guttenberg,NJ,New Jersey,Hudson,40.7927,-74.0047,7093,1840003597
+Leisure Village West,NJ,New Jersey,Ocean,40.0103,-74.2806,8759,1840033491
+Clinton,NJ,New Jersey,Hunterdon,40.6356,-74.9124,8809,1840003604
+Cape May,NJ,New Jersey,Cape May,38.9408,-74.9043,8204,1840001594
+Albion,NJ,New Jersey,Camden,39.7787,-74.9549,8009,1840033214
+Rockaway,NJ,New Jersey,Morris,40.8969,-74.5155,7866,1840000951
+Branchville,NJ,New Jersey,Sussex,41.1464,-74.7497,07826 07890,1840000785
+Egg Harbor City,NJ,New Jersey,Atlantic,39.5639,-74.5969,8215,1840016638
+Lambertville,NJ,New Jersey,Hunterdon,40.3686,-74.943,8530,1840001039
+Totowa,NJ,New Jersey,Passaic,40.9039,-74.2216,07512 07511,1840000839
+Lebanon,NJ,New Jersey,Hunterdon,40.6433,-74.8352,8833,1840001040
+Gloucester City,NJ,New Jersey,Camden,39.8923,-75.1173,8030,1840003777
+Roseville,NJ,New Jersey,Sussex,40.9576,-74.6916,7874,1840033403
+Oak Ridge,NJ,New Jersey,Passaic,41.0462,-74.486,7438,1840033370
+Lake Como,NJ,New Jersey,Monmouth,40.1705,-74.0262,7719,1840033317
+Pine Ridge at Crestwood,NJ,New Jersey,Ocean,39.9587,-74.3158,8759,1840033484
+Wanaque,NJ,New Jersey,Passaic,41.044,-74.2901,07465 07420,1840000840
+Beach Glen,NJ,New Jersey,Morris,40.9298,-74.4863,7866,1840033226
+Montvale,NJ,New Jersey,Bergen,41.053,-74.0497,7645,1840000906
+Mount Hermon,NJ,New Jersey,Warren,40.9268,-74.9929,7825,1840033356
+Fenwick,NJ,New Jersey,Salem,39.6176,-75.3369,8098,1840033275
+East Rutherford,NJ,New Jersey,Bergen,40.8179,-74.0853,7073,1840003542
+Cranberry Lake,NJ,New Jersey,Sussex,40.9543,-74.7466,7821,1840033254
+Plainfield,NJ,New Jersey,Union,40.6153,-74.4159,07062 07063 07060 07061,1840001090
+Spotswood,NJ,New Jersey,Middlesex,40.3952,-74.3915,8884,1840001336
+Paterson,NJ,New Jersey,Passaic,40.9147,-74.1624,07522 07524 07514 07513 07505 07504 07501 07503 07502 07509 07510 07533 07543 07544,1840000838
+Fair Haven,NJ,New Jersey,Monmouth,40.3618,-74.0392,7704,1840003681
+Mill Brook,NJ,New Jersey,Morris,40.8645,-74.5574,7869,1840033346
+Woodport,NJ,New Jersey,Morris,40.9854,-74.6104,7849,1840033449
+Harlingen,NJ,New Jersey,Somerset,40.4494,-74.6585,8502,1840024278
+Finesville,NJ,New Jersey,Warren,40.6112,-75.1708,8865,1840024224
+Lakewood,NJ,New Jersey,Ocean,40.0943,-74.2117,8701,1840005533
+Interlaken,NJ,New Jersey,Monmouth,40.235,-74.0166,7712,1840003689
+Clayton,NJ,New Jersey,Gloucester,39.6629,-75.0782,08312 08094,1840001520
+Silver Ridge,NJ,New Jersey,Ocean,39.962,-74.2358,8757,1840033466
+West New York,NJ,New Jersey,Hudson,40.7856,-74.0093,7093,1840001035
+Mount Bethel,NJ,New Jersey,Somerset,40.6376,-74.5146,7059,1840033459
+Smithville,NJ,New Jersey,Atlantic,39.4933,-74.4781,08205 08231,1840024384
+Netcong,NJ,New Jersey,Morris,40.8979,-74.7023,7857,1840003580
+Ringwood,NJ,New Jersey,Passaic,41.1063,-74.2754,7456,1840000835
+Woodstown,NJ,New Jersey,Salem,39.6503,-75.325,8098,1840001531
+Stirling,NJ,New Jersey,Morris,40.672,-74.4949,7980,1840033421
+Keyport,NJ,New Jersey,Monmouth,40.4327,-74.2013,7735,1840003691
+Quinton,NJ,New Jersey,Salem,39.5473,-75.4085,08079 08072,1840024375
+Brielle,NJ,New Jersey,Monmouth,40.1048,-74.0637,8730,1840001357
+Saddle River,NJ,New Jersey,Bergen,41.0273,-74.0956,7458,1840000903
+Belleplain,NJ,New Jersey,Cape May,39.266,-74.8674,8270,1840026666
+Erma,NJ,New Jersey,Cape May,38.9971,-74.8931,8204,1840005863
+Hurffville,NJ,New Jersey,Gloucester,39.7626,-75.1082,8080,1840033303
+Pine Lake Park,NJ,New Jersey,Ocean,40.0014,-74.2592,08759 08757,1840024354
+Hornerstown,NJ,New Jersey,Monmouth,40.1062,-74.514,8514,1840033301
+River Edge,NJ,New Jersey,Bergen,40.9269,-74.0387,7661,1840000900
+Southard,NJ,New Jersey,Monmouth,40.1384,-74.2249,7731,1840033415
+Johnsonburg,NJ,New Jersey,Warren,40.965,-74.8783,07846 07821 07825,1840024230
+Kenilworth,NJ,New Jersey,Union,40.6782,-74.289,7033,1840003616
+Monroe,NJ,New Jersey,Sussex,41.1145,-74.6341,7871,1840033350
+Red Bank,NJ,New Jersey,Monmouth,40.348,-74.0674,7701,1840001358
+Stone Harbor,NJ,New Jersey,Cape May,39.0425,-74.7691,8247,1840001599
+Sea Bright,NJ,New Jersey,Monmouth,40.3653,-73.9769,7760,1840001361
+Perth Amboy,NJ,New Jersey,Middlesex,40.5204,-74.2724,08861 08862,1840001340
+Milltown,NJ,New Jersey,Middlesex,40.4503,-74.435,8850,1840001338
+Ridgewood,NJ,New Jersey,Bergen,40.9822,-74.1126,07450 07451,1840000899
+McAfee,NJ,New Jersey,Sussex,41.1784,-74.5404,7462,1840033342
+Edgewater Park,NJ,New Jersey,Burlington,40.0682,-74.9007,8010,1840033265
+Barnsboro,NJ,New Jersey,Gloucester,39.7618,-75.1599,8080,1840033224
+Ross Corner,NJ,New Jersey,Sussex,41.1274,-74.7135,7822,1840024181
+Leonia,NJ,New Jersey,Bergen,40.8638,-73.9898,7605,1840000904
+Wildwood,NJ,New Jersey,Cape May,38.9886,-74.8199,8260,1840001602
+Vernon Valley,NJ,New Jersey,Sussex,41.2396,-74.4833,07461 07418,1840033487
+Princeton Meadows,NJ,New Jersey,Middlesex,40.3333,-74.5627,08536 08512,1840033474
+Groveville,NJ,New Jersey,Mercer,40.1678,-74.6513,8620,1840024323
+Mount Royal,NJ,New Jersey,Gloucester,39.8101,-75.2113,8061,1840033361
+Beattystown,NJ,New Jersey,Warren,40.8223,-74.8502,7840,1840005192
+Kearny,NJ,New Jersey,Hudson,40.7526,-74.1202,07032 07099,1840003601
+Landing,NJ,New Jersey,Morris,40.9051,-74.6652,7850,1840033323
+New Egypt,NJ,New Jersey,Ocean,40.0643,-74.5285,8533,1840005531
+Freewood Acres,NJ,New Jersey,Monmouth,40.169,-74.2379,7731,1840033281
+Hopewell,NJ,New Jersey,Mercer,40.3889,-74.7638,8525,1840003709
+Hamburg,NJ,New Jersey,Sussex,41.1485,-74.5735,7419,1840003481
+Leesburg,NJ,New Jersey,Cumberland,39.2568,-74.9874,8327,1840033325
+Hackensack,NJ,New Jersey,Bergen,40.8889,-74.0461,07601 07602,1840003556
+Edinburg,NJ,New Jersey,Mercer,40.2582,-74.616,8550,1840033266
+Augusta,NJ,New Jersey,Sussex,41.129,-74.7282,7822,1840033221
+Bedminster,NJ,New Jersey,Somerset,40.6807,-74.6454,7921,1840033227
+Mendham,NJ,New Jersey,Morris,40.7687,-74.6004,7945,1840003575
+New Sharon,NJ,New Jersey,Monmouth,40.2062,-74.5504,8691,1840033364
+Monmouth Junction,NJ,New Jersey,Middlesex,40.381,-74.5435,8852,1840005415
+Manasquan,NJ,New Jersey,Monmouth,40.1185,-74.0449,8736,1840003674
+North Wildwood,NJ,New Jersey,Cape May,39.0047,-74.7995,8260,1840001597
+Phillipsburg,NJ,New Jersey,Warren,40.6895,-75.1821,8865,1840000944
+Tansboro,NJ,New Jersey,Camden,39.769,-74.9196,8009,1840033425
+Buddtown,NJ,New Jersey,Burlington,39.9393,-74.7029,8088,1840033239
+Toms River,NJ,New Jersey,Ocean,39.993,-74.1855,08755 08753 08754 08756,1840005536
+Oceanport,NJ,New Jersey,Monmouth,40.316,-74.0205,07703 07757,1840001365
+Blackwood,NJ,New Jersey,Camden,39.7982,-75.0629,8012,1840005560
+Bergenfield,NJ,New Jersey,Bergen,40.9233,-73.9982,7621,1840000893
+Silverton,NJ,New Jersey,Ocean,40.016,-74.1449,8753,1840033410
+Sharptown,NJ,New Jersey,Salem,39.6557,-75.3652,8098,1840033407
+Fanwood,NJ,New Jersey,Union,40.6417,-74.3857,7023,1840003614
+Little Silver,NJ,New Jersey,Monmouth,40.3358,-74.0346,7739,1840003671
+Jefferson,NJ,New Jersey,Gloucester,39.7537,-75.2118,8062,1840033310
+Harmony,NJ,New Jersey,Warren,40.7501,-75.14,8865,1840024228
+North Cape May,NJ,New Jersey,Cape May,38.9765,-74.9516,8204,1840005866
+Pennsville,NJ,New Jersey,Salem,39.6507,-75.5078,08023 08070,1840016710
+Neshanic Station,NJ,New Jersey,Somerset,40.5082,-74.7302,8853,1840033363
+Pleasant Plains,NJ,New Jersey,Somerset,40.4523,-74.5696,08823 08873,1840033383
+Elizabeth,NJ,New Jersey,Union,40.6655,-74.1918,07208 07202 07201 07206 07207,1840003613
+Bradley Beach,NJ,New Jersey,Monmouth,40.2018,-74.0122,7720,1840001356
+Everett,NJ,New Jersey,Monmouth,40.3543,-74.1465,7738,1840033270
+Sussex,NJ,New Jersey,Sussex,41.2096,-74.6076,7461,1840000789
+Hawthorne,NJ,New Jersey,Passaic,40.9579,-74.1582,07506 07507,1840003513
+Port Norris,NJ,New Jersey,Cumberland,39.2514,-75.0413,8349,1840005750
+Montville,NJ,New Jersey,Morris,40.9148,-74.3838,7045,1840033352
+Ridgefield,NJ,New Jersey,Bergen,40.8312,-74.0146,7657,1840000897
+Fords,NJ,New Jersey,Middlesex,40.5415,-74.3123,08840 08863 07095,1840005409
+New Milford,NJ,New Jersey,Bergen,40.9339,-74.0195,7646,1840000908
+Chatham,NJ,New Jersey,Morris,40.7405,-74.3838,7928,1840000948
+Alpine,NJ,New Jersey,Bergen,40.9617,-73.92,7620,1840003551
+Highland Park,NJ,New Jersey,Middlesex,40.5006,-74.4284,8904,1840003636
+Macopin,NJ,New Jersey,Passaic,41.0523,-74.3888,7480,1840033332
+Matawan,NJ,New Jersey,Monmouth,40.4126,-74.2365,7747,1840003675
+Upper Saddle River,NJ,New Jersey,Bergen,41.0633,-74.0987,7458,1840000920
+Pompton Lakes,NJ,New Jersey,Passaic,41.0028,-74.2857,7442,1840000833
+Repaupo,NJ,New Jersey,Gloucester,39.7998,-75.2988,8085,1840033398
+Mount Arlington,NJ,New Jersey,Morris,40.9188,-74.6391,07850 07856,1840003579
+Deans,NJ,New Jersey,Middlesex,40.4043,-74.516,8852,1840033259
+Westfield,NJ,New Jersey,Union,40.6517,-74.3434,07090 07091,1840001096
+Leisure Knoll,NJ,New Jersey,Ocean,40.0186,-74.2908,8759,1840033482
+Bordentown,NJ,New Jersey,Burlington,40.1494,-74.7084,8505,1840001476
+Fort Lee,NJ,New Jersey,Bergen,40.8507,-73.9711,7024,1840003552
+Basking Ridge,NJ,New Jersey,Somerset,40.7062,-74.5493,7920,1840033225
+Scobeyville,NJ,New Jersey,Monmouth,40.2971,-74.1432,7722,1840033405
+North Arlington,NJ,New Jersey,Bergen,40.7872,-74.1269,7031,1840000909
+Prospect Park,NJ,New Jersey,Passaic,40.9381,-74.1738,7508,1840000834
+Pleasantville,NJ,New Jersey,Atlantic,39.3897,-74.5168,8232,1840001535
+South Bound Brook,NJ,New Jersey,Somerset,40.5535,-74.5279,8880,1840001057
+Homestead Park,NJ,New Jersey,Morris,40.6901,-74.4502,7933,1840033300
+Glen Ridge,NJ,New Jersey,Essex,40.804,-74.2043,7028,1840005356
+Ironia,NJ,New Jersey,Morris,40.8229,-74.6257,7869,1840033307
+Owens,NJ,New Jersey,Sussex,41.2637,-74.5279,7461,1840033372
+Riverton,NJ,New Jersey,Burlington,40.0115,-75.0149,08077 08076,1840001478
+Wharton,NJ,New Jersey,Morris,40.8999,-74.5808,7885,1840000955
+Union Beach,NJ,New Jersey,Monmouth,40.4455,-74.17,7735,1840001369
+Marksboro,NJ,New Jersey,Warren,40.9881,-74.9061,7825,1840024231
+Audubon,NJ,New Jersey,Camden,39.8906,-75.0723,8106,1840003775
+Haddon Heights,NJ,New Jersey,Camden,39.8791,-75.0646,8035,1840003779
+Waterford Works,NJ,New Jersey,Camden,39.7232,-74.8491,8089,1840033436
+Ashland,NJ,New Jersey,Camden,39.8781,-75.0085,08003 08034,1840033467
+Oradell,NJ,New Jersey,Bergen,40.9562,-74.0314,7649,1840000914
+Haworth,NJ,New Jersey,Bergen,40.9622,-73.9976,7641,1840003559
+Hazlet,NJ,New Jersey,Monmouth,40.4157,-74.191,7730,1840033295
+Flemington,NJ,New Jersey,Hunterdon,40.5086,-74.8601,8822,1840003605
+Seaside Park,NJ,New Jersey,Ocean,39.9259,-74.0781,8752,1840001488
+Short Hills,NJ,New Jersey,Essex,40.7389,-74.3277,7078,1840033408
+Moorestown,NJ,New Jersey,Burlington,39.9671,-74.9427,8057,1840033353
+Bellmawr,NJ,New Jersey,Camden,39.8665,-75.0942,08031 08099,1840000731
+Brigantine,NJ,New Jersey,Atlantic,39.4127,-74.3802,8203,1840001533
+White Meadow Lake,NJ,New Jersey,Morris,40.924,-74.5122,7866,1840005198
+Troy Hills,NJ,New Jersey,Morris,40.8529,-74.3921,7054,1840033430
+Demarest,NJ,New Jersey,Bergen,40.955,-73.9568,7627,1840003540
+Audubon Park,NJ,New Jersey,Camden,39.8966,-75.0889,8106,1840033220
+Sea Girt,NJ,New Jersey,Monmouth,40.1308,-74.0356,8750,1840001362
+Dumont,NJ,New Jersey,Bergen,40.945,-73.9925,7628,1840003541
+Deepwater,NJ,New Jersey,Salem,39.6834,-75.4905,8023,1840033260
+Presidential Lakes Estates,NJ,New Jersey,Burlington,39.915,-74.5648,8015,1840005520
+Adelphia,NJ,New Jersey,Monmouth,40.2182,-74.2563,7728,1840033213
+Vineland,NJ,New Jersey,Cumberland,39.4652,-74.9981,08344 08360 08361 08362,1840001551
+Helmetta,NJ,New Jersey,Middlesex,40.3778,-74.4238,8828,1840003635
+Locust,NJ,New Jersey,Monmouth,40.3946,-74.0263,7760,1840033456
+Awosting,NJ,New Jersey,Passaic,41.1545,-74.3365,7421,1840033222
+Rancocas Woods,NJ,New Jersey,Burlington,39.989,-74.8602,8054,1840033395
+Boonton,NJ,New Jersey,Morris,40.9047,-74.4048,7005,1840000946
+Summit,NJ,New Jersey,Union,40.7154,-74.3648,07901 07902,1840000999
+Brooklawn,NJ,New Jersey,Camden,39.8787,-75.1207,8030,1840001506
+Griggstown,NJ,New Jersey,Somerset,40.4399,-74.599,8540,1840024277
+Carteret,NJ,New Jersey,Middlesex,40.5849,-74.2285,7008,1840001331
+Margate City,NJ,New Jersey,Atlantic,39.3307,-74.5071,8402,1840003793
+Society Hill,NJ,New Jersey,Middlesex,40.5344,-74.4577,8854,1840033486
+Vista Center,NJ,New Jersey,Ocean,40.1585,-74.3227,8527,1840033475
+Rocky Hill,NJ,New Jersey,Somerset,40.4001,-74.6405,8553,1840001055
+North Branch,NJ,New Jersey,Somerset,40.602,-74.6774,8876,1840033369
+Tenafly,NJ,New Jersey,Bergen,40.9174,-73.9529,7670,1840000918
+Cliffwood Beach,NJ,New Jersey,Monmouth,40.4428,-74.2179,7735,1840005440
+Lower Squankum,NJ,New Jersey,Monmouth,40.1587,-74.1568,7731,1840033329
+Lake Hiawatha,NJ,New Jersey,Morris,40.8826,-74.3815,7034,1840033318
+Asbury,NJ,New Jersey,Warren,40.7004,-75.0122,8802,1840024217
+Auburn,NJ,New Jersey,Salem,39.7109,-75.3677,8085,1840033219
+Delanco,NJ,New Jersey,Burlington,40.0507,-74.9535,8075,1840033261
+Concordia,NJ,New Jersey,Middlesex,40.3117,-74.4477,8831,1840005412
+Shiloh,NJ,New Jersey,Cumberland,39.4594,-75.297,8353,1840001549
+Tabernacle,NJ,New Jersey,Burlington,39.844,-74.7102,8088,1840033423
+Runnemede,NJ,New Jersey,Camden,39.8521,-75.074,8078,1840001511
+Olivet,NJ,New Jersey,Salem,39.5401,-75.1728,8318,1840005592
+Gillette,NJ,New Jersey,Morris,40.674,-74.466,7933,1840033284
+Woodland Park,NJ,New Jersey,Passaic,40.8898,-74.1949,7424,1840000841
+Parsippany,NJ,New Jersey,Morris,40.8579,-74.426,7054,1840033373
+Holmdel,NJ,New Jersey,Monmouth,40.3451,-74.184,7733,1840033299
+West Berlin,NJ,New Jersey,Camden,39.8087,-74.9413,8091,1840033437
+Fries Mill,NJ,New Jersey,Gloucester,39.6562,-75.0452,8322,1840033282
+Dover Beaches South,NJ,New Jersey,Ocean,39.9538,-74.0804,8751,1840005529
+Hainesburg,NJ,New Jersey,Warren,40.9543,-75.0631,7832,1840024227
+Atsion,NJ,New Jersey,Burlington,39.7426,-74.726,8088,1840033218
+Pitman,NJ,New Jersey,Gloucester,39.7332,-75.1307,8071,1840001521
+Oaklyn,NJ,New Jersey,Camden,39.9023,-75.0815,8107,1840001515
+Rudeville,NJ,New Jersey,Sussex,41.1495,-74.5446,7419,1840033404
+Wood-Lynne,NJ,New Jersey,Camden,39.9167,-75.0956,8107,1840033448
+Linwood,NJ,New Jersey,Atlantic,39.3435,-74.5707,8221,1840016701
+Yardville,NJ,New Jersey,Mercer,40.1849,-74.6601,08691 08620,1840026523
+Allendale,NJ,New Jersey,Bergen,41.0332,-74.1332,7401,1840003550
+Lincroft,NJ,New Jersey,Monmouth,40.3391,-74.1282,7738,1840005449
+South Amboy,NJ,New Jersey,Middlesex,40.4851,-74.2831,8879,1840001333
+Sewaren,NJ,New Jersey,Middlesex,40.5506,-74.2604,7077,1840005422
+Alpha,NJ,New Jersey,Warren,40.6599,-75.1569,8865,1840003572
+Victory Gardens,NJ,New Jersey,Morris,40.8762,-74.5434,7801,1840000954
+Port Republic,NJ,New Jersey,Atlantic,39.5327,-74.4852,8241,1840001536
+Brass Castle,NJ,New Jersey,Warren,40.7622,-75.0139,7882,1840005193
+Loch Arbour,NJ,New Jersey,Monmouth,40.2323,-74.0012,7711,1840003672
+Waldwick,NJ,New Jersey,Bergen,41.0132,-74.1262,7463,1840000921
+Ocean Acres,NJ,New Jersey,Ocean,39.743,-74.2804,08050 08005,1840033483
+Jersey City,NJ,New Jersey,Hudson,40.7161,-74.0683,07310 07311 07302 07307 07306 07305 07304 07097 07303 07308 07395 07399,1840003600
+Cedar Knolls,NJ,New Jersey,Morris,40.822,-74.4488,7927,1840033242
+Ten Mile Run,NJ,New Jersey,Somerset,40.4219,-74.589,08823 08540,1840033462
+South Plainfield,NJ,New Jersey,Middlesex,40.5746,-74.4151,7080,1840001334
+Hackettstown,NJ,New Jersey,Warren,40.854,-74.8257,7840,1840003573
+Lafayette,NJ,New Jersey,Sussex,41.0984,-74.6885,7848,1840033316
+Roosevelt,NJ,New Jersey,Monmouth,40.2211,-74.4725,08555 08535,1840001359
+Absecon,NJ,New Jersey,Atlantic,39.4221,-74.4941,8201,1840003797
+Raritan,NJ,New Jersey,Somerset,40.573,-74.6432,8869,1840001054
+Middlebush,NJ,New Jersey,Somerset,40.5015,-74.5349,8873,1840024280
+Great Meadows,NJ,New Jersey,Warren,40.877,-74.9036,7838,1840024225
+Laurel Lake,NJ,New Jersey,Cumberland,39.3265,-75.0306,8332,1840005752
+Trenton,NJ,New Jersey,Mercer,40.2237,-74.764,08638 08611 08618 08629 08609 08608 08601 08602 08603 08604 08605 08606 08607 08625 08645 08646 08647 08650 08666 08695,1840001383
+Collingwood Park,NJ,New Jersey,Monmouth,40.2223,-74.1338,7727,1840033251
+Lakeside,NJ,New Jersey,Passaic,41.1818,-74.336,7421,1840033320
+Lake Telemark,NJ,New Jersey,Morris,40.9605,-74.4967,7866,1840005196
+Kingston,NJ,New Jersey,Somerset,40.3818,-74.6113,08528 08540,1840033313
+Union City,NJ,New Jersey,Hudson,40.7675,-74.0323,7087,1840001034
+Highland Lakes,NJ,New Jersey,Sussex,41.1716,-74.4643,07462 07422,1840033298
+Weston,NJ,New Jersey,Somerset,40.5224,-74.5765,8873,1840033440
+Garfield,NJ,New Jersey,Bergen,40.8791,-74.1083,7026,1840003554
+Glenwood,NJ,New Jersey,Sussex,41.2512,-74.4896,7418,1840033288
+Golden Triangle,NJ,New Jersey,Camden,39.9289,-75.0399,8002,1840033471
+Pine Valley,NJ,New Jersey,Camden,39.7869,-74.9741,8021,1840001510
+Pine Brook,NJ,New Jersey,Morris,40.8604,-74.3404,7058,1840033379
+Old Tappan,NJ,New Jersey,Bergen,41.0164,-73.9856,7675,1840000913
+Readington,NJ,New Jersey,Hunterdon,40.5687,-74.7377,8889,1840033396
+Glendora,NJ,New Jersey,Camden,39.8405,-75.0678,8029,1840033286
+Clarksville,NJ,New Jersey,Mercer,40.2965,-74.6802,8648,1840033247
+Upper Montclair,NJ,New Jersey,Essex,40.8427,-74.2016,7043,1840024255
+Beverly,NJ,New Jersey,Burlington,40.065,-74.9217,8010,1840001475
+Morristown,NJ,New Jersey,Morris,40.7966,-74.4772,07960 07962 07963,1840003577
+Taylortown,NJ,New Jersey,Morris,40.9379,-74.3946,7005,1840033426
+Marcella,NJ,New Jersey,Morris,40.987,-74.4743,7866,1840033338
+Marshalltown,NJ,New Jersey,Salem,39.6376,-75.4533,8079,1840033340
+Leisuretowne,NJ,New Jersey,Burlington,39.8987,-74.7052,8088,1840005521
+Woods Tavern,NJ,New Jersey,Somerset,40.5023,-74.6446,8844,1840033450
+Wickatunk,NJ,New Jersey,Monmouth,40.3501,-74.2479,7751,1840033444
+Pennington,NJ,New Jersey,Mercer,40.3263,-74.7906,8534,1840001382
+West Long Branch,NJ,New Jersey,Monmouth,40.2883,-74.0186,7764,1840001370
+Ocean Grove,NJ,New Jersey,Monmouth,40.2119,-74.0079,7756,1840005446
+Green Village,NJ,New Jersey,Morris,40.7393,-74.4535,7935,1840033292
+Blue Anchor,NJ,New Jersey,Camden,39.6896,-74.8827,8037,1840033230
+Voorhees,NJ,New Jersey,Somerset,40.4822,-74.4924,8873,1840033435
+Bradley Gardens,NJ,New Jersey,Somerset,40.5712,-74.6679,8807,1840033232
+Leisure Village East,NJ,New Jersey,Ocean,40.038,-74.1683,8701,1840033212
+Millville,NJ,New Jersey,Cumberland,39.3903,-75.0561,8332,1840001550
+Shark River Hills,NJ,New Jersey,Monmouth,40.1936,-74.0477,7753,1840005450
+Lavallette,NJ,New Jersey,Ocean,39.9697,-74.0721,8735,1840001492
+West Creek,NJ,New Jersey,Ocean,39.6346,-74.3071,8092,1840033438
+Bennetts Mills,NJ,New Jersey,Ocean,40.129,-74.2751,8527,1840033229
+Farmingdale,NJ,New Jersey,Monmouth,40.1984,-74.1701,7727,1840003686
+Newport,NJ,New Jersey,Cumberland,39.2968,-75.1766,8345,1840033368
+Northfield,NJ,New Jersey,Atlantic,39.3723,-74.5556,8225,1840001538
+Lincoln Park,NJ,New Jersey,Morris,40.9239,-74.3035,7035,1840000953
+Gladstone,NJ,New Jersey,Somerset,40.7226,-74.6654,7934,1840033285
+Lenola,NJ,New Jersey,Burlington,39.9623,-74.9824,8057,1840033326
+Kresson,NJ,New Jersey,Camden,39.8576,-74.9213,8053,1840033315
+Twin Rivers,NJ,New Jersey,Mercer,40.263,-74.4915,8520,1840005474
+Newark,NJ,New Jersey,Essex,40.7242,-74.1724,07103 07102 07105 07104 07107 07106 07108 07112 07114 07101 07175 07184 07188 07189 07191 07192 07193 07195 07198 07199,1840002791
+Frenchtown,NJ,New Jersey,Hunterdon,40.5279,-75.0562,8825,1840003606
+Bernardsville,NJ,New Jersey,Somerset,40.7268,-74.5919,7924,1840001052
+Ventnor City,NJ,New Jersey,Atlantic,39.3457,-74.486,8406,1840001539
+Washington,NJ,New Jersey,Warren,40.7586,-74.9826,7882,1840000945
+Andover,NJ,New Jersey,Sussex,40.9864,-74.7429,7821,1840003479
+Folsom,NJ,New Jersey,Atlantic,39.5928,-74.8426,08094 08037,1840003799
+Ewansville,NJ,New Jersey,Burlington,39.9784,-74.7352,8088,1840033273
+Camden,NJ,New Jersey,Camden,39.9361,-75.1072,08104 08105 08102 08103 08101,1840001507
+Robbinsville,NJ,New Jersey,Mercer,40.2197,-74.6273,8691,1840025550
+Darlington,NJ,New Jersey,Bergen,41.0804,-74.1821,7430,1840033258
+Penns Neck,NJ,New Jersey,Mercer,40.3323,-74.6368,8540,1840033376
+Broadway,NJ,New Jersey,Warren,40.7356,-75.0494,07882 08808,1840024220
+Buena,NJ,New Jersey,Atlantic,39.5283,-74.9448,08326 08310 08341 08360,1840001534
+Whitesboro,NJ,New Jersey,Cape May,39.0417,-74.8674,08210 08252,1840033443
+Garwood,NJ,New Jersey,Union,40.6512,-74.3231,7027,1840003615
+Land of Pines,NJ,New Jersey,Monmouth,40.1582,-74.2288,7731,1840033322
+Sparta,NJ,New Jersey,Sussex,41.0334,-74.6385,7871,1840033416
+Far Hills,NJ,New Jersey,Somerset,40.6905,-74.6257,7931,1840003611
+Evesboro,NJ,New Jersey,Burlington,39.9134,-74.9235,8053,1840033271
+Red Lion,NJ,New Jersey,Burlington,39.8896,-74.7446,8088,1840033397
+Anderson,NJ,New Jersey,Warren,40.7614,-74.9304,07882 07865,1840024216
+Spring Lake Heights,NJ,New Jersey,Monmouth,40.1521,-74.0429,7762,1840001367
+Butler,NJ,New Jersey,Morris,40.9991,-74.3472,7405,1840000947
+Winslow,NJ,New Jersey,Camden,39.6573,-74.8624,8095,1840033446
+Millington,NJ,New Jersey,Morris,40.6773,-74.5177,7946,1840033348
+Paulsboro,NJ,New Jersey,Gloucester,39.8401,-75.2398,8066,1840001523
+Linden,NJ,New Jersey,Union,40.6251,-74.238,7036,1840001094
+Tavistock,NJ,New Jersey,Camden,39.8757,-75.0276,8033,1840001517
+Bay Head,NJ,New Jersey,Ocean,40.07,-74.048,8742,1840003756
+West Freehold,NJ,New Jersey,Monmouth,40.2324,-74.2943,7728,1840005454
+Tennent,NJ,New Jersey,Monmouth,40.2796,-74.3343,7726,1840033427
+Bakersville,NJ,New Jersey,Mercer,40.2748,-74.7063,8648,1840033223
+Brookfield,NJ,New Jersey,Camden,40.8183,-75.0612,7823,1840033464
+Manahawkin,NJ,New Jersey,Ocean,39.693,-74.2493,8050,1840005535
+Berlin,NJ,New Jersey,Camden,39.7914,-74.9373,8009,1840001505
+Whitman Square,NJ,New Jersey,Gloucester,39.7459,-75.0343,8012,1840033461
+Florham Park,NJ,New Jersey,Morris,40.7772,-74.3953,07961 07932,1840003582
+Pellettown,NJ,New Jersey,Sussex,41.1615,-74.6746,7822,1840033375
+Long Branch,NJ,New Jersey,Monmouth,40.2965,-73.9915,7740,1840003673
+Princeton Junction,NJ,New Jersey,Mercer,40.3207,-74.6236,08550 08540,1840005472
+Harrington Park,NJ,New Jersey,Bergen,40.9899,-73.9802,7640,1840003557
+Maple Shade,NJ,New Jersey,Burlington,39.9526,-74.9924,8052,1840033337
+Gilford Park,NJ,New Jersey,Ocean,39.9487,-74.1371,8753,1840033283
+Bridgeport,NJ,New Jersey,Gloucester,39.8009,-75.3474,8014,1840033234
+Ship Bottom,NJ,New Jersey,Ocean,39.6458,-74.1834,8008,1840001489
+Lodi,NJ,New Jersey,Bergen,40.8784,-74.0815,7644,1840003535
+Hasbrouck Heights,NJ,New Jersey,Bergen,40.862,-74.0742,7604,1840003558
+Golf View,NJ,New Jersey,Salem,39.7007,-75.4694,8069,1840033289
+Collings Lakes,NJ,New Jersey,Atlantic,39.5939,-74.882,8094,1840005595
+Ho-Ho-Kus,NJ,New Jersey,Bergen,41.0002,-74.0975,7423,1840003561
+Point Pleasant Beach,NJ,New Jersey,Ocean,40.0927,-74.0457,8742,1840001486
+Teterboro,NJ,New Jersey,Bergen,40.8574,-74.0597,07608 07699,1840000919
+Fairton,NJ,New Jersey,Cumberland,39.3758,-75.213,8302,1840001547
+Bridgeton,NJ,New Jersey,Cumberland,39.4284,-75.2284,8302,1840016610
+Dunellen,NJ,New Jersey,Middlesex,40.5902,-74.4656,8812,1840003634
+Long Valley,NJ,New Jersey,Morris,40.7826,-74.7777,7853,1840005197
+Succasunna,NJ,New Jersey,Morris,40.8509,-74.6595,7876,1840024235
+Hightstown,NJ,New Jersey,Mercer,40.2685,-74.525,8520,1840003708
+Plainsboro Center,NJ,New Jersey,Middlesex,40.3311,-74.5938,8536,1840033473
+Hancocks Bridge,NJ,New Jersey,Salem,39.5046,-75.4611,08302 08038,1840024373
+Chesilhurst,NJ,New Jersey,Camden,39.7307,-74.8784,8089,1840001508
+Riviera Beach,NJ,New Jersey,Ocean,40.0979,-74.1001,8724,1840033402
+Gibbsboro,NJ,New Jersey,Camden,39.8331,-74.9656,8026,1840003776
+Rossmoor,NJ,New Jersey,Middlesex,40.336,-74.4726,8831,1840033485
+Riverside Park,NJ,New Jersey,Burlington,40.0384,-74.9746,8075,1840033401
+Mount Fern,NJ,New Jersey,Morris,40.8657,-74.5785,7869,1840033354
+Barnegat Light,NJ,New Jersey,Ocean,39.752,-74.1106,08008 08006,1840003755
+Rahway,NJ,New Jersey,Union,40.6078,-74.2808,7065,1840001091
+Delaware,NJ,New Jersey,Warren,40.8907,-75.0665,7833,1840024223
+Green Knoll,NJ,New Jersey,Somerset,40.6048,-74.615,8807,1840033460
+Piscataway,NJ,New Jersey,Middlesex,40.4993,-74.399,8817,1840033380
+Clyde,NJ,New Jersey,Somerset,40.4874,-74.5132,8873,1840033249
+East Hanover,NJ,New Jersey,Morris,40.8201,-74.3649,7936,1840033479
+Woodbury,NJ,New Jersey,Gloucester,39.8378,-75.1523,8096,1840001527
+Green Grove,NJ,New Jersey,Monmouth,40.2343,-74.0774,7753,1840033290
+Riverside,NJ,New Jersey,Burlington,40.0323,-74.9574,8075,1840033400
+Dennisville,NJ,New Jersey,Cape May,39.1932,-74.8252,8270,1840016637
+Cliffwood,NJ,New Jersey,Monmouth,40.4368,-74.2396,7721,1840033248
+Glenside,NJ,New Jersey,Salem,39.6665,-75.4883,8070,1840033287
+Pedricktown,NJ,New Jersey,Salem,39.7612,-75.4077,8067,1840024374
+Marlboro,NJ,New Jersey,Monmouth,40.3154,-74.2463,7746,1840033339
+Monmouth Beach,NJ,New Jersey,Monmouth,40.3364,-73.9863,7750,1840001364
+North Bergen,NJ,New Jersey,Hudson,40.8043,-74.0121,7047,1840033452
+East Freehold,NJ,New Jersey,Monmouth,40.2718,-74.2426,7728,1840005441
+Allenhurst,NJ,New Jersey,Monmouth,40.2362,-74.0018,7711,1840003682
+Englishtown,NJ,New Jersey,Monmouth,40.2971,-74.3607,7726,1840003680
+Star Cross,NJ,New Jersey,Gloucester,39.6465,-75.0152,8322,1840033420
+Kendall Park,NJ,New Jersey,Middlesex,40.4137,-74.5627,08824 08852,1840005419
+Princeton,NJ,New Jersey,Mercer,40.3563,-74.6694,08540 08542 08541 08543 08544,1840001381
+Penns Grove,NJ,New Jersey,Salem,39.7275,-75.469,8069,1840001530
+South Toms River,NJ,New Jersey,Ocean,39.9415,-74.2092,8757,1840001490
+East Trenton Heights,NJ,New Jersey,Mercer,40.2587,-74.7099,8619,1840033264
+High Bridge,NJ,New Jersey,Hunterdon,40.6684,-74.8938,8829,1840003609
+Roselle Park,NJ,New Jersey,Union,40.6653,-74.2667,7204,1840001093
+Willingboro,NJ,New Jersey,Burlington,40.0279,-74.8691,8046,1840033445
+Port Colden,NJ,New Jersey,Warren,40.7683,-74.9542,7882,1840033388
+Stockholm,NJ,New Jersey,Sussex,41.0895,-74.5171,7460,1840033422
+Oak Valley,NJ,New Jersey,Gloucester,39.8054,-75.1589,8090,1840033371
+Thorofare,NJ,New Jersey,Gloucester,39.8423,-75.1963,8086,1840033428
+New Brunswick,NJ,New Jersey,Middlesex,40.487,-74.445,08901 08903 08906 08933 08989,1840001339
+Ramblewood,NJ,New Jersey,Burlington,39.9322,-74.9525,8054,1840033392
+East Millstone,NJ,New Jersey,Somerset,40.5011,-74.5661,8873,1840024273
+Wood-Ridge,NJ,New Jersey,Bergen,40.8509,-74.0878,7075,1840000925
+Clementon,NJ,New Jersey,Camden,39.8045,-74.985,8021,1840003773
+Bound Brook,NJ,New Jersey,Somerset,40.5676,-74.5385,8805,1840001053
+Strathmore,NJ,New Jersey,Monmouth,40.4018,-74.2194,7747,1840005451
+Mountainside,NJ,New Jersey,Union,40.681,-74.3605,7092,1840003612
+Annandale,NJ,New Jersey,Hunterdon,40.6469,-74.8881,08801 08809,1840033215
+Cliffside Park,NJ,New Jersey,Bergen,40.8221,-73.9878,7010,1840003537
+Westville,NJ,New Jersey,Gloucester,39.8704,-75.1302,8093,1840001526
+Salem,NJ,New Jersey,Salem,39.568,-75.4723,8079,1840001529
+Harrison,NJ,New Jersey,Hudson,40.7431,-74.1532,7029,1840003598
+Whitehouse Station,NJ,New Jersey,Hunterdon,40.6159,-74.772,08833 08889,1840033442
+Edgewater,NJ,New Jersey,Bergen,40.8234,-73.974,7020,1840003543
+Somerville,NJ,New Jersey,Somerset,40.5696,-74.6092,8876,1840001056
+Palmyra,NJ,New Jersey,Burlington,40.0025,-75.0359,8065,1840001479
+Nesco,NJ,New Jersey,Atlantic,39.6382,-74.6965,8037,1840033362
+Middlesex,NJ,New Jersey,Middlesex,40.5744,-74.5011,8846,1840001337
+Estell Manor,NJ,New Jersey,Atlantic,39.3585,-74.7751,08317 08319 08330 08270,1840003796
+Colonia,NJ,New Jersey,Middlesex,40.5929,-74.3151,7067,1840005411
+Cedar Brook,NJ,New Jersey,Camden,39.7154,-74.9007,8081,1840033241
+Jobstown,NJ,New Jersey,Burlington,40.0371,-74.6929,8041,1840033312
+Clarksburg,NJ,New Jersey,Monmouth,40.1887,-74.4407,8510,1840033246
+North Haledon,NJ,New Jersey,Passaic,40.9627,-74.1845,7508,1840000836
+Sea Isle City,NJ,New Jersey,Cape May,39.1538,-74.6964,8243,1840001596
+Cassville,NJ,New Jersey,Ocean,40.1046,-74.3865,8527,1840033240
+Kingston Estates,NJ,New Jersey,Camden,39.9188,-74.9898,8034,1840033314
+Hope,NJ,New Jersey,Warren,40.9098,-74.9647,7825,1840024229
+Iselin,NJ,New Jersey,Middlesex,40.5701,-74.3171,8830,1840005418
+Imlaystown,NJ,New Jersey,Monmouth,40.1676,-74.5152,8501,1840033305
+Midland Park,NJ,New Jersey,Bergen,40.9952,-74.141,7432,1840000905
+West Cape May,NJ,New Jersey,Cape May,38.9423,-74.9377,8204,1840001600
+Ramtown,NJ,New Jersey,Monmouth,40.1144,-74.149,7731,1840033393
+Mount Hope,NJ,New Jersey,Morris,40.9262,-74.5427,7885,1840033358
+Prospect Plains,NJ,New Jersey,Middlesex,40.324,-74.471,8831,1840033391
+Martinsville,NJ,New Jersey,Somerset,40.6034,-74.5755,08836 08805 08807,1840024279
+Fairview,NJ,New Jersey,Bergen,40.8182,-74.0023,7022,1840003549
+Cape May Court House,NJ,New Jersey,Cape May,39.079,-74.8211,8210,1840005864
+Oxford,NJ,New Jersey,Warren,40.8052,-74.9966,7863,1840005194
+Stratford,NJ,New Jersey,Camden,39.8289,-75.0154,8084,1840001516
+Apshawa,NJ,New Jersey,Passaic,41.0176,-74.3629,7480,1840033216
+Sayreville,NJ,New Jersey,Middlesex,40.4655,-74.3237,08872 08879 08859 08871,1840001332
+Lawnside,NJ,New Jersey,Camden,39.8672,-75.0289,8045,1840001514
+Beemerville,NJ,New Jersey,Sussex,41.2107,-74.6916,7461,1840033228
+Mickleton,NJ,New Jersey,Gloucester,39.7901,-75.2377,8056,1840033345
+Woodbridge,NJ,New Jersey,Middlesex,40.5551,-74.2848,7095,1840005423
+Glen Gardner,NJ,New Jersey,Hunterdon,40.7004,-74.9396,8826,1840003607
+Mount Ephraim,NJ,New Jersey,Camden,39.8805,-75.0915,8059,1840003772
+Belle Mead,NJ,New Jersey,Somerset,40.4645,-74.6725,8502,1840024271
+Green Pond,NJ,New Jersey,Morris,41.0173,-74.4777,7435,1840033291
+Wildwood Crest,NJ,New Jersey,Cape May,38.9717,-74.8383,8260,1840001603
+Tuckerton,NJ,New Jersey,Ocean,39.5973,-74.3306,8087,1840001495
+Carlstadt,NJ,New Jersey,Bergen,40.825,-74.0614,7072,1840000895
+Hampton,NJ,New Jersey,Hunterdon,40.7067,-74.9642,8827,1840003608
+Brunswick Gardens,NJ,New Jersey,Middlesex,40.3907,-74.3363,8857,1840033238
+Turnersville,NJ,New Jersey,Gloucester,39.7666,-75.0614,08080 08012 08032,1840005565
+Bogota,NJ,New Jersey,Bergen,40.8753,-74.0293,7603,1840000894
+Pine Hill,NJ,New Jersey,Camden,39.7879,-74.9858,08009 08021,1840001509
+Mountain Lakes,NJ,New Jersey,Morris,40.8907,-74.4406,7046,1840003578
+Mercerville,NJ,New Jersey,Mercer,40.2361,-74.6917,08690 08619,1840033344
+Masonville,NJ,New Jersey,Burlington,39.9784,-74.8702,8054,1840033341
+Unionville,NJ,New Jersey,Burlington,40.0054,-74.7646,8060,1840033431
+Palisades Park,NJ,New Jersey,Bergen,40.847,-73.9965,7650,1840000915
+North Beach Haven,NJ,New Jersey,Ocean,39.6008,-74.2119,8008,1840005532
+Mount Olive,NJ,New Jersey,Morris,40.8515,-74.7329,7836,1840033359
+Rosenhayn,NJ,New Jersey,Cumberland,39.4787,-75.1379,08352 08302,1840005751
+North Plainfield,NJ,New Jersey,Somerset,40.621,-74.4385,07063 07060,1840001059
+New Village,NJ,New Jersey,Warren,40.7184,-75.0774,8886,1840033366
+Ogdensburg,NJ,New Jersey,Sussex,41.0769,-74.5976,7439,1840000787
+Forked River,NJ,New Jersey,Ocean,39.8202,-74.1456,8731,1840005524
+Lumberton,NJ,New Jersey,Burlington,39.9659,-74.8052,8048,1840033330
+Cream Ridge,NJ,New Jersey,Monmouth,40.1351,-74.524,8514,1840033255
+Smalleytown,NJ,New Jersey,Somerset,40.6559,-74.4782,7059,1840033413
+Finderne,NJ,New Jersey,Somerset,40.5626,-74.5744,8807,1840024274
+Browntown,NJ,New Jersey,Middlesex,40.4018,-74.3065,8857,1840033237
+Milford,NJ,New Jersey,Hunterdon,40.5694,-75.0907,8848,1840001041
+Cresskill,NJ,New Jersey,Bergen,40.9405,-73.9597,7626,1840003539
+Mount Rose,NJ,New Jersey,Mercer,40.3693,-74.739,8525,1840033360
+Keansburg,NJ,New Jersey,Monmouth,40.4469,-74.1323,7734,1840003690
+Wanamassa,NJ,New Jersey,Monmouth,40.2366,-74.0294,7712,1840005452
+Barnegat,NJ,New Jersey,Ocean,39.7547,-74.2224,8005,1840005525
+Richwood,NJ,New Jersey,Gloucester,39.714,-75.1735,08028 08071 08074 08062,1840033399
+McCoys Corner,NJ,New Jersey,Sussex,41.1979,-74.6302,7461,1840033343
+Jacksons Mills,NJ,New Jersey,Ocean,40.1479,-74.324,8527,1840033308
+Fair Lawn,NJ,New Jersey,Bergen,40.9358,-74.1177,7410,1840003548
+Bridgeville,NJ,New Jersey,Warren,40.8371,-75.0244,7823,1840033235
+Madison Park,NJ,New Jersey,Middlesex,40.4461,-74.296,08879 08859 08857,1840005421
+Port Reading,NJ,New Jersey,Middlesex,40.567,-74.2476,07077 07001 07064,1840005417
+Mine Hill,NJ,New Jersey,Morris,40.8779,-74.5938,7803,1840033349
+Rumson,NJ,New Jersey,Monmouth,40.3626,-74.0046,7760,1840001360
+Woodbine,NJ,New Jersey,Cape May,39.2284,-74.8097,8270,1840001604
+East Orange,NJ,New Jersey,Essex,40.7651,-74.2118,07018 07017 07019,1840002792
+Plainsboro,NJ,New Jersey,Middlesex,40.3334,-74.6004,8536,1840033381
+Medford Lakes,NJ,New Jersey,Burlington,39.8582,-74.8051,8055,1840003752
+Corbin City,NJ,New Jersey,Atlantic,39.3046,-74.7197,8270,1840003794
+Colesville,NJ,New Jersey,Sussex,41.2751,-74.6499,7461,1840033250
+Plumbsock,NJ,New Jersey,Sussex,41.2187,-74.6707,7461,1840033386
+Roebling,NJ,New Jersey,Burlington,40.1167,-74.7775,8554,1840024353
+Cranbury,NJ,New Jersey,Middlesex,40.3102,-74.5168,8512,1840005413
+Brookside,NJ,New Jersey,Morris,40.7943,-74.5679,7960,1840033236
+Gibbstown,NJ,New Jersey,Gloucester,39.8233,-75.2783,8027,1840005564
+Country Lake Estates,NJ,New Jersey,Burlington,39.9489,-74.5411,8015,1840005518
+Watchung,NJ,New Jersey,Somerset,40.6433,-74.4391,7069,1840001061
+Waretown,NJ,New Jersey,Ocean,39.7898,-74.1925,8758,1840005537
+Marlton,NJ,New Jersey,Burlington,39.9015,-74.9296,8053,1840005522
+Shrewsbury,NJ,New Jersey,Monmouth,40.3249,-74.06,7702,1840001363
+Fieldsboro,NJ,New Jersey,Burlington,40.1362,-74.7297,8505,1840003753
+Westwood,NJ,New Jersey,Bergen,40.9878,-74.0307,7675,1840000923
+Clarksboro,NJ,New Jersey,Gloucester,39.7998,-75.2238,8020,1840033245
+Beckett,NJ,New Jersey,Gloucester,39.7565,-75.3565,8085,1840033476
+Newton,NJ,New Jersey,Sussex,41.0535,-74.7527,7860,1840000786
+Blairstown,NJ,New Jersey,Warren,40.9852,-74.9573,7825,1840024218
+Caldwell,NJ,New Jersey,Essex,40.839,-74.2777,07006 07007,1840005354
+Oakhurst,NJ,New Jersey,Monmouth,40.2607,-74.0263,7755,1840005445
+Barrington,NJ,New Jersey,Camden,39.8689,-75.0514,08007 08033,1840003771
+Northvale,NJ,New Jersey,Bergen,41.0096,-73.9502,7647,1840000910
+Port Monmouth,NJ,New Jersey,Monmouth,40.4337,-74.101,07748 07758,1840005447
+White Horse,NJ,New Jersey,Mercer,40.192,-74.7022,08690 08610,1840005475
+Strathmere,NJ,New Jersey,Cape May,39.1951,-74.6612,8248,1840005868
+Beachwood,NJ,New Jersey,Ocean,39.9282,-74.2022,8722,1840001483
+Lamington,NJ,New Jersey,Somerset,40.6609,-74.7174,7921,1840033321
+Eldridge Park,NJ,New Jersey,Mercer,40.2654,-74.7449,8648,1840033267
+Belvidere,NJ,New Jersey,Warren,40.8295,-75.073,7823,1840000943
+Vienna,NJ,New Jersey,Warren,40.8698,-74.881,07840 07880,1840024233
+Freehold,NJ,New Jersey,Monmouth,40.2595,-74.2753,7728,1840003687
+Mays Landing,NJ,New Jersey,Atlantic,39.4526,-74.7239,08330 08342,1840005597
+Pompton Plains,NJ,New Jersey,Morris,40.9682,-74.2957,7444,1840033387
+Roseland,NJ,New Jersey,Essex,40.8207,-74.3085,7068,1840000998
+Passaic,NJ,New Jersey,Passaic,40.8574,-74.1281,7055,1840000837
+Cross Keys,NJ,New Jersey,Gloucester,39.7134,-75.0296,8094,1840033256
+Dover Beaches North,NJ,New Jersey,Ocean,39.992,-74.0714,8735,1840005528
+Echelon,NJ,New Jersey,Camden,39.8482,-74.9957,8043,1840033470
+Monroeville,NJ,New Jersey,Salem,39.629,-75.1593,8343,1840033351
+Mantoloking,NJ,New Jersey,Ocean,40.0436,-74.0512,8738,1840003754
+Ellisburg,NJ,New Jersey,Camden,39.9199,-75.0093,08002 08034,1840033268
+Braddock,NJ,New Jersey,Camden,39.7009,-74.8896,8037,1840033231
+Blackwells Mills,NJ,New Jersey,Somerset,40.4814,-74.5714,8873,1840033455
+Van Hiseville,NJ,New Jersey,Ocean,40.1118,-74.3426,8527,1840033432
+Rutherford,NJ,New Jersey,Bergen,40.8203,-74.1058,7070,1840000902
+Cape May Point,NJ,New Jersey,Cape May,38.9372,-74.9649,8212,1840001595
+Hillsdale,NJ,New Jersey,Bergen,41.0074,-74.0441,7642,1840003560
+Chester,NJ,New Jersey,Morris,40.7874,-74.6921,7930,1840000949
+Point Pleasant,NJ,New Jersey,Ocean,40.0772,-74.0702,8742,1840001485
+Lake Mohawk,NJ,New Jersey,Sussex,41.0151,-74.6639,7871,1840004955
+Little Ferry,NJ,New Jersey,Bergen,40.8463,-74.0386,7643,1840003534
+Newfoundland,NJ,New Jersey,Passaic,41.0465,-74.4352,7435,1840033367
+Beach Haven,NJ,New Jersey,Ocean,39.5659,-74.2488,8008,1840001482
+Zarephath,NJ,New Jersey,Somerset,40.5361,-74.5745,08873 08890,1840024282
+Newfield,NJ,New Jersey,Gloucester,39.5486,-75.0171,8344,1840001522
+Atlantic City,NJ,New Jersey,Atlantic,39.3795,-74.4524,08401 08404 08405,1840003798
+Spring Lake,NJ,New Jersey,Monmouth,40.1538,-74.0273,7762,1840001366
+Essex Fells,NJ,New Jersey,Essex,40.8268,-74.2798,7021,1840005355
+Dorothy,NJ,New Jersey,Atlantic,39.4007,-74.8238,8317,1840033263
+Asbury Park,NJ,New Jersey,Monmouth,40.2226,-74.0118,7712,1840003684
+Glassboro,NJ,New Jersey,Gloucester,39.7014,-75.1119,8028,1840003789
+Crosswicks,NJ,New Jersey,Burlington,40.1534,-74.6477,8515,1840033257
+Stewartsville,NJ,New Jersey,Warren,40.6939,-75.1115,8886,1840024232
+Roselle,NJ,New Jersey,Union,40.6527,-74.2599,7203,1840001092
+Williamstown,NJ,New Jersey,Gloucester,39.6874,-74.9785,8094,1840016785
+Haledon,NJ,New Jersey,Passaic,40.9363,-74.1886,07508 07538,1840003512
+Pequannock,NJ,New Jersey,Morris,40.9523,-74.2988,7444,1840033377
+Elmer,NJ,New Jersey,Salem,39.5915,-75.1742,8318,1840003791
+Middletown,NJ,New Jersey,Monmouth,40.3943,-74.1171,7748,1840033457
+Woodstock,NJ,New Jersey,Morris,40.9954,-74.526,7438,1840033451
+Mahwah,NJ,New Jersey,Bergen,41.0887,-74.1438,7430,1840033334
+Skillman,NJ,New Jersey,Somerset,40.4247,-74.714,8558,1840024281
+Smithburg,NJ,New Jersey,Monmouth,40.209,-74.3529,7728,1840033414
+Elmwood Park,NJ,New Jersey,Bergen,40.9048,-74.1201,7407,1840003544
+Laurence Harbor,NJ,New Jersey,Middlesex,40.4489,-74.2496,08879 07721 07735,1840005420
+Woodbury Heights,NJ,New Jersey,Gloucester,39.8161,-75.1512,8097,1840001528
+Merchantville,NJ,New Jersey,Camden,39.9501,-75.0503,8109,1840003770
+Pleasant Grove,NJ,New Jersey,Ocean,40.1246,-74.3429,8527,1840033382
+Dayton,NJ,New Jersey,Middlesex,40.3815,-74.5137,8810,1840005414
+Whippany,NJ,New Jersey,Morris,40.8245,-74.4171,7981,1840033441
+Ramsey,NJ,New Jersey,Bergen,41.0595,-74.1457,7446,1840000896
+Hainesport,NJ,New Jersey,Burlington,39.9837,-74.8271,8036,1840033293
+Mantua,NJ,New Jersey,Gloucester,39.794,-75.1721,8051,1840033336
+Jamesburg,NJ,New Jersey,Middlesex,40.3494,-74.4403,8831,1840003637
+Rockleigh,NJ,New Jersey,Bergen,41.0024,-73.9328,7647,1840000901
+Francis Mills,NJ,New Jersey,Ocean,40.1348,-74.3974,8527,1840033279
+Pemberton Heights,NJ,New Jersey,Burlington,39.9565,-74.6767,8068,1840005519
+Englewood,NJ,New Jersey,Bergen,40.8917,-73.9735,7631,1840003546
+Port Murray,NJ,New Jersey,Warren,40.7913,-74.9137,7865,1840033389
+Norwood,NJ,New Jersey,Bergen,40.9932,-73.9509,7648,1840000911
+Clearbrook Park,NJ,New Jersey,Middlesex,40.3097,-74.4644,8831,1840033478
+Lindenwold,NJ,New Jersey,Camden,39.8171,-74.9894,8021,1840000730
+Hutchinson,NJ,New Jersey,Warren,40.7818,-75.1252,8865,1840033304
+Vincentown,NJ,New Jersey,Burlington,39.934,-74.7485,8088,1840033434
+Englewood Cliffs,NJ,New Jersey,Bergen,40.8821,-73.9466,7632,1840003547
+Franklin,NJ,New Jersey,Sussex,41.1101,-74.5886,7416,1840003480
+Weehawken,NJ,New Jersey,Hudson,40.7695,-74.0204,7086,1840033454
+Collingswood,NJ,New Jersey,Camden,39.916,-75.0759,08107 08108,1840016611
+Maywood,NJ,New Jersey,Bergen,40.9024,-74.0632,7607,1840003536
+Stockton,NJ,New Jersey,Hunterdon,40.4062,-74.976,8559,1840001042
+Lawrenceville,NJ,New Jersey,Mercer,40.3018,-74.7378,8648,1840005473
+Browns Mills,NJ,New Jersey,Burlington,39.9736,-74.569,8015,1840005517
+Rio Grande,NJ,New Jersey,Cape May,39.0197,-74.8761,8242,1840005867
+Pemberton,NJ,New Jersey,Burlington,39.9715,-74.6856,8068,1840001480
+National Park,NJ,New Jersey,Gloucester,39.8676,-75.1853,8063,1840003788
+Alloway,NJ,New Jersey,Salem,39.5621,-75.351,08001 08079 08098,1840005590
+Carneys Point,NJ,New Jersey,Salem,39.7072,-75.4674,08023 08069,1840005591
+Florence,NJ,New Jersey,Burlington,40.119,-74.8096,8518,1840033278
+Haddonfield,NJ,New Jersey,Camden,39.8953,-75.0344,8033,1840016699
+Petersburg,NJ,New Jersey,Morris,41.0082,-74.524,7438,1840033378
+Kinnelon,NJ,New Jersey,Morris,40.9847,-74.3863,7405,1840000952
+Springdale,NJ,New Jersey,Somerset,40.607,-74.5088,7059,1840033417
+Jerseyville,NJ,New Jersey,Monmouth,40.2393,-74.2293,7728,1840033311
+East Newark,NJ,New Jersey,Hudson,40.7511,-74.1622,7029,1840003596
+Branchburg Park,NJ,New Jersey,Somerset,40.5723,-74.6849,8876,1840033233
+Neptune City,NJ,New Jersey,Monmouth,40.2002,-74.0335,7753,1840003677
+Juliustown,NJ,New Jersey,Burlington,40.0118,-74.6712,08022 08042,1840026546
+Hewitt,NJ,New Jersey,Passaic,41.1418,-74.3107,7421,1840033296
+Cherry Hill,NJ,New Jersey,Camden,39.9348,-75.0307,8002,1840033244
+Denville,NJ,New Jersey,Morris,40.8923,-74.4774,7834,1840033262
+Avalon,NJ,New Jersey,Cape May,39.0906,-74.7357,8202,1840003808
+Ewan,NJ,New Jersey,Gloucester,39.6987,-75.186,8062,1840033272
+Blawenburg,NJ,New Jersey,Somerset,40.4058,-74.6973,8558,1840024272
+West Wildwood,NJ,New Jersey,Cape May,39.0009,-74.8245,8260,1840001601
+Flagtown,NJ,New Jersey,Somerset,40.517,-74.6843,8821,1840033276
+Yorketown,NJ,New Jersey,Monmouth,40.3064,-74.3385,7726,1840033488
+Mullica Hill,NJ,New Jersey,Gloucester,39.7266,-75.2191,8062,1840016703
+Jacksonville,NJ,New Jersey,Burlington,40.0504,-74.7635,8505,1840033309
+Rancocas,NJ,New Jersey,Burlington,40.0107,-74.8668,8060,1840033394
+Hi-Nella,NJ,New Jersey,Camden,39.8366,-75.0217,8083,1840003780
+Brookdale,NJ,New Jersey,Essex,40.8348,-74.1798,7003,1840024254
+Wallington,NJ,New Jersey,Bergen,40.8535,-74.1067,7057,1840000922
+Ledgewood,NJ,New Jersey,Morris,40.8812,-74.656,7852,1840033324
+Ocean Gate,NJ,New Jersey,Ocean,39.9261,-74.1355,8740,1840001493
+Surf City,NJ,New Jersey,Ocean,39.6621,-74.1698,8008,1840001494
+Holiday Heights,NJ,New Jersey,Ocean,39.9394,-74.2572,8757,1840033481
+Park Ridge,NJ,New Jersey,Bergen,41.0353,-74.0422,7656,1840000917
+Morris Plains,NJ,New Jersey,Morris,40.8357,-74.4785,7950,1840003576
+Hamilton Square,NJ,New Jersey,Mercer,40.2249,-74.6525,08690 08691,1840024324
+Heathcote,NJ,New Jersey,Middlesex,40.3907,-74.5756,08852 08540,1840033480
+Brownville,NJ,New Jersey,Middlesex,40.4009,-74.2959,8857,1840033468
+Riverdale,NJ,New Jersey,Morris,40.9921,-74.3125,7457,1840000950
+Greentree,NJ,New Jersey,Camden,39.899,-74.9614,08003 08034,1840033472
+Dover,NJ,New Jersey,Morris,40.8859,-74.5597,07801 07802,1840003581
+Liberty Corner,NJ,New Jersey,Somerset,40.6648,-74.5774,7920,1840033327
+Crandon Lakes,NJ,New Jersey,Sussex,41.1234,-74.8403,7860,1840004954
+Tabor,NJ,New Jersey,Morris,40.8712,-74.4799,7878,1840033424
+Clifton,NJ,New Jersey,Passaic,40.8631,-74.1575,07014 07013 07012 07011 07015,1840003511
+Pine Beach,NJ,New Jersey,Ocean,39.9358,-74.1699,8741,1840001484
+Elwood,NJ,New Jersey,Atlantic,39.573,-74.7148,08215 08217 08037,1840005594
+Wrightstown,NJ,New Jersey,Burlington,40.0262,-74.6299,08640 08562,1840001481
+Oakland,NJ,New Jersey,Bergen,41.0313,-74.2411,7436,1840000912
+Secaucus,NJ,New Jersey,Hudson,40.7809,-74.0662,07094 07096,1840001033
+Villas,NJ,New Jersey,Cape May,39.0157,-74.935,8251,1840005869
