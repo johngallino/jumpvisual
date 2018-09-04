@@ -1,110 +1,35 @@
 import sqlite3
+import tkinter as tk
 
-atlantic = ('Absecon',
-		'Atlantic City',
-		'Brigantine',
-		'Buena',
-		'Buena Vista Township',
-		'Corbin City',
-		'Egg Harbor City',
-		'Egg Harbor Township',
-		'Estell Manor',
-		'Folsom',
-		'Galloway Township',
-		'Hamilton Township',
-		'Hammonton',
-		'Linwood',
-		'Longport',
-		'Margate City',
-		'Mullica Township',
-		'Northfield',
-		'Pleasantville',
-		'Port Republic',
-		'Somers Point',
-		'Ventnor City',
-		'Weymouth Township')
+
+def center_window(width=300, height=200):
+    # get screen width and height
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+
+    # calculate position x and y coordinates
+    x = (screen_width/2) - (width/2)
+    y = (screen_height/2) - (height/2)
+    root.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
 nj_counties = ('atlantic', 'bergen', 'burlington', 'camden', 'cape may', 'cumberland', 'essex', 'gloucester', 'hudson', 'hunterdon', 
 	'mercer', 'middlesex', 'monmouth', 'morris', 'ocean', 'passaic', 'salem', 'sommerset', 'sussex', 'union', 'warren')
 
-# bergen = ['Allendale',
-# 'Alpine',
-# 'Bergenfield',
-# 'Bogota',
-# 'Carlstadt',
-# 'Cliffside Park',
-# 'Closter',
-# 'Cresskill',
-# 'Demarest',
-# 'Dumont',
-# 'East Rutherford',
-# 'Edgewater',
-# 'Elmwood Park',
-# 'Emerson',
-# 'Englewood',
-# 'Englewood Cliffs',
-# 'Fair Lawn',
-# 'Fairview',
-# 'Fort Lee,
-# 'Franklin Lakes,
-# 'Garfield,
-# 'Glen Rock,
-# 'Hackensack,
-# 'Harrington Park,
-# 'Hasbrouck Heights,
-# 'Haworth,
-# 'Hillsdale,
-# 'Ho-Ho-Kus,
-# 'Leonia,
-# 'Little Ferry,
-# 'Lodi,
-# 'Lyndhurst,
-# 'Mahwah,
-# 'Maywood,
-# 'Midland Park,
-# 'Montvale,
-# 'Moonachie,
-# 'New Milford,
-# 'North Arlington,
-# 'Northvale,
-# 'Norwood,
-# 'Oakland,
-# 'Old Tappan,
-# 'Oradell,
-# 'Palisades Park,
-# 'Paramus,
-# 'Park Ridge,
-# 'Ramsey,
-# 'Ridgefield,
-# 'Ridgefield Park,
-# 'Ridgewood,
-# 'River Edge,
-# 'River Vale,
-# 'Rochelle Park,
-# 'Rockleigh,
-# 'Rutherford,
-# 'Saddle Brook,
-# 'Saddle River,
-# 'South Hackensack,
-# 'Teaneck,
-# 'Tenafly,
-# 'Teterboro,
-# 'Upper Saddle River,
-# 'Waldwick,
-# 'Wallington,
-# 'Washington Township,
-# 'Westwood,
-# 'Wood-Ridge,
-# 'Woodcliff Lake,
-# 'Wyckoff
-# ]
-
 conn = sqlite3.connect('jump.db')
-
 c = conn.cursor()
 
-print("Welcome to the JumpVisual Coverage Wizard! This simple program will collect the towns that you cover to enter into our system. Let's get started...\n\n")
+introtext="""This simple program is intended for JumpVisual staff photographers. It will help you choose the towns that you want (or do not want) to cover, and generate a report at the end to input into our database.\n\nLet's get started..."""
 
+
+root = tk.Tk()
+center_window(500, 400)
+tk.Label(root, text="Welcome to the JumpVisual Coverage Wizard!", padx=15, pady=15).pack()
+tk.Label(root, text=introtext, width=50, wraplength=350, padx=15, pady=15, justify=tk.LEFT).pack()
+tk.Button(root, text="Next >>").pack()
+tk.Button(root, text="Quit", command=root.destroy).pack()
+
+root.mainloop()
+exit()
 # name = input("First, please enter your first and last name:\n")
 
 # states_covered = []
