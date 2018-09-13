@@ -6,6 +6,7 @@ version = "v1.0"
 
 
 
+
 ### FIRST SCREEN
 class Frame1(tk.Frame):
 
@@ -45,8 +46,10 @@ class Frame2(tk.Frame):
                                      font=("TKDefaultFont", 10), wraplength=600)
         tk.Label(self, text="First:").grid(row=2, column=0, sticky=tk.W)
         tk.Label(self, text="Last:").grid(row=2, column=1, sticky=tk.W)
-        self.fname_entry = tk.Entry(self)
-        self.lname_entry = tk.Entry(self)
+        self.f = tk.StringVar()
+        self.l = tk.StringVar()
+        self.fname_entry = tk.Entry(self, textvariable=self.f)
+        self.lname_entry = tk.Entry(self, textvariable=self.l)
         states = tk.Frame(self, pady=20)
         states.grid(row=4, column=0, sticky=tk.W)
         
@@ -95,11 +98,7 @@ class Wizard(tk.Tk):
         self.resizable(width=False, height=False)
         self.leftframe = tk.Frame(width=300, bg="blue")
         self.i = 0
-        self.firstname = tk.StringVar()
-        self.lastname = tk.StringVar()
-        nj_bool = tk.BooleanVar()
-        ny_bool = tk.BooleanVar()
-        ct_bool = tk.BooleanVar()
+        
 
         #version
         tk.Label(self.leftframe, text=version, bg="blue", fg="white").grid(row=1, column=0, sticky=tk.S, padx=3, pady=3)
@@ -146,7 +145,27 @@ class Wizard(tk.Tk):
         self.drawframe(self.i)
 
 
+### USER CLASS
+class User(Wizard):
+    """A class to hold the User's data"""
+    
+    def __init__(self, *args, **kwargs):
+        #super().__init__(*args, **kwargs)
 
+        print("A user has been created")
+        self.firstname = ''
+        self.lastname = ''
+        self.email = ''
+        self.phone = ''
+        self.address = ''
+        self.slack = ''
+        self.abilities = 'P'
+        self.nj_bool = False
+        self.ny_bool = False
+        self.ct_bool = False
+        self.nj_counties = []
+        self.ny_counties = []
+        self.ct_counties = []
 
 
 
@@ -156,8 +175,10 @@ class Wizard(tk.Tk):
 
 
 if __name__ == '__main__': #if this file is being run directly from the terminal (instead of from another py script), run mainloop()
+
     
     app = Wizard()
+    user1 = User()
     app.drawframe(app.i)
     app.mainloop()
     exit()
