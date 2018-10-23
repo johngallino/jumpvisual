@@ -10,7 +10,7 @@ version = "v1.0"
 ### FIRST SCREEN
 class Frame1(tk.Frame):
 
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, User, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
 
         self.header_string = "Welcome to the JumpVisual Coverage Wizard!"
@@ -24,19 +24,18 @@ class Frame1(tk.Frame):
                                  font=("TKDefaultFont", 16), wraplength=500)
         self.top_string_label = ttk.Label(self, text=self.top_string, anchor=tk.W,
                                      font=("TKDefaultFont", 10), wraplength=500)
-
+        
+        self.next_button = ttk.Button(self, text="Next >>", command=lambda:app.next_frame(app.current_frame, app.i))
+        self.next_button.grid(row=3, column=3, sticky=tk.E, padx=10, pady=10)
 
         #placing the widgets inside Frame1
         self.header_label.grid(row=0, column=0, sticky=tk.W)
         self.top_string_label.grid(row=1, column=0, sticky=tk.W, ipady=20)
 
-
-
-
 ### SECOND SCREEN
 class Frame2(tk.Frame):
 
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, User, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
         self.header_string = "Step 1"
         self.top_string = ("Enter your name and the states you cover")
@@ -48,7 +47,8 @@ class Frame2(tk.Frame):
         tk.Label(self, text="Last:").grid(row=2, column=1, sticky=tk.W)
         self.f = tk.StringVar()
         self.l = tk.StringVar()
-        self.fname_entry = tk.Entry(self, textvariable=self.f)
+        self.f.set(user.firstname)
+        self.fname_entry = tk.Entry(self, textvariable=self.f, command=self.f.set(user.firstname))
         self.lname_entry = tk.Entry(self, textvariable=self.l)
         states = tk.Frame(self, pady=20)
         states.grid(row=4, column=0, sticky=tk.W)
@@ -56,6 +56,13 @@ class Frame2(tk.Frame):
         tk.Checkbutton(states, text='NJ').grid(row=0, column=0, sticky=tk.W)
         tk.Checkbutton(states, text='NY').grid(row=1, column=0, sticky=tk.W)
         tk.Checkbutton(states, text='CT').grid(row=2, column=0, sticky=tk.W)
+
+        #next button
+        self.next_button = ttk.Button(self, text="Next >>", command=lambda:app.next_frame(app.current_frame, app.i))
+        self.next_button.grid(row=6, column=3, sticky=tk.E, padx=10, pady=10)
+        #back button
+        self.back_button = ttk.Button(self, text="<< Back", command=lambda:app.prev_frame(app.current_frame, app.i))
+        self.back_button.grid(row=6, column=2, sticky=tk.E, padx=10, pady=10)
 
         #placing the widgets inside Frame2
         self.header_label.grid(row=0, column=0, sticky=tk.W)
@@ -66,9 +73,9 @@ class Frame2(tk.Frame):
 ### THIRD SCREEN
 class Frame3(tk.Frame):
 
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, user, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
-        self.header_string = "whattup"
+        self.header_string = "3rd Frame"
         self.top_string = ("This is the last screen")
         self.header_label = ttk.Label(self, text=self.header_string, anchor=tk.W,
                                   font=("TKDefaultFont", 16), wraplength=600)
@@ -78,82 +85,25 @@ class Frame3(tk.Frame):
         nj_check.grid(row=3, column=0, sticky=tk.W)
         tk.Checkbutton(self, text='NY').grid(row=4, column=0, sticky=tk.W)
         tk.Checkbutton(self, text='CT').grid(row=5, column=0, sticky=tk.W)
+        
+        #back button
+        self.back_button = ttk.Button(self, text="<< Back", command=lambda:app.prev_frame(app.current_frame, app.i))
+        self.back_button.grid(row=6, column=2, sticky=tk.E, padx=10, pady=10)
+
 
         #placing the widgets inside Frame3
         self.header_label.grid(row=0, column=0, sticky=tk.W)
         self.top_string_label.grid(row=1, column=0, sticky=tk.W, ipady=20)
-
-
         
-frames = [Frame1, Frame2, Frame3]
-limit = len(frames)
-        
-### ROOT SCREEN
-class Wizard(tk.Tk):
-    """ JumpVisual Wizard root window """
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.title("JumpVisual Photographer Coverage Wizard")
-        self.geometry("800x600")
-        self.resizable(width=False, height=False)
-        self.leftframe = tk.Frame(width=300, bg="blue")
-        self.i = 0
-        
-
-        #version
-        tk.Label(self.leftframe, text=version, bg="blue", fg="white").grid(row=1, column=0, sticky=tk.S, padx=3, pady=3)
-
-        #styling
-   
-        self.leftframe.grid(row=0, column=0, sticky=(tk.W + tk.E + tk.N + tk.S), rowspan=4)
-        self.grid_propagate(True) 
-        self.leftframe.rowconfigure(0, weight=1)
-        self.columnconfigure(0, weight=1)
-        self.rowconfigure(1, weight=1)
-
-
-        
-    def drawframe(self,i):
-        print("i is " + str(self.i))
-        self.next_button = ttk.Button(self, text="Next >>", command=lambda: Wizard.next_frame(self, self.current_frame, self.i))
-        self.back_button = ttk.Button(self, text="<< Back", command=lambda: Wizard.prev_frame(self,self.current_frame, self.i))
-        
-        self.current_frame = frames[i](self, padx=30, pady=30, width=400)
-        self.current_frame.grid(row=0,column=1)
-        self.next_button.grid(row=3, column=3, sticky=tk.E, padx=10, pady=10)
-        self.back_button.grid(row=3, column=2, sticky=tk.W, padx=10, pady=10)
-        if self.i == (limit-1):
-            self.next_button.destroy()
-        if self.i == 0:
-            self.back_button.destroy()
-
-
-    def next_frame(self, current_frame, i):
-        """advances to next frame."""
-        current_frame.destroy()
-        print("Next hit. Frame destroyed")
-        if self.i < (len(frames)-1):
-            self.i += 1
-        self.drawframe(self.i)
-    
-    def prev_frame(self, current_frame, i):
-        """returns to previous frame"""
-        current_frame.destroy()
-        print("Back hit. Frame destroyed")
-        if self.i > 0:
-            self.i -= 1
-        self.drawframe(self.i)
-
-
 ### USER CLASS
-class User(Wizard):
-    """A class to hold the User's data"""
+class User():
+    """A class to hold the User's data """
     
     def __init__(self, *args, **kwargs):
         #super().__init__(*args, **kwargs)
 
         print("A user has been created")
-        self.firstname = ''
+        self.firstname = 'Bob'
         self.lastname = ''
         self.email = ''
         self.phone = ''
@@ -167,26 +117,65 @@ class User(Wizard):
         self.ny_counties = []
         self.ct_counties = []
 
+user = User()
+frames = [Frame1, Frame2, Frame3]
+limit = len(frames)
 
+        
+### ROOT SCREEN
+class Wizard(tk.Tk):
+    """ JumpVisual Wizard root window """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.title("JumpVisual Photographer Coverage Wizard")
+        self.geometry("800x600")
+        self.resizable(width=False, height=False)
+        self.leftframe = tk.Frame(width=300, bg="blue")
+        self.i = 0
+        self.current_frame = frames[self.i](self, user, padx=30, pady=30, width=400)        
+        
+        #version
+        tk.Label(self.leftframe, text=version, bg="blue", fg="white").grid(row=1, column=0, sticky=tk.S, padx=3, pady=3)
 
+        #styling
+   
+        self.leftframe.grid(row=0, column=0, sticky=(tk.W + tk.E + tk.N + tk.S), rowspan=4)
+        self.grid_propagate(True) 
+        self.leftframe.rowconfigure(0, weight=1)
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
 
 
         
+    def drawframe(self, i, user):
+        """draws current frame"""
+        print("i is " + str(i) + " limit is " + str(limit))
+        
+        self.current_frame = frames[i](self, user, padx=30, pady=30, width=400)        
+        self.current_frame.grid(row=0,column=1)
+
+
+    def next_frame(self, current_frame, i):
+        """advances to next frame."""
+        self.current_frame.destroy()
+        self.i += 1
+        self.drawframe(self.i, user)
+    
+    def prev_frame(self, current_frame, i):
+        """returns to previous frame"""
+        self.current_frame.destroy()
+        self.i -= 1
+        self.drawframe(self.i, user)
 
 
 if __name__ == '__main__': #if this file is being run directly from the terminal (instead of from another py script), run mainloop()
 
     
     app = Wizard()
-    user1 = User()
-    app.drawframe(app.i)
+    app.drawframe(app.i, user)
     app.mainloop()
     exit()
-
-
-
-
-
 
 
 
