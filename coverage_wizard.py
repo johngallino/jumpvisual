@@ -4,7 +4,8 @@ from tkinter import ttk
 
 version = "v1.0"
 
-
+nj_counties = ('atlantic', 'bergen', 'burlington', 'camden', 'cape may', 'cumberland', 'essex', 'gloucester', 'hudson', 'hunterdon', 
+	'mercer', 'middlesex', 'monmouth', 'morris', 'ocean', 'passaic', 'salem', 'sommerset', 'sussex', 'union', 'warren')
 
 
 ### FIRST SCREEN
@@ -26,7 +27,7 @@ class Frame1(tk.Frame):
                                      font=("TKDefaultFont", 10), wraplength=500)
         
         self.next_button = ttk.Button(self, text="Next >>", command=lambda:app.next_frame(app.current_frame, app.i))
-        self.next_button.grid(row=3, column=3, sticky=tk.E, padx=10, pady=10)
+        self.next_button.grid(row=3, column=0, sticky=tk.E, padx=10, pady=10)
 
         #placing the widgets inside Frame1
         self.header_label.grid(row=0, column=0, sticky=tk.W)
@@ -38,57 +39,161 @@ class Frame2(tk.Frame):
     def __init__(self, parent, User, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
         self.header_string = "Step 1"
-        self.top_string = ("Enter your name and the states you cover")
+        self.top_string = ("Enter your name and contact information")
         self.header_label = ttk.Label(self, text=self.header_string, anchor=tk.W,
                                   font=("TKDefaultFont", 16), wraplength=600)
         self.top_string_label = ttk.Label(self, text=self.top_string, anchor=tk.W,
                                      font=("TKDefaultFont", 10), wraplength=600)
-        tk.Label(self, text="First:").grid(row=2, column=0, sticky=tk.W)
-        tk.Label(self, text="Last:").grid(row=2, column=1, sticky=tk.W)
+        info = tk.Frame(self)
+        info.grid(row=2, column=0, sticky=tk.W)
+        tk.Label(info, text="First Name").grid(row=0, column=0, sticky=tk.W)
+        tk.Label(info, text="Last Name").grid(row=0, column=1, sticky=tk.W, padx=20)
+        tk.Label(info, text="Phone Number").grid(row=2, column=0, sticky=tk.W)
+        tk.Label(info, text="Email").grid(row=2, column=1, sticky=tk.W, padx=20)
+        tk.Label(info, text="City of Residence").grid(row=4, column=0, sticky=tk.W)
+        tk.Label(info, text="State").grid(row=4, column=1, sticky=tk.W, padx=20)
+        
         self.f = tk.StringVar()
         self.l = tk.StringVar()
         self.f.set(user.firstname)
-        self.fname_entry = tk.Entry(self, textvariable=self.f, command=self.f.set(user.firstname))
-        self.lname_entry = tk.Entry(self, textvariable=self.l)
+        self.l.set(user.lastname)
+        self.fname_entry = tk.Entry(info, textvariable=self.f)
+        self.lname_entry = tk.Entry(info, textvariable=self.l)
+        self.fname_entry.grid(row=1, column=0, sticky=tk.W)
+        self.lname_entry.grid(row=1, column=1, sticky=tk.W, padx=20)
+        
+        self.phone = tk.StringVar()
+        self.email = tk.StringVar()
+        self.phone.set(user.phone)
+        self.email.set(user.email)
+        self.phone_entry = tk.Entry(info, textvariable=self.phone)
+        self.email_entry = tk.Entry(info, textvariable=self.email)
+        self.phone_entry.grid(row=3, column=0, sticky=tk.W)
+        self.email_entry.grid(row=3, column=1, sticky=tk.W, padx=20)
+        
+        self.city = tk.StringVar()
+        self.state = tk.StringVar()
+        self.city.set(user.hometown)
+        self.city_entry = tk.Entry(info, textvariable=self.city)
+        self.choices=[ 'NJ', 'NY', 'CT' ]
+        self.statevar = tk.StringVar()
+        self.statepulldown = ttk.OptionMenu(info, self.statevar, self.choices[1], *self.choices)
+        self.city_entry.grid(row=5, column=0, sticky=tk.W)
+        self.statepulldown.grid(row=5, column=1, sticky=tk.W, padx=20)
+        self.statevar.set('NJ')
+        
+                  
         states = tk.Frame(self, pady=20)
         states.grid(row=4, column=0, sticky=tk.W)
+        tk.Label(states, text="What states does your coverage zone include?").grid(row=0, column=0, columnspan=3, sticky=tk.W)
+        self.njvar = tk.IntVar()
+        self.njvar.set(user.nj_bool)
+        self.njbox = tk.Checkbutton(states, text='NJ', variable=self.njvar)
+        self.njbox.grid(row=1, column=0, sticky=tk.W)
+        self.nyvar = tk.IntVar()
+        self.nyvar.set(user.ny_bool)
+        self.nybox = tk.Checkbutton(states, text='NY', variable=self.nyvar)
+        self.nybox.grid(row=1, column=1, sticky=tk.W, padx=20)
+        self.ctvar = tk.IntVar()
+        self.ctvar.set(user.ct_bool)
+        self.ctbox = tk.Checkbutton(states, text='CT', variable=self.ctvar)
+        self.ctbox.grid(row=1, column=2, sticky=tk.W, padx=20)
         
-        tk.Checkbutton(states, text='NJ').grid(row=0, column=0, sticky=tk.W)
-        tk.Checkbutton(states, text='NY').grid(row=1, column=0, sticky=tk.W)
-        tk.Checkbutton(states, text='CT').grid(row=2, column=0, sticky=tk.W)
+        services = tk.Frame(self,pady=10)
+        services.grid(row=5, column=0, sticky=tk.W)
+        tk.Label(services, text="Additional Services You Offer").grid(row=0, column=0, sticky=tk.W)
+        self.vidvar = tk.IntVar()
+        if "_V" in user.abilities:
+            self.vidvar.set(1)
+        tk.Checkbutton(services, text='Int/Ext Video', variable=self.vidvar).grid(row=1, column=0,sticky=tk.W)
+        self.floorvar = tk.IntVar()
+        if "_Fl" in user.abilities:
+            self.floorvar.set(1)
+        tk.Checkbutton(services, text='Floorplans', variable=self.floorvar).grid(row=2, column=0,sticky=tk.W)
+        self.aesvar = tk.IntVar()
+        if "_AeS" in user.abilities:
+            self.aesvar.set(1)
+        tk.Checkbutton(services, text='Aerial stills', variable=self.aesvar).grid(row=1, column=1,sticky=tk.W)
+        self.aevvar = tk.IntVar()
+        if "_AeV" in user.abilities:
+            self.aevvar.set(1)
+        tk.Checkbutton(services, text='Aerial video', variable=self.aevvar).grid(row=2, column=1,sticky=tk.W)
+        self.faavar = tk.IntVar()
+        if "_FAA" in user.abilities:
+            self.faavar.set(1)
+        tk.Checkbutton(services, text='FAA Certified', variable=self.faavar).grid(row=3, column=1,sticky=tk.W)
+        #tk.Label(services, text=user.abilities).grid(row=4, column=0, sticky=tk.W)
 
+        nav = tk.Frame(self)
+        nav.grid(row=6, column=0, sticky=tk.E + tk.S)
         #next button
-        self.next_button = ttk.Button(self, text="Next >>", command=lambda:app.next_frame(app.current_frame, app.i))
-        self.next_button.grid(row=6, column=3, sticky=tk.E, padx=10, pady=10)
+        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user))
+        self.next_button.grid(row=0, column=1, sticky=tk.E, padx=10, pady=10)
         #back button
-        self.back_button = ttk.Button(self, text="<< Back", command=lambda:app.prev_frame(app.current_frame, app.i))
-        self.back_button.grid(row=6, column=2, sticky=tk.E, padx=10, pady=10)
-
+        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:app.prev_frame(app.current_frame, app.i))
+        self.back_button.grid(row=0, column=0, sticky=tk.E, padx=10, pady=10)
+        
         #placing the widgets inside Frame2
         self.header_label.grid(row=0, column=0, sticky=tk.W)
-        self.top_string_label.grid(row=1, column=0, sticky=tk.W, ipady=20)
-        self.fname_entry.grid(row=3, column=0, sticky=tk.W)
-        self.lname_entry.grid(row=3, column=1, sticky=tk.W)
+        self.top_string_label.grid(row=1, column=0, columnspan=2, sticky=tk.W, ipady=20)
+        
+        
+    def nxt(self, user):
+        user.firstname = self.fname_entry.get()
+        user.lastname = self.lname_entry.get()
+        user.nj_bool = self.njvar.get()
+        user.ny_bool = self.nyvar.get()
+        user.ct_bool = self.ctvar.get()
+        user.phone = self.phone.get()
+        user.email = self.email.get()
+        user.hometown = self.city.get()
+        user.homestate = self.statevar.get()
+        user.abilities = "P"
+        if self.vidvar.get() == 1:
+            user.abilities += "_V"
+            print("Video added to abilities")
+        if self.floorvar.get() == 1:
+            user.abilities += "_Fl"
+            print("Floorplans added to abilities")
+        if self.aesvar.get() == 1:
+            user.abilities += "_AeS"
+            print("Aerial Stills added to abilities")
+        if self.aevvar.get() == 1:
+            user.abilities += "_AeV"
+            print("Aerial Video added to abilities")
+        if self.faavar.get() == 1:
+            user.abilities += "_FAA"
+            print("FAA Certification added to abilities")
+        app.next_frame(app.current_frame, app.i)
 
 ### THIRD SCREEN
 class Frame3(tk.Frame):
 
     def __init__(self, parent, user, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
-        self.header_string = "3rd Frame"
-        self.top_string = ("This is the last screen")
+        print("User abilities are saved as " + user.abilities)
+        self.header_string = "Step 2 - NJ Counties"
+        self.top_string = ("Next we are going to review the counties in the states that you selected as part of your coverage zone. Please select the counties that your coverage zone extends into. \n\nREMEMBER: checking a county below does NOT mean you have to cover the entire county")
         self.header_label = ttk.Label(self, text=self.header_string, anchor=tk.W,
-                                  font=("TKDefaultFont", 16), wraplength=600)
+                                  font=("TKDefaultFont", 16), wraplength=500)
         self.top_string_label = ttk.Label(self, text=self.top_string, anchor=tk.W,
-                                     font=("TKDefaultFont", 10), wraplength=600)
-        nj_check = tk.Checkbutton(self, text='NJ')
-        nj_check.grid(row=3, column=0, sticky=tk.W)
-        tk.Checkbutton(self, text='NY').grid(row=4, column=0, sticky=tk.W)
-        tk.Checkbutton(self, text='CT').grid(row=5, column=0, sticky=tk.W)
+                                     font=("TKDefaultFont", 10), wraplength=500)
+        transfer = tk.Frame(self)
+        transfer.grid(row=2, column=0)
+        tk.Label(transfer, text="NJ Counties:").grid(row=0, column=0, sticky=tk.W)
+        tk.Label(transfer, text="Your Coverage Zone:").grid(row=0, column=2, sticky=tk.W)
+        njlistbox = tk.Listbox(transfer, height=21)
+        for county in nj_counties:
+            njlistbox.insert(tk.END, county.title())
+        njlistbox.grid(row=1, column=0, rowspan=2, sticky=tk.W)
+        tk.Button(transfer, text="  Add >>  ").grid(row=1, column=1, padx=20)
+        tk.Button(transfer, text="<< Remove").grid(row=2, column=1,padx=20)
+        userlistbox = tk.Listbox(transfer, height=21)
+        userlistbox.grid(row=1, column=2, rowspan=2, sticky=tk.W)
         
         #back button
         self.back_button = ttk.Button(self, text="<< Back", command=lambda:app.prev_frame(app.current_frame, app.i))
-        self.back_button.grid(row=6, column=2, sticky=tk.E, padx=10, pady=10)
+        self.back_button.grid(row=6, column=0, sticky=tk.E, padx=10, pady=10)
 
 
         #placing the widgets inside Frame3
@@ -103,11 +208,12 @@ class User():
         #super().__init__(*args, **kwargs)
 
         print("A user has been created")
-        self.firstname = 'Bob'
+        self.firstname = ''
         self.lastname = ''
         self.email = ''
         self.phone = ''
-        self.address = ''
+        self.hometown = ''
+        self.homestate = ''
         self.slack = ''
         self.abilities = 'P'
         self.nj_bool = False
@@ -180,8 +286,7 @@ if __name__ == '__main__': #if this file is being run directly from the terminal
 
 
 
-##nj_counties = ('atlantic', 'bergen', 'burlington', 'camden', 'cape may', 'cumberland', 'essex', 'gloucester', 'hudson', 'hunterdon', 
-##	'mercer', 'middlesex', 'monmouth', 'morris', 'ocean', 'passaic', 'salem', 'sommerset', 'sussex', 'union', 'warren')
+
 ##
 ##conn = sqlite3.connect('jump.db')
 ##c = conn.cursor()
