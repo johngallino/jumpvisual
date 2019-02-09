@@ -1,0 +1,34 @@
+JumpVisualDB Release Notes
+
+3.1w - 1/23/2019
+- Now reads and displays zip codes
+- Pop up windows should now appear more centered on screen
+
+
+3.0w - 1/19/2019
+
+- Added 214 missing towns to database
+- Added Emergency contact info fields for every profile
+- Added Aerial Insurance and Liability Insurance checkmarks
+- Added fields for address, Jumpvisual email, birthday and FAA certifciation number
+- Added a check when you search a city name that is repeated in the state
+
+
+===================================================================
+===================================================================
+===================================================================
+
+JumpWizard Release Notes
+
+1.4w - 1/23/2019
+
+- Towns are now saved when you press Next and then Back
+- Trailing spaces in field entries are automatically removed
+- JumpWizard will now alert you right away if the directory cannot be written to
+- Allows for entering a new directory if that's the case
+- Will also alert you if jump.db file is missing
+- Spaces in exported report filename are stripped out
+- Fixed a bug with towns that have a middle word that isn't capitalized (eg. Hastings-on-Hudson)
+- Pop up windows should now appear more centered on screen
+
+
