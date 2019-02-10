@@ -45,9 +45,12 @@ def parseDate(origdate):
         formatedDate += 'ERROR '
         
     gix = str(day)
+    print('GIX is ' + gix)
     if day < 1 or day > 31:
         formatedDate += 'ERROR'
-        
+
+    elif gix.startswith('1'):
+        formatedDate += str(day) + 'th'
     elif gix.endswith('1'):
             formatedDate += str(day) + 'st'
     elif gix.endswith('2'):

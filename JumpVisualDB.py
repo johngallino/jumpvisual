@@ -6,21 +6,21 @@ import datetime
 import tkinter as tk
 from tkinter import ttk
 import dateformat
-
+import editpop
+import wizardpop
+import backerupper
 ## Created by John Gallino
 ## December, 2018
 
 
 #TO DO LIST
-# Add backup of jump.db every week
 # Add editing capability
-# Notes section
 
 conn = sqlite3.connect('jump.db')
 c = conn.cursor()
 files = []
 path = "photographers"
-version = "v4.0"
+version = "version 4.0"
 
 def center(win):
     """
@@ -50,11 +50,6 @@ def clearPhotographers():
     c.execute("DELETE FROM photographers")
     conn.commit()
     
-def checkColor(string):
-    if u'\u2713' in string:
-        return "GREEN"
-    else:
-        return "BROWN"
     
 def readPhotographer(data, checksum):
     """ reads .jmp file and updates the database """
@@ -223,6 +218,8 @@ def updatePhotographer(data, checksum):
     conn.commit()
     print(firstname + " " + lastname + "'s coverage has been updated.\n")
 
+def wizard():
+    wizardpop.run()
     
     
 ### ROOT SCREEN
@@ -238,15 +235,21 @@ class root(tk.Tk):
         self.columnconfigure(1, weight=1)
         self.wm_iconbitmap('jvdb.ico')
         self.p_abilities = ''
+        self.p_notes = ''
+        self.p_realtors = ''
     ## TOP IMAGE
         self.headimg = tk.PhotoImage(file="dispatch.pbm")
         tk.Label(self, bg="WHITE", image=self.headimg).grid(row=0, column=0, columnspan=10, sticky=tk.W+tk.E)
-        #tk.Label(self, text=version).grid(row=0, column=0, sticky='sw')
+        tk.Label(self, text=version, bg="WHITE").grid(row=0, column=1, ipadx=15, sticky='es')
     ## LEFT FRAME
         leftframe = tk.Frame(self, bg="WHITE")
         leftframe.grid(row=1, column=0, sticky='nw', rowspan=8)
         tk.Label(leftframe, text="Team Members", font=("TKDefaultFont", 14), bg="WHITE", fg="DARK RED").grid(row=0, column=0, sticky=tk.W+tk.N, padx=20)
-        rosterbox = tk.Listbox(leftframe, width=20, height=11, activestyle='none', bd=2, font=("TKDefaultFont"))
+
+    ## ADD A GUY
+        tk.Button(leftframe, text="+", relief=tk.FLAT, cursor="hand2", bd=1, bg="WHITE", activebackground="WHITE", font="TKDefaultFont 8", command=wizard).grid(row=0, column=1, sticky='e', ipadx=4)
+
+        rosterbox = tk.Listbox(leftframe, width=20, height=13, activestyle='none', font=("TKDefaultFont"))
         rosterbox_scroll = tk.Scrollbar(leftframe, orient=tk.VERTICAL)
         rosterbox['yscrollcommand'] = rosterbox_scroll.set
         rosterbox_scroll['command'] = rosterbox.yview
@@ -254,137 +257,130 @@ class root(tk.Tk):
         rosterbox_scroll.grid(row=1, column=1, rowspan=5, sticky=tk.N+tk.S+tk.E)
         #tk.Label(leftframe, text=version, bg="WHITE", fg="GRAY").grid(row=7, column=0, padx=5, pady=6, sticky='swe')
         
-        p_first = tk.StringVar()
-        p_last = tk.StringVar()
-        p_phone = tk.StringVar()
-        p_email = tk.StringVar()
-        p_jvemail = tk.StringVar()
-        p_address = tk.StringVar()
-        p_city = tk.StringVar()
-        p_state = tk.StringVar()
-        p_zip = tk.StringVar()
-        p_birthday = tk.StringVar()
-        p_faanum = tk.StringVar()
-        p_emername = tk.StringVar()
-        p_emerrel = tk.StringVar()
-        p_emercell = tk.StringVar()
+        self.p_first = tk.StringVar()
+        self.p_last = tk.StringVar()
+        self.p_phone = tk.StringVar()
+        self.p_email = tk.StringVar()
+        self.p_jvemail = tk.StringVar()
+        self.p_jvemail = tk.StringVar()
+        self.p_jvemail = tk.StringVar()
+        self.p_address = tk.StringVar()
+        self.p_city = tk.StringVar()
+        self.p_state = tk.StringVar()
+        self.p_zip = tk.StringVar()
+        self.p_birthday = tk.StringVar()
+        self.p_faanum = tk.StringVar()
+        self.p_emername = tk.StringVar()
+        self.p_emerrel = tk.StringVar()
+        self.p_emercell = tk.StringVar()
         #abilities
-        p_weekends = tk.StringVar()
-        p_floor = tk.StringVar()
-        p_mat = tk.StringVar()
-        p_dusk = tk.StringVar()
-        p_teaser = tk.StringVar()
-        p_premium = tk.StringVar()
-        p_luxury = tk.StringVar()
-        p_vedit = tk.StringVar()
-        p_aes = tk.StringVar()
-        p_aev = tk.StringVar()
-        p_faa = tk.StringVar()
-        p_ains = tk.StringVar()
-        p_lins = tk.StringVar()
+        self.p_weekends = tk.StringVar()
+        self.p_floor = tk.StringVar()
+        self.p_mat = tk.StringVar()
+        self.p_dusk = tk.StringVar()
+        self.p_teaser = tk.StringVar()
+        self.p_premium = tk.StringVar()
+        self.p_luxury = tk.StringVar()
+        self.p_vedit = tk.StringVar()
+        self.p_aes = tk.StringVar()
+        self.p_aev = tk.StringVar()
+        self.p_faa = tk.StringVar()
+        self.p_ains = tk.StringVar()
+        self.p_lins = tk.StringVar()
         
-        def viewProfile():
+        def viewProfile(event):
             """ Reads profile of the selected photographer """
             target = rosterbox.get(tk.ACTIVE).rstrip('\n')
             name = target.split(" ")
-            p_first.set(name[0].title())
-            p_last.set(name[1].rstrip('\n').title())
-            c.execute("SELECT phone, email, jv_email, address, city, state, birthday, faa_num, abilities, emer_name, emer_rel, emer_cell, zip FROM photographers WHERE first=? AND last=?", (p_first.get(), p_last.get()))
+            self.p_first.set(name[0].title())
+            self.p_last.set(name[1].rstrip('\n').title())
+            c.execute("SELECT phone, email, jv_email, address, city, state, birthday, faa_num, abilities, emer_name, emer_rel, emer_cell, zip, realtors, notes FROM photographers WHERE first=? AND last=?", (self.p_first.get(), self.p_last.get()))
             info = c.fetchone()
             if info != None:
-                for datapoint in info:
-                    if datapoint is not None:
-                        p_phone.set(info[0])
-                        p_email.set(info[1])
-                        p_jvemail.set(info[2])
-                        p_address.set(info[3])
-                        p_city.set(info[4])
-                        p_state.set(info[5])
-                        p_birthday.set(info[6])
-                        p_faanum.set(info[7])
-                        self.p_abilities = info[8].lower()
-                        #print("p_abilities is " + self.p_abilities) 
-                        p_emername.set(info[9])
-                        p_emerrel.set(info[10])
-                        p_emercell.set(info[11])
-                        p_zip.set(info[12])
-                    else:
-                        p_phone.set('error')
-                        p_email.set('error')
-                        p_jvemail.set('error')
-                        p_address.set('error')
-                        p_city.set('error')
-                        p_state.set('error')
-                        p_birthday.set('error')
-                        p_faanum.set('error')
-                        self.p_abilities = ('error')
-                        #print("p_abilities is " + self.p_abilities) 
-                        p_emername.set('error')
-                        p_emerrel.set('error')
-                        p_emercell.set('error')
-                        p_zip.set('error')
+                self.p_realtors = info[13]
+                self.p_notes = info[14] 
+                self.p_phone.set(info[0])
+                self.p_email.set(info[1])
+                self.p_jvemail.set(info[2])
+                self.p_address.set(info[3])
+                self.p_city.set(info[4])
+                self.p_state.set(info[5])
+                self.p_birthday.set(info[6])
+                self.p_faanum.set(info[7])
+                self.p_abilities = info[8].lower()
+                #print("p_abilities is " + self.p_abilities) 
+                self.p_emername.set(info[9])
+                self.p_emerrel.set(info[10])
+                self.p_emercell.set(info[11])
+                self.p_zip.set(info[12])
                     
-            updateProfileBox()
+                    
+            updateProfileBox(self)
 
-        for i in os.listdir(path):
-            if i.endswith('.jmp'):
-                files.append(i)
+        # for i in os.listdir(path):
+        #     if i.endswith('.jmp'):
+        #         files.append(i)
                 
-        #print("files in '" + str(path) + "' folder are " + str(files))
+        # #print("files in '" + str(path) + "' folder are " + str(files))
         
-        for file in files:
-            # for each file in photographers folder, do checksum and pull the first and last name
-            with open("photographers/" +file, "r") as data:
-                checksum = hashlib.md5(open("photographers/"+file, "rb").read()).hexdigest()
-                while True:
-                    name = data.readline()
-                    #break while loop if line is not a comment
-                    if not name.startswith('#'):
+        # for file in files:
+        #     # for each file in photographers folder, do checksum and pull the first and last name
+        #     with open("photographers/" +file, "r") as data:
+        #         checksum = hashlib.md5(open("photographers/"+file, "rb").read()).hexdigest()
+        #         while True:
+        #             name = data.readline()
+        #             #break while loop if line is not a comment
+        #             if not name.startswith('#'):
                         
-                        break
-                fullname = name.split(" ")
-                firstname = fullname[0].title()
-                lastname = fullname[1].rstrip('\n').title()
+        #                 break
+        #         fullname = name.split(" ")
+        #         firstname = fullname[0].title()
+        #         lastname = fullname[1].rstrip('\n').title()
                 
-                # check if this photographer is already in the database
-                c.execute("SELECT employee_id FROM photographers WHERE first = ? AND last = ?", (firstname, lastname))
-                check = c.fetchall()
-                if len(check) ==0:
-                    print("\n" + name.rstrip('\n').title() + " is not in database. Adding now...")
-                    readPhotographer(data, checksum)
-                else:
-                    # compare .jmp checksum to old checksum
-                    c.execute("SELECT checksum FROM photographers WHERE first = ? AND last = ?", (firstname, lastname))
-                    checkold = str(c.fetchone()[0])
-                    if checkold != checksum:
-                        #print("checksum reads as " + checksum + " but on record it is " + checkold)
-                        print("UPDATE: There seems to be a change in " + firstname + " " + lastname + "'s .jmp file! Updating now...")
-                        updatePhotographer(data, checksum)
-                    else:
-                        print(firstname + " " + lastname + " is already in the db and up to date")
+        #         # check if this photographer is already in the database
+        #         c.execute("SELECT employee_id FROM photographers WHERE first = ? AND last = ?", (firstname, lastname))
+        #         check = c.fetchall()
+        #         if len(check) ==0:
+        #             print("\n" + name.rstrip('\n').title() + " is not in database. Adding now...")
+        #             readPhotographer(data, checksum)
+        #         else:
+        #             # compare .jmp checksum to old checksum
+        #             c.execute("SELECT checksum FROM photographers WHERE first = ? AND last = ?", (firstname, lastname))
+        #             checkold = str(c.fetchone()[0])
+        #             if checkold != checksum:
+        #                 #print("checksum reads as " + checksum + " but on record it is " + checkold)
+        #                 print("UPDATE: There seems to be a change in " + firstname + " " + lastname + "'s .jmp file! Updating now...")
+        #                 updatePhotographer(data, checksum)
+        #             # else:
+        #                 # print(firstname + " " + lastname + " is already in the db and up to date")
                     
-                # this part just populates the roster box    
-                while True:
-                    line = data.readline()
-                    #break while loop if line is not a comment
-                    if not line.startswith('#'):
-                        break
-                rosterbox.insert(tk.END, name.title())
-                data.close()
+        #         # this part just populates the roster box    
+        #         while True:
+        #             line = data.readline()
+        #             #break while loop if line is not a comment
+        #             if not line.startswith('#'):
+        #                 break
+        c.execute("SELECT first, last from Photographers")
+        allguys = c.fetchall()
+        print(allguys)
+        for guy in allguys:
+            name = guy[0] + ' ' + guy[1]
+            rosterbox.insert(tk.END, name.title())
+                # data.close()
                 
                 #check if every photographer in db has a corresponding .jmp file
                 
         #deletes from db if there is no .jmp file
-        c.execute("SELECT first, last FROM photographers")
-        db_photographers = c.fetchall()
-        for photographer in db_photographers:
-            filename = photographer[0] + photographer[1] + ".jmp"
-            print('searching for ' + filename)
-            exists = os.path.isfile('photographers/'+filename)
-            if exists:
-                print(filename + " found")
-            else:
-                print("Uh oh! No file found for " + photographer[0] + " " + photographer[1])
+        # c.execute("SELECT first, last FROM photographers")
+        # db_photographers = c.fetchall()
+        # for photographer in db_photographers:
+        #     filename = photographer[0] + photographer[1] + ".jmp"
+        #     print('searching for ' + filename)
+        #     exists = os.path.isfile('photographers/'+filename)
+        #     if exists:
+        #         print(filename + " found")
+        #     else:
+        #         print("Uh oh! No file found for " + photographer[0] + " " + photographer[1])
                 # c.execute("SELECT employee_id FROM photographers WHERE first=? AND last=?", (photographer[0], photographer[1]))
                 # targetid = str(c.fetchone()[0])
                 # print("targetid is " + targetid)
@@ -393,107 +389,96 @@ class root(tk.Tk):
                 # conn.commit()
                 # print("Done. " + photographer[0] + " " + photographer[1] + " has been removed from the database.")
 
-            
-        tk.Button(leftframe, text="View Profile", font=("TKDefaultFont"), command=viewProfile).grid(row=6, column=0, ipadx=30, padx=(20,0), sticky='nw')
+        rosterbox.bind("<Double-Button-1>", viewProfile)    
+        #tk.Button(leftframe, text="View Profile", font=("TKDefaultFont"), command=lambda:viewProfile(self)).grid(row=6, column=0, ipadx=30, padx=(20,0), sticky='nw')
         #tk.Button(leftframe, text="+", font=("TKDefaultFont"), command=jumpwizard.newGuy).grid(row=6, column=1, sticky='nw', ipadx=5)
 
         
-        def updateProfileBox():
+        def updateProfileBox(self):
             """ updates the dang ole profile box """
             self.namelabel.destroy()
-            self.namelabel = tk.Label(infoFrame, text=(p_first.get() + " " + p_last.get()), font=("TKDefaultFont", 14))
-            self.namelabel.grid(row=1, column=0, sticky=tk.W, pady=2, padx=10)
+            self.namelabel = tk.Label(infoFrame, text=(self.p_first.get() + " " + self.p_last.get()), font=("TKDefaultFont 14"))
+            self.namelabel.grid(row=1, column=0, sticky=tk.W, pady=(6,2), padx=10)
             
             # this is black horiz line
-            tk.Frame(topFrame,height=1, width=420 ,bg="black").place(x=10, y=30)
-            #tk.Frame(checks,height=1, width=200 ,bg="black").grid(row=2, column=0, columnspan=3, sticky='we', pady=(12,3), padx=(0,10))
+            tk.Frame(topFrame,height=1, width=200 ,bg="black").place(x=10, y=30)
             
             self.phonelabel.destroy()
-            self.phonelabel = tk.Label(infoFrame, text=p_phone.get())
-            self.phonelabel.grid(row=3, column=0, sticky=tk.W, padx=6)
+            self.phonelabel = tk.Label(infoFrame, text=self.p_phone.get())
+            self.phonelabel.grid(row=3, column=0, sticky='nw', padx=6)
             
             self.emaillabel.destroy()
-            self.emaillabel = tk.Label(infoFrame, text=p_email.get())
-            self.emaillabel.grid(row=4, column=0, sticky=tk.W, padx=6)
+            self.emaillabel = tk.Label(infoFrame, text=self.p_email.get())
+            self.emaillabel.grid(row=4, column=0, sticky='nw', padx=6)
             
             self.jvemaillabel.destroy()
-            self.jvemaillabel = tk.Label(infoFrame, text=p_jvemail.get())
-            self.jvemaillabel.grid(row=5, column=0, sticky=tk.W, padx=6)
+            self.jvemaillabel = tk.Label(infoFrame, text=self.p_jvemail.get())
+            self.jvemaillabel.grid(row=5, column=0, sticky='nw', padx=6)
             
             self.addresslabel.destroy()
-            self.addresslabel = tk.Label(infoFrame, text=p_address.get())
-            self.addresslabel.grid(row=6, column=0, sticky=tk.W, padx=6)
+            self.addresslabel = tk.Label(infoFrame, text=self.p_address.get())
+            self.addresslabel.grid(row=6, column=0, sticky='nw', padx=6, pady=(6,0))
             
             self.citylabel.destroy()
-            self.citylabel = tk.Label(checks, text=p_city.get() +", " + p_state.get() + " " + p_zip.get())
-            self.citylabel.grid(row=1, column=2, sticky=tk.E, padx=6)
+            self.citylabel = tk.Label(infoFrame, text=self.p_city.get() +", " + self.p_state.get() + " " + self.p_zip.get())
+            self.citylabel.grid(row=7, column=0, sticky='nw', padx=6)
             
             self.birthdaylabel.destroy()
-            self.birthdaylabel = tk.Label(infoFrame, text="B-Day: " + p_birthday.get())
-            self.birthdaylabel.grid(row=7, column=0, sticky=tk.W, padx=6)
+            self.birthdaylabel = tk.Label(infoFrame, text="B-Day: " + self.p_birthday.get())
+            self.birthdaylabel.grid(row=8, column=0, sticky='nw', padx=6, pady=(6,0))
             
             self.faa_numlabel.destroy()
-            self.faa_numlabel = tk.Label(infoFrame, text=('FAA#: ' +p_faanum.get()))
-            self.faa_numlabel.grid(row=8, column=0, sticky=tk.W, padx=6)
+            self.faa_numlabel = tk.Label(infoFrame, text=('FAA#: ' +self.p_faanum.get()))
+            self.faa_numlabel.grid(row=9, column=0, sticky='nw', padx=6)
+            self.serviceList.delete(0, tk.END)
+
+            self.notesList.destroy()
+            self.notesList = tk.Text(third, height=8, width=25)
+            self.notesList.tag_configure('tag-right', font='TKDefaultFont 10', rmargin=3, justify='right')
+            
+            if self.p_notes != None:
+                self.notesList.insert('end', self.p_notes, 'tag-right')
+            self.notesList.config(state=tk.DISABLED)
+            self.notesList.grid(row=1, column=0, sticky='ne')
+
+            self.notesList_scroll.destroy()
+            self.notesList_scroll = tk.Scrollbar(third, orient=tk.VERTICAL)
+            self.notesList['yscrollcommand'] = self.notesList_scroll.set
+            self.notesList_scroll['command'] = self.notesList.yview
+
+            self.notesList_scroll.grid(row=1, column=2, padx=(0, 10), sticky='nsw')
+
+            self.realtorList.destroy()
+            self.realtorList = tk.Text(third, height=5, width=25)
+            self.realtorList.tag_configure('tag-right', font='TKDefaultFont 10', rmargin=3, justify='right')
+            
+            if self.p_realtors != None:
+                self.realtorList.insert('end', self.p_realtors, 'tag-right')
+            self.realtorList.config(state=tk.DISABLED)
+            self.realtorList.grid(row=4, column=0, sticky='ne')  
+
+            self.realtorList_scroll.destroy()
+            self.realtorList_scroll = tk.Scrollbar(third, orient=tk.VERTICAL)
+            self.realtorList['yscrollcommand'] = self.realtorList_scroll.set
+            self.realtorList_scroll['command'] = self.realtorList.yview
+
+            self.realtorList_scroll.grid(row=4, column=2, padx=(0, 10), sticky='nsw') 
+            # self.realtorList.delete(0, tk.END)
+            # if self.p_realtors != None:
+            #     print("realtors are " + self.p_realtors)
+            #     gix = self.p_realtors.split('\n')
+            #     for realtor in gix:
+            #          self.realtorList.insert(tk.END, realtor)
+                
             
             ab_check(self.p_abilities)
-            self.weekendlabel.destroy()
-            self.weekendlabel = tk.Label(checks, text=p_weekends.get(), fg=checkColor(p_weekends.get()))
-            self.weekendlabel.grid(row=3, column=1, sticky=tk.W, pady=(9,2), padx=6)
             
-            self.floorlabel.destroy()
-            self.floorlabel = tk.Label(checks, text=p_floor.get(), fg=checkColor(p_floor.get()))
-            self.floorlabel.grid(row=4, column=1, sticky=tk.W, pady=2, padx=6)
-            
-            self.dusklabel.destroy()
-            self.dusklabel = tk.Label(checks, text=p_dusk.get(), fg=checkColor(p_dusk.get()))
-            self.dusklabel.grid(row=5, column=1, sticky=tk.W, pady=2, padx=6)
-            
-            self.teaserlabel.destroy()
-            self.teaserlabel = tk.Label(checks, text=p_teaser.get(), fg=checkColor(p_teaser.get()))
-            self.teaserlabel.grid(row=3, column=2, sticky=tk.W, pady=(9,2), padx=6)
-            
-            self.premiumlabel.destroy()
-            self.premiumlabel = tk.Label(checks, text=p_premium.get(), fg=checkColor(p_premium.get()))
-            self.premiumlabel.grid(row=4, column=2, sticky=tk.W, pady=2, padx=6)
-            
-            self.luxurylabel.destroy()
-            self.luxurylabel = tk.Label(checks, text=p_luxury.get(), fg=checkColor(p_luxury.get()))
-            self.luxurylabel.grid(row=5, column=2, sticky=tk.W, pady=2, padx=6)
-            
-            self.veditlabel.destroy()
-            self.veditlabel = tk.Label(checks, text=p_vedit.get(), fg=checkColor(p_vedit.get()))
-            self.veditlabel.grid(row=6, column=2, sticky=tk.W, pady=2, padx=6)
-            
-            self.aeslabel.destroy()
-            self.aeslabel = tk.Label(checks, text=p_aes.get(), fg=checkColor(p_aes.get()))
-            self.aeslabel.grid(row=6, column=1, sticky=tk.W, pady=2, padx=6)
-            
-            self.aevlabel.destroy()
-            self.aevlabel = tk.Label(checks, text=p_aev.get(), fg=checkColor(p_aev.get()))
-            self.aevlabel.grid(row=7, column=2, sticky=tk.W, pady=2, padx=6)
-            
-            self.faalabel.destroy()
-            self.faalabel = tk.Label(checks, text=p_faa.get(), fg=checkColor(p_faa.get()))
-            self.faalabel.grid(row=7, column=1, sticky=tk.W, pady=2, padx=6)
-            
-            self.ainslabel.destroy()
-            self.ainslabel = tk.Label(checks, text=p_ains.get(), fg=checkColor(p_ains.get()))
-            self.ainslabel.grid(row=8, column=1, sticky=tk.W, pady=2, padx=6)
-            
-            self.matlabel.destroy()
-            self.matlabel = tk.Label(checks, text=p_mat.get(), fg=checkColor(p_mat.get()))
-            self.matlabel.grid(row=8, column=2, sticky=tk.W, pady=2, padx=6)
-            
-            self.linslabel.destroy()
-            self.linslabel = tk.Label(checks, text=p_lins.get(), fg=checkColor(p_lins.get()))
-            self.linslabel.grid(row=9, column=1, sticky=tk.W, pady=2, padx=6)
     
     ## POPUP COVERAGE   
         def cov_popup(first, last):
             window = tk.Toplevel()
             window.title("Coverage for " + first + " " + last)
-          
+            window.wm_iconbitmap('jvdb.ico')
             boxframe = tk.Frame(window)
             boxframe.grid(row=1, column=0, padx=15, ipady=15)
             cov_box = tk.Listbox(boxframe, width=40, height=30)
@@ -521,7 +506,7 @@ class root(tk.Tk):
         def emer_popup(first, last):
             window = tk.Toplevel()
             window.title("Emergency Contact Info for " + first + " " + last)
-            
+            window.wm_iconbitmap('jvdb.ico')
             c.execute("SELECT emer_name, emer_rel, emer_cell FROM Photographers WHERE first=? AND last=?", (first, last))
             emer_results = c.fetchone()
             if emer_results is not None:
@@ -541,6 +526,7 @@ class root(tk.Tk):
         
         def confirm_removeGuy(first, last):
             confirm = tk.Toplevel(padx=15, pady=15)
+            confirm.wm_iconbitmap('jvdb.ico')
             center(confirm)
             confirm.title("Are you sure?")
             tk.Label(confirm, text="Are you sure you want to remove " + first + " " + last + "?").grid(row=0, columnspan=2, column=0, pady=(0,15), sticky='ew')
@@ -569,147 +555,116 @@ class root(tk.Tk):
         topFrame = tk.Frame(self, bd=2, width=500, relief=tk.RAISED,)
         topFrame.columnconfigure(0, weight=3)
         topFrame.columnconfigure(3, weight=1)
-        topFrame.rowconfigure(0, weight=1)
-        topFrame.grid(row=1, column=1, sticky=tk.W, pady=10, padx=15, ipadx=2)
+        #topFrame.rowconfigure(0, weight=1)
+        topFrame.grid(row=1, column=1, sticky='nw', rowspan=2, pady=(0,5), padx=15, ipadx=2)
         
         infoFrame = tk.Frame(topFrame, width=300)
-        infoFrame.pack(fill=tk.BOTH, expand=False, side=tk.LEFT)
-        #infoFrame.pack_propagate(False)
-        checks = tk.Frame(topFrame)
-        checks.pack(fill=tk.BOTH, expand=False, side=tk.RIGHT)
-        #checks.grid(row=0, column=1, rowspan=15, sticky='e', pady=(6,0))
+        infoFrame.grid(row=0, column=0, sticky='nws')
         
-        self.namelabel = tk.Label(infoFrame, text=(p_first.get() + " " + p_last.get()), font=("TKDefaultFont", 14))
+        
+        self.namelabel = tk.Label(infoFrame, text=(self.p_first.get() + " " + self.p_last.get()), font=("TKDefaultFont", 14))
         self.namelabel.grid(row=1, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
-        self.addresslabel = tk.Label(infoFrame, text=p_address.get())
+        self.addresslabel = tk.Label(infoFrame, text=self.p_address.get())
         self.addresslabel.grid(row=4, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
-        self.phonelabel = tk.Label(infoFrame, text=p_phone.get())
+        self.phonelabel = tk.Label(infoFrame, text=self.p_phone.get())
         self.phonelabel.grid(row=5, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
-        self.emaillabel = tk.Label(infoFrame, text=p_email.get())
+        self.emaillabel = tk.Label(infoFrame, text=self.p_email.get())
         self.emaillabel.grid(row=6, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
-        self.jvemaillabel = tk.Label(infoFrame, text=p_jvemail.get())
+        self.jvemaillabel = tk.Label(infoFrame, text=self.p_jvemail.get())
         self.jvemaillabel.grid(row=7, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
-        self.birthdaylabel = tk.Label(infoFrame, text=p_birthday.get())
+        self.birthdaylabel = tk.Label(infoFrame, text=self.p_birthday.get())
         self.birthdaylabel.grid(row=8, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
-        self.faa_numlabel = tk.Label(infoFrame, text=("FAA#: " +p_faanum.get()))
+        self.faa_numlabel = tk.Label(infoFrame, text=("FAA#: " +self.p_faanum.get()))
         self.faa_numlabel.grid(row=9, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
-        buttons = tk.Frame(infoFrame)
+        buttons = tk.Frame(infoFrame,)
         buttons.grid(row=9, column=0, sticky='sw', rowspan=2, pady=(20, 5), padx=6)
-        tk.Button(buttons, text="View Coverage", bg="LIGHTSTEELBLUE", command=lambda:cov_popup(p_first.get(), p_last.get())).grid(row=0, column=0, sticky='w', ipadx=2)
-        tk.Button(buttons, text="Emergency", bg="PINK", command=lambda:emer_popup(p_first.get(), p_last.get())).grid(row=0, column=1, sticky='w', ipadx=2)
-        
+        tk.Button(buttons, text="Coverage", font=("TKDefaultFont", 10), bg="LIGHTSTEELBLUE", command=lambda:cov_popup(self.p_first.get(), self.p_last.get())).grid(row=0, column=0, sticky='ws', ipadx=2, padx=(0,5), pady=(10,0))
+        tk.Button(buttons, text="Emergency", font=("TKDefaultFont", 10), bg="PINK", command=lambda:emer_popup(self.p_first.get(), self.p_last.get())).grid(row=0, column=1, sticky='ws', ipadx=2, padx=(0,5), pady=(10,0))
+        tk.Button(buttons, text="Edit", font=("TKDefaultFont", 10),  bg="WHITE", command=lambda:editpop.editPop(self.p_first.get(), self.p_last.get())).grid(row=0,column=2, sticky='ws', ipadx=10, pady=(45,0))
      
-        self.citylabel = tk.Label(checks, text=p_city.get() +", " + p_state.get() + " " + p_zip.get())
-        self.citylabel.grid(row=1, column=3, sticky='es', padx=6)
-        tk.Button(checks, font=("TKDefaultFont", 8), text="Remove",bg="PINK", command=lambda:confirm_removeGuy(p_first.get(), p_last.get())).grid(row=9,  column=2, sticky='se', padx=(0,5), pady=6, ipadx=2)
+        self.citylabel = tk.Label(infoFrame, text=self.p_city.get() +", " + self.p_state.get() + " " + self.p_zip.get())
+        #self.citylabel.grid(row=1, column=3, sticky='es', padx=6)
+        #tk.Button(checks, font=("TKDefaultFont", 8), text="Remove",bg="PINK", command=lambda:confirm_removeGuy(p_first.get(), p_last.get())).grid(row=9,  column=2, sticky='se', padx=(0,5), pady=6, ipadx=2)
 
 
         #left column
-        self.weekendlabel = tk.Label(checks, text=p_weekends.get())
-        self.weekendlabel.grid(row=3, column=2, sticky=tk.W, padx=5)
-        self.floorlabel = tk.Label(checks, text=p_floor.get())
-        self.floorlabel.grid(row=4, column=2, sticky=tk.W, padx=5)
-        self.matlabel = tk.Label(checks, text=p_mat.get())
-        self.matlabel.grid(row=5, column=2, sticky=tk.W, padx=5)
-        self.dusklabel = tk.Label(checks, text=p_dusk.get())
-        self.dusklabel.grid(row=6, column=2, sticky=tk.W, padx=5)
-        self.aeslabel = tk.Label(checks, text=p_aes.get())
-        self.aeslabel.grid(row=7, column=2, sticky=tk.W, padx=5)
-        self.faalabel = tk.Label(checks, text=p_faa.get())
-        self.faalabel.grid(row=8, column=2, sticky=tk.W, padx=5)
-        self.ainslabel = tk.Label(checks, text=p_ains.get())
-        self.ainslabel.grid(row=9, column=2, sticky='w', padx=5)
+        services = tk.Frame(topFrame)
+        services.grid(row=0, column=2, padx=(0,5),  sticky='nws')
+        tk.Label(services, text="Services", font=("TKDefaultFont 8 bold")).grid(row=0, column=0, pady=(9,0), sticky='w')
+        self.serviceList = tk.Listbox(services, width=15, height=14)
+        self.serviceList.grid(row=1, column=0, sticky='nsw')
+
+        serviceList_scroll = tk.Scrollbar(services, orient=tk.VERTICAL)
+        self.serviceList['yscrollcommand'] = serviceList_scroll.set
+        serviceList_scroll['command'] = self.serviceList.yview
+        serviceList_scroll.grid(row=1, column=2, padx=(0, 3), sticky='nsw')
         
         
         #right column
-        self.teaserlabel = tk.Label(checks, text=p_teaser.get())
-        self.teaserlabel.grid(row=3, column=3, sticky=tk.W, padx=5)
-        self.premiumlabel = tk.Label(checks, text=p_premium.get())
-        self.premiumlabel.grid(row=4, column=3, sticky=tk.W, padx=5)
-        self.luxurylabel = tk.Label(checks, text=p_luxury.get())
-        self.luxurylabel.grid(row=5, column=3, sticky=tk.W, padx=5)
-        self.veditlabel = tk.Label(checks, text=p_vedit.get())
-        self.veditlabel.grid(row=6, column=3, sticky=tk.W, padx=5)
-        self.aevlabel = tk.Label(checks, text=p_aev.get())
-        self.aevlabel.grid(row=7, column=3, sticky=tk.W, padx=5)
-        self.linslabel = tk.Label(checks, text=p_lins.get())
-        self.linslabel.grid(row=10, column=3, sticky='w', padx=5)
+        third = tk.Frame(topFrame)
+        third.grid(row=0, column=3, sticky='nws')
+        tk.Label(third, text="Notes", font=("TKDefaultFont 8 bold")).grid(row=0, column=0, pady=(9,0), sticky='e')
+        self.notesList = tk.Text(third, height=8, width=25)
+        self.notesList.grid(row=1, column=0, sticky='ne')
+
+        self.notesList_scroll = tk.Scrollbar(third, orient=tk.VERTICAL)
         
-        
+
+        tk.Label(third, text="Associated Realtors", font=("TKDefaultFont 8 bold")).grid(row=2, column=0, sticky='e')
+        self.realtorList = tk.Text(third, width=25, height=5)
+        self.realtorList.grid(row=4, sticky='w')
+
+        self.realtorList_scroll = tk.Scrollbar(third, orient=tk.VERTICAL)
+
         
         def ab_check(abilities):
             """ reads and decyphers abilities code """
             #print("abilities is " + abilities)
             if "fp" in str(abilities):
-                p_floor.set(u'\u2713' + " Floorplans")
-            else:
-                p_floor.set(u'\u2718' + " Floorplans")
-                
+                self.serviceList.insert(tk.END, "Floorplans")
+
             if "wkends" in abilities:
-                p_weekends.set(u'\u2713' + " Weekends")
-            else:
-                p_weekends.set(u'\u2718' + " Weekends")
+                self.serviceList.insert(tk.END, "Weekends")
                 
             if "vmatter" in abilities:
-                p_mat.set(u'\u2713' + " Matterport")
-            else:
-                p_mat.set(u'\u2718' + " Matterport")
+                self.serviceList.insert(tk.END, "Matterport")
                 
             if "pdusk" in abilities:
-                p_dusk.set(u'\u2713' + " Dusk Photos")
-            else:
-                p_dusk.set(u'\u2718' + " Dusk Photos")
+                self.serviceList.insert(tk.END, "Dusk Photos")
                 
             if "vteaser" in abilities:
-                p_teaser.set(u'\u2713' + " Teaser Video")
-            else:
-                p_teaser.set(u'\u2718' + " Teaser Video")
+                self.serviceList.insert(tk.END, "Teaser Vid")
                 
             if "vpremium" in abilities:
-                p_premium.set(u'\u2713' + " Premium Video")
-            else:
-                p_premium.set(u'\u2718' + " Premium Video")
+                self.serviceList.insert(tk.END, "Premium Vid")
                 
             if "vluxury" in abilities:
-                p_luxury.set(u'\u2713' + " Luxury Video")
-            else:
-                p_luxury.set(u'\u2718' + " Luxury Video")
+                self.serviceList.insert(tk.END, "Luxury Vid")
                 
             if "vediting" in abilities:
-                p_vedit.set(u'\u2713' + " Video Editing")
-            else:
-                p_vedit.set(u'\u2718' + " Video Editing")
+                self.serviceList.insert(tk.END, "Video Edit")
                 
             if "paerial" in abilities:
-                p_aes.set(u'\u2713' + " Aerial Stills")
-            else:
-                p_aes.set(u'\u2718' + " Aerial Stills")
+                self.serviceList.insert(tk.END, "Aerial Stills")
                 
             if "vaerial" in abilities:
-                p_aev.set(u'\u2713' + " Aerial Video")
-            else:
-                p_aev.set(u'\u2718' + " Aerial Video")
+                self.serviceList.insert(tk.END, "Aerial Video")
                 
             if "faa" in abilities:
-                p_faa.set(u'\u2713' + " FAA Certified")
-            else:
-                p_faa.set(u'\u2718' + " FAA Certified")
+                self.serviceList.insert(tk.END, "FAA Certified")
                 
             if "insaerial" in abilities:
-                p_ains.set(u'\u2713' + " Aerial Insurance")
-            else:
-                p_ains.set(u'\u2718' + " Aerial Insurance")
+                self.serviceList.insert(tk.END, "Aerial Ins.")
             
             if "insliab" in abilities:
-                p_lins.set(u'\u2713' + " Liability Ins.")
-            else:
-                p_lins.set(u'\u2718' + " Liability Ins.")
+                self.serviceList.insert(tk.END, "Liability Ins.")
+            
         
         ab_check(self.p_abilities)
         if (rosterbox.get(tk.ACTIVE) == ''):
             rosterbox.insert(tk.END, 'No Photographers!')
         else:
-            viewProfile()
+            viewProfile(self)
                 
     ## DIVIDER
         #tk.Frame(self, height=1, width=500 ,bg="black").grid(row=2, column=1, columnspan=2, sticky=tk.N, pady=20)
@@ -780,16 +735,16 @@ class root(tk.Tk):
                 dupePop(townResults, query.title(), searchstate)
                 
             else:
-                c.execute("SELECT first, last, photographers.city, abilities FROM photographers LEFT JOIN coverage ON photographers.employee_ID=coverage.employee_ID LEFT JOIN USCities on coverage.city_id=UScities.id WHERE UScities.city = ? AND UScities.state_id=?", (query.title(), searchstate))
+                c.execute("SELECT first, last, photographers.city, abilities, realtors, notes FROM photographers LEFT JOIN coverage ON photographers.employee_ID=coverage.employee_ID LEFT JOIN USCities on coverage.city_id=UScities.id WHERE UScities.city = ? AND UScities.state_id=?", (query.title(), searchstate))
                 whatigot = c.fetchall()
                 if len(whatigot)==0:
                     resultsBox.insert(tk.END, "Sorry, no results. Check your spelling?")
                 else:
                     for guy in whatigot:
                         if guy[2] == query.title():  
-                            resultsBox.insert(tk.END, guy[0] + " " + guy[1] + " lives there." + "  ["+ guy[3]+"]")
+                            resultsBox.insert(tk.END, guy[0] + " " + guy[1] + " lives there." + "  ["+ guy[3]+"]" + "   R: " + guy[4].replace('\n', ' ') + "   N: " + guy[5].replace('\n', ' ') + "    ")
                         else:
-                            resultsBox.insert(tk.END, guy[0] + " " + guy[1] + "  ["+ guy[3]+"]")
+                            resultsBox.insert(tk.END, guy[0] + " " + guy[1] + "  ["+ guy[3]+"]" + "   R: " + guy[4].replace('\n', ' ') + "   N: " + guy[5].replace('\n', ' ')+ "    ")
             
         def enterhit(event):
             searchcity(state_int)

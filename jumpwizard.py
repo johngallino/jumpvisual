@@ -1195,4 +1195,3 @@ if __name__ == '__main__': #if this file is being run directly from the terminal
         app.writeError_pop()
     app.mainloop()
     raise SystemExit
-
