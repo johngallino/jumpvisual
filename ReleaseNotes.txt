@@ -1,10 +1,13 @@
 JumpVisualDB Release Notes
 
-4.0 - 2/7/2019
+4.0 - 2/7/2019 MAJOR CHANGES! :D
 - Searching a city will no longer return results to the console screen (redundant)
 - Can now double click on Team Member to view profile (instead of hitting View Profile button)
 - Added visible fields for Notes and Associated Realtors
 - GUI changes
+- A backup of jump.db will be automatically made once a day the first time you open the program - in case you screw up!
+	- the last 30 days of backups will be stored in the backups folder
+
 
 
 3.1w - 1/23/2019

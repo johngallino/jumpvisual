@@ -9,6 +9,7 @@ import dateformat
 import editpop
 import wizardpop
 import backerupper
+import config
 ## Created by John Gallino
 ## December, 2018
 
@@ -219,8 +220,9 @@ def updatePhotographer(data, checksum):
     print(firstname + " " + lastname + "'s coverage has been updated.\n")
 
 def wizard():
-    wizardpop.run()
-    
+    name = wizardpop.run()
+    rosterbox.insert(tk.END, config.newuser.name)
+
     
 ### ROOT SCREEN
 class root(tk.Tk):
@@ -248,7 +250,7 @@ class root(tk.Tk):
 
     ## ADD A GUY
         tk.Button(leftframe, text="+", relief=tk.FLAT, cursor="hand2", bd=1, bg="WHITE", activebackground="WHITE", font="TKDefaultFont 8", command=wizard).grid(row=0, column=1, sticky='e', ipadx=4)
-
+        global rosterbox
         rosterbox = tk.Listbox(leftframe, width=20, height=13, activestyle='none', font=("TKDefaultFont"))
         rosterbox_scroll = tk.Scrollbar(leftframe, orient=tk.VERTICAL)
         rosterbox['yscrollcommand'] = rosterbox_scroll.set
@@ -259,6 +261,7 @@ class root(tk.Tk):
         
         self.p_first = tk.StringVar()
         self.p_last = tk.StringVar()
+        self.p_nickname = tk.StringVar()
         self.p_phone = tk.StringVar()
         self.p_email = tk.StringVar()
         self.p_jvemail = tk.StringVar()
@@ -291,10 +294,12 @@ class root(tk.Tk):
         def viewProfile(event):
             """ Reads profile of the selected photographer """
             target = rosterbox.get(tk.ACTIVE).rstrip('\n')
+            print("target is " + str(target)+ '.')
             name = target.split(" ")
-            self.p_first.set(name[0].title())
-            self.p_last.set(name[1].rstrip('\n').title())
-            c.execute("SELECT phone, email, jv_email, address, city, state, birthday, faa_num, abilities, emer_name, emer_rel, emer_cell, zip, realtors, notes FROM photographers WHERE first=? AND last=?", (self.p_first.get(), self.p_last.get()))
+            self.p_first.set(name[0])
+            self.p_last.set(name[1].rstrip('\n'))
+            #print("p_first is " + self.p_first.get() + "\np_last is " + self.p_last.get())
+            c.execute("SELECT phone, email, jv_email, address, city, state, birthday, faa_num, abilities, emer_name, emer_rel, emer_cell, zip, realtors, notes, nickname FROM photographers WHERE first=? AND last=?", (self.p_first.get(), self.p_last.get()))
             info = c.fetchone()
             if info != None:
                 self.p_realtors = info[13]
@@ -313,91 +318,34 @@ class root(tk.Tk):
                 self.p_emerrel.set(info[10])
                 self.p_emercell.set(info[11])
                 self.p_zip.set(info[12])
+                self.p_nickname.set(info[15])
                     
                     
             updateProfileBox(self)
 
-        # for i in os.listdir(path):
-        #     if i.endswith('.jmp'):
-        #         files.append(i)
-                
-        # #print("files in '" + str(path) + "' folder are " + str(files))
         
-        # for file in files:
-        #     # for each file in photographers folder, do checksum and pull the first and last name
-        #     with open("photographers/" +file, "r") as data:
-        #         checksum = hashlib.md5(open("photographers/"+file, "rb").read()).hexdigest()
-        #         while True:
-        #             name = data.readline()
-        #             #break while loop if line is not a comment
-        #             if not name.startswith('#'):
-                        
-        #                 break
-        #         fullname = name.split(" ")
-        #         firstname = fullname[0].title()
-        #         lastname = fullname[1].rstrip('\n').title()
-                
-        #         # check if this photographer is already in the database
-        #         c.execute("SELECT employee_id FROM photographers WHERE first = ? AND last = ?", (firstname, lastname))
-        #         check = c.fetchall()
-        #         if len(check) ==0:
-        #             print("\n" + name.rstrip('\n').title() + " is not in database. Adding now...")
-        #             readPhotographer(data, checksum)
-        #         else:
-        #             # compare .jmp checksum to old checksum
-        #             c.execute("SELECT checksum FROM photographers WHERE first = ? AND last = ?", (firstname, lastname))
-        #             checkold = str(c.fetchone()[0])
-        #             if checkold != checksum:
-        #                 #print("checksum reads as " + checksum + " but on record it is " + checkold)
-        #                 print("UPDATE: There seems to be a change in " + firstname + " " + lastname + "'s .jmp file! Updating now...")
-        #                 updatePhotographer(data, checksum)
-        #             # else:
-        #                 # print(firstname + " " + lastname + " is already in the db and up to date")
-                    
-        #         # this part just populates the roster box    
-        #         while True:
-        #             line = data.readline()
-        #             #break while loop if line is not a comment
-        #             if not line.startswith('#'):
-        #                 break
         c.execute("SELECT first, last from Photographers")
         allguys = c.fetchall()
-        print(allguys)
         for guy in allguys:
             name = guy[0] + ' ' + guy[1]
             rosterbox.insert(tk.END, name.title())
-                # data.close()
-                
-                #check if every photographer in db has a corresponding .jmp file
-                
-        #deletes from db if there is no .jmp file
-        # c.execute("SELECT first, last FROM photographers")
-        # db_photographers = c.fetchall()
-        # for photographer in db_photographers:
-        #     filename = photographer[0] + photographer[1] + ".jmp"
-        #     print('searching for ' + filename)
-        #     exists = os.path.isfile('photographers/'+filename)
-        #     if exists:
-        #         print(filename + " found")
-        #     else:
-        #         print("Uh oh! No file found for " + photographer[0] + " " + photographer[1])
-                # c.execute("SELECT employee_id FROM photographers WHERE first=? AND last=?", (photographer[0], photographer[1]))
-                # targetid = str(c.fetchone()[0])
-                # print("targetid is " + targetid)
-                # c.execute("DELETE FROM coverage WHERE employee_id=?",[targetid])
-                # c.execute("DELETE FROM photographers WHERE employee_id=?",[targetid])
-                # conn.commit()
-                # print("Done. " + photographer[0] + " " + photographer[1] + " has been removed from the database.")
+               
 
-        rosterbox.bind("<Double-Button-1>", viewProfile)    
+        rosterbox.bind("<Double-Button-1>", viewProfile)  
+
+        #View Profile button that I disabled  
         #tk.Button(leftframe, text="View Profile", font=("TKDefaultFont"), command=lambda:viewProfile(self)).grid(row=6, column=0, ipadx=30, padx=(20,0), sticky='nw')
-        #tk.Button(leftframe, text="+", font=("TKDefaultFont"), command=jumpwizard.newGuy).grid(row=6, column=1, sticky='nw', ipadx=5)
 
         
         def updateProfileBox(self):
             """ updates the dang ole profile box """
             self.namelabel.destroy()
-            self.namelabel = tk.Label(infoFrame, text=(self.p_first.get() + " " + self.p_last.get()), font=("TKDefaultFont 14"))
+            #print("p_nickname is " + self.p_nickname.get())
+            if self.p_nickname.get() == 'None':
+                self.namelabel = tk.Label(infoFrame, text=(self.p_first.get() + " "  + self.p_last.get()), font=("TKDefaultFont 14"))  
+            else:
+                self.namelabel = tk.Label(infoFrame, text=(self.p_first.get() + " \'" + self.p_nickname.get() + "\' "  + self.p_last.get()), font=("TKDefaultFont 14"))
+
             self.namelabel.grid(row=1, column=0, sticky=tk.W, pady=(6,2), padx=10)
             
             # this is black horiz line
@@ -433,36 +381,36 @@ class root(tk.Tk):
             self.serviceList.delete(0, tk.END)
 
             self.notesList.destroy()
-            self.notesList = tk.Text(third, height=8, width=25)
+            self.notesList = tk.Text(topFrame, wrap=tk.WORD, height=4, width=45)
             self.notesList.tag_configure('tag-right', font='TKDefaultFont 10', rmargin=3, justify='right')
             
             if self.p_notes != None:
                 self.notesList.insert('end', self.p_notes, 'tag-right')
             self.notesList.config(state=tk.DISABLED)
-            self.notesList.grid(row=1, column=0, sticky='ne')
+            self.notesList.grid(row=3, column=1, pady=(0,10), sticky='nsw')
 
             self.notesList_scroll.destroy()
-            self.notesList_scroll = tk.Scrollbar(third, orient=tk.VERTICAL)
+            self.notesList_scroll = tk.Scrollbar(topFrame, orient=tk.VERTICAL)
             self.notesList['yscrollcommand'] = self.notesList_scroll.set
             self.notesList_scroll['command'] = self.notesList.yview
 
-            self.notesList_scroll.grid(row=1, column=2, padx=(0, 10), sticky='nsw')
+            self.notesList_scroll.grid(row=3, column=2, padx=(0, 10), pady=(0,5), sticky='nsw')
 
             self.realtorList.destroy()
-            self.realtorList = tk.Text(third, height=5, width=25)
+            self.realtorList = tk.Text(services, height=8, width=28)
             self.realtorList.tag_configure('tag-right', font='TKDefaultFont 10', rmargin=3, justify='right')
             
             if self.p_realtors != None:
                 self.realtorList.insert('end', self.p_realtors, 'tag-right')
             self.realtorList.config(state=tk.DISABLED)
-            self.realtorList.grid(row=4, column=0, sticky='ne')  
+            self.realtorList.grid(row=1, column=2, sticky='ne')  
 
             self.realtorList_scroll.destroy()
-            self.realtorList_scroll = tk.Scrollbar(third, orient=tk.VERTICAL)
+            self.realtorList_scroll = tk.Scrollbar(services, orient=tk.VERTICAL)
             self.realtorList['yscrollcommand'] = self.realtorList_scroll.set
             self.realtorList_scroll['command'] = self.realtorList.yview
 
-            self.realtorList_scroll.grid(row=4, column=2, padx=(0, 10), sticky='nsw') 
+            self.realtorList_scroll.grid(row=1, column=3, padx=(0,8),sticky='nsw') 
             # self.realtorList.delete(0, tk.END)
             # if self.p_realtors != None:
             #     print("realtors are " + self.p_realtors)
@@ -554,29 +502,28 @@ class root(tk.Tk):
     ## TOP FRAME
         topFrame = tk.Frame(self, bd=2, width=500, relief=tk.RAISED,)
         topFrame.columnconfigure(0, weight=3)
-        topFrame.columnconfigure(3, weight=1)
         #topFrame.rowconfigure(0, weight=1)
-        topFrame.grid(row=1, column=1, sticky='nw', rowspan=2, pady=(0,5), padx=15, ipadx=2)
+        topFrame.grid(row=1, column=1, sticky='nw', rowspan=2, padx=15, pady=(0,5), ipadx=2)
         
         infoFrame = tk.Frame(topFrame, width=300)
-        infoFrame.grid(row=0, column=0, sticky='nws')
+        infoFrame.grid(row=0, column=0, rowspan=4, sticky='nws')
         
         
         self.namelabel = tk.Label(infoFrame, text=(self.p_first.get() + " " + self.p_last.get()), font=("TKDefaultFont", 14))
-        self.namelabel.grid(row=1, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
+        self.namelabel.grid(row=1,  sticky=tk.W, pady=2, padx=6)
         self.addresslabel = tk.Label(infoFrame, text=self.p_address.get())
-        self.addresslabel.grid(row=4, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
+        self.addresslabel.grid(row=4, sticky=tk.W, pady=2, padx=6)
         self.phonelabel = tk.Label(infoFrame, text=self.p_phone.get())
-        self.phonelabel.grid(row=5, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
+        self.phonelabel.grid(row=5, sticky=tk.W, pady=2, padx=6)
         self.emaillabel = tk.Label(infoFrame, text=self.p_email.get())
-        self.emaillabel.grid(row=6, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
+        self.emaillabel.grid(row=6,  sticky=tk.W, pady=2, padx=6)
         self.jvemaillabel = tk.Label(infoFrame, text=self.p_jvemail.get())
-        self.jvemaillabel.grid(row=7, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
+        self.jvemaillabel.grid(row=7, sticky=tk.W, pady=2, padx=6)
         self.birthdaylabel = tk.Label(infoFrame, text=self.p_birthday.get())
-        self.birthdaylabel.grid(row=8, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
+        self.birthdaylabel.grid(row=8, sticky=tk.W, pady=2, padx=6)
         self.faa_numlabel = tk.Label(infoFrame, text=("FAA#: " +self.p_faanum.get()))
-        self.faa_numlabel.grid(row=9, column=0, columnspan=2, sticky=tk.W, pady=2, padx=6)
-        buttons = tk.Frame(infoFrame,)
+        self.faa_numlabel.grid(row=9, sticky=tk.W, pady=2, padx=6)
+        buttons = tk.Frame(infoFrame)
         buttons.grid(row=9, column=0, sticky='sw', rowspan=2, pady=(20, 5), padx=6)
         tk.Button(buttons, text="Coverage", font=("TKDefaultFont", 10), bg="LIGHTSTEELBLUE", command=lambda:cov_popup(self.p_first.get(), self.p_last.get())).grid(row=0, column=0, sticky='ws', ipadx=2, padx=(0,5), pady=(10,0))
         tk.Button(buttons, text="Emergency", font=("TKDefaultFont", 10), bg="PINK", command=lambda:emer_popup(self.p_first.get(), self.p_last.get())).grid(row=0, column=1, sticky='ws', ipadx=2, padx=(0,5), pady=(10,0))
@@ -587,77 +534,74 @@ class root(tk.Tk):
         #tk.Button(checks, font=("TKDefaultFont", 8), text="Remove",bg="PINK", command=lambda:confirm_removeGuy(p_first.get(), p_last.get())).grid(row=9,  column=2, sticky='se', padx=(0,5), pady=6, ipadx=2)
 
 
-        #left column
+        #services list
         services = tk.Frame(topFrame)
-        services.grid(row=0, column=2, padx=(0,5),  sticky='nws')
+        services.columnconfigure(2, weight=1)
+        services.grid(row=0, column=1, columnspan=2, sticky='ew')
         tk.Label(services, text="Services", font=("TKDefaultFont 8 bold")).grid(row=0, column=0, pady=(9,0), sticky='w')
-        self.serviceList = tk.Listbox(services, width=15, height=14)
+        self.serviceList = tk.Listbox(services, width=15, height=8, activestyle='none')
+
         self.serviceList.grid(row=1, column=0, sticky='nsw')
 
         serviceList_scroll = tk.Scrollbar(services, orient=tk.VERTICAL)
         self.serviceList['yscrollcommand'] = serviceList_scroll.set
         serviceList_scroll['command'] = self.serviceList.yview
-        serviceList_scroll.grid(row=1, column=2, padx=(0, 3), sticky='nsw')
+        serviceList_scroll.grid(row=1, column=1, padx=(0, 5), sticky='nsw')
         
+        # notes
+        tk.Label(topFrame, text="Notes", font=("TKDefaultFont 8 bold")).grid(row=2, column=1, sticky='ne')
+        self.notesList = tk.Text(topFrame, height=5, width=25)
+        # self.notesList.grid(row=4, column=0, sticky='w')
+        self.notesList_scroll = tk.Scrollbar(topFrame, orient=tk.VERTICAL)
         
-        #right column
-        third = tk.Frame(topFrame)
-        third.grid(row=0, column=3, sticky='nws')
-        tk.Label(third, text="Notes", font=("TKDefaultFont 8 bold")).grid(row=0, column=0, pady=(9,0), sticky='e')
-        self.notesList = tk.Text(third, height=8, width=25)
-        self.notesList.grid(row=1, column=0, sticky='ne')
-
-        self.notesList_scroll = tk.Scrollbar(third, orient=tk.VERTICAL)
-        
-
-        tk.Label(third, text="Associated Realtors", font=("TKDefaultFont 8 bold")).grid(row=2, column=0, sticky='e')
-        self.realtorList = tk.Text(third, width=25, height=5)
-        self.realtorList.grid(row=4, sticky='w')
-
-        self.realtorList_scroll = tk.Scrollbar(third, orient=tk.VERTICAL)
+        # realtors
+        tk.Label(services, text="Associated Realtors", font=("TKDefaultFont 8 bold")).grid(row=0, column=2, pady=(9,0), sticky='e')
+        self.realtorList = tk.Text(services, width=45, height=7)
+        # self.realtorList.grid(row=1, column=2, sticky='ne')
+        self.realtorList_scroll = tk.Scrollbar(services, orient=tk.VERTICAL)
 
         
         def ab_check(abilities):
             """ reads and decyphers abilities code """
             #print("abilities is " + abilities)
             if "fp" in str(abilities):
-                self.serviceList.insert(tk.END, "Floorplans")
+                self.serviceList.insert(tk.END, " Floorplans")
 
             if "wkends" in abilities:
-                self.serviceList.insert(tk.END, "Weekends")
+                self.serviceList.insert(tk.END, " Weekends")
                 
             if "vmatter" in abilities:
-                self.serviceList.insert(tk.END, "Matterport")
+                self.serviceList.insert(tk.END, " Matterport")
                 
             if "pdusk" in abilities:
-                self.serviceList.insert(tk.END, "Dusk Photos")
+                self.serviceList.insert(tk.END, " Dusk Photos")
                 
             if "vteaser" in abilities:
-                self.serviceList.insert(tk.END, "Teaser Vid")
+                self.serviceList.insert(tk.END, " Teaser Vid")
                 
             if "vpremium" in abilities:
-                self.serviceList.insert(tk.END, "Premium Vid")
+                self.serviceList.insert(tk.END, " Premium Vid")
                 
             if "vluxury" in abilities:
-                self.serviceList.insert(tk.END, "Luxury Vid")
+                self.serviceList.insert(tk.END, " Luxury Vid")
                 
             if "vediting" in abilities:
-                self.serviceList.insert(tk.END, "Video Edit")
+                self.serviceList.insert(tk.END, " Video Edit")
                 
             if "paerial" in abilities:
-                self.serviceList.insert(tk.END, "Aerial Stills")
+                self.serviceList.insert(tk.END, " Aerial Stills")
                 
             if "vaerial" in abilities:
-                self.serviceList.insert(tk.END, "Aerial Video")
+                self.serviceList.insert(tk.END, " Aerial Video")
                 
             if "faa" in abilities:
-                self.serviceList.insert(tk.END, "FAA Certified")
+                self.serviceList.insert(tk.END, " FAA Certified")
                 
             if "insaerial" in abilities:
-                self.serviceList.insert(tk.END, "Aerial Ins.")
+                self.serviceList.insert(tk.END, " Aerial Ins.")
             
             if "insliab" in abilities:
-                self.serviceList.insert(tk.END, "Liability Ins.")
+                self.serviceList.insert(tk.END, " Liability Ins.")
             
         
         ab_check(self.p_abilities)

@@ -2,6 +2,7 @@ import sqlite3
 import os
 import tkinter as tk
 from tkinter import ttk
+import config
 
 version = "v2.0"
 
@@ -19,6 +20,9 @@ ct_counties = ('fairfield', 'hartford', 'litchfield', 'middlesex', 'new haven', 
 found = os.path.isfile('jump.db')
 c = 0 #global variable
 i = 0
+name = ''
+
+user = config.newuser
 
 def center(win):
     """
@@ -959,26 +963,28 @@ class FinalFrame(tk.Frame):
         # Proof
         report = tk.Frame(self)
         report.grid(row=3, column=0, sticky=tk.W+tk.E)
+
         self.proof = tk.Text(report, height=21, width=60)
+        self.proof.tag_configure('proof', font='TKDefaultFont 10', lmargin1=3, justify='left')
         self.proof_scroll = tk.Scrollbar(report, orient=tk.VERTICAL)
         self.proof['yscrollcommand'] = self.proof_scroll.set
         self.proof_scroll['command'] = self.proof.yview
         self.proof_scroll.grid(row=0, column=1, sticky=tk.E+tk.N+tk.S)
-        self.proof.insert(tk.END, "Name:\t" + user.firstname.title() + " " + user.lastname.title() + "\n")
-        self.proof.insert(tk.END, "Phone:\t" + user.phone + "\n")
-        self.proof.insert(tk.END, "Personal Email:\t" + user.email + "\n")
-        self.proof.insert(tk.END, "JumpVisual Email:\t" + user.jvemail + "\n")
-        self.proof.insert(tk.END, "Address:\t" + user.address + "\n")
-        self.proof.insert(tk.END, "City:\t" + user.hometown + ", " + user.homestate+ "\n")
-        self.proof.insert(tk.END, "Birthday:\t" + user.birthday + "\n")
-        self.proof.insert(tk.END, "FAA Cert#:\t" + user.faa_num + "\n")
-        self.proof.insert(tk.END, "Services:\t" + user.abilities + "\n")
-        self.proof.insert(tk.END, "Emergency Contact:\t{x} ({y}) {z}\n".format(x=user.emer_name, y=user.emer_relation, z=user.emer_cell))
-        self.proof.insert(tk.END, "### COVERAGE ZONE ###\n")
+        self.proof.insert(tk.END, "Name:\t" + user.firstname.title() + " " + user.lastname.title() + "\n", 'proof')
+        self.proof.insert(tk.END, "Phone:\t" + user.phone + "\n", 'proof')
+        self.proof.insert(tk.END, "Personal Email:\t" + user.email + "\n", 'proof')
+        self.proof.insert(tk.END, "JumpVisual Email:\t" + user.jvemail + "\n", 'proof')
+        self.proof.insert(tk.END, "Address:\t" + user.address + "\n", 'proof')
+        self.proof.insert(tk.END, "City:\t" + user.hometown + ", " + user.homestate+ "\n", 'proof')
+        self.proof.insert(tk.END, "Birthday:\t" + user.birthday + "\n", 'proof')
+        self.proof.insert(tk.END, "FAA Cert#:\t" + user.faa_num + "\n", 'proof')
+        self.proof.insert(tk.END, "Services:\t" + user.abilities + "\n", 'proof')
+        self.proof.insert(tk.END, "Emergency Contact:\t{x} ({y}) {z}\n".format(x=user.emer_name, y=user.emer_relation, z=user.emer_cell), 'proof')
+        self.proof.insert(tk.END, "### COVERAGE ZONE ###\n", 'proof')
         self.usertowns = user.nj_towns + user.ny_towns + user.ct_towns
         
         for town in self.usertowns:
-            self.proof.insert(tk.END, town + "\n")
+            self.proof.insert(tk.END, town + "\n", 'proof')
         self.proof.config(state=tk.DISABLED)
         self.proof.grid(row=0, column=0, columnspan=2, sticky=tk.W+tk.E)
         
@@ -1001,9 +1007,14 @@ class FinalFrame(tk.Frame):
         self.top_string_label.grid(row=1, column=0, sticky=tk.W, columnspan=2, ipady=8)
         
     def next(self, user):
+        # writeNewGuy(user)
         try:
             writeNewGuy(user)
             self.finlabelgood.grid(row=2, column=0, sticky=tk.W)
+            global name
+            name = str(user.firstname.title() + ' ' + user.lastname.title())
+            print("in wizardpop name is " + name)
+            return name
         except:
             self.finlabelbad.grid(row=2, column=0, sticky=tk.W)
             
@@ -1012,6 +1023,13 @@ def writeNewGuy(user):
     with conn:
         c.execute("INSERT INTO photographers (first, last, phone, email, jv_email, address, city, state, zip, birthday, faa_num, abilities, emer_name, emer_rel, emer_cell) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (user.firstname, user.lastname, user.phone, user.email, user.jvemail, user.address,  user.hometown, user.homestate, user.zip, user.birthday, user.faa_num, user.abilities, user.emer_name, user.emer_relation, user.emer_cell))
         conn.commit()
+    # root.rosterbox.delete(0, tk.END)   
+    # c.execute("SELECT first, last from Photographers")
+    # allguys = c.fetchall()
+    # for guy in allguys:
+    #     name = guy[0] + ' ' + guy[1]
+    #     root.rosterbox.insert(tk.END, name.title())
+    #rosterbox.insert(tk.END, (user.firstname + " " + user.lastname))
 
     # c.execute("SELECT employee_ID FROM photographers WHERE first=? AND last=?", (user.firstname, user.lastname))
     # photoID = c.fetchone()
@@ -1019,40 +1037,7 @@ def writeNewGuy(user):
     # print("ID of new guy is " + str(photoID))
 
         
-### USER CLASS
-class User():
-    """A class to hold the User's data """
-    
-    def __init__(self, *args, **kwargs):
-        #super().__init__(*args, **kwargs)
 
-        ##print("A user has been created")
-        self.firstname = ''
-        self.lastname = ''
-        self.email = ''
-        self.jvemail = ''
-        self.phone = ''
-        self.address = ''
-        self.hometown = ''
-        self.homestate = 'NJ'
-        self.abilities = ''
-        self.birthday = '' #m/d
-        self.zip = ''
-        self.faa_num = 'None'
-        self.nj_bool = False
-        self.ny_bool = False
-        self.man_bool = False
-        self.ct_bool = False
-        self.nj_counties = []
-        self.ny_counties = []
-        self.ct_counties = []
-        self.nj_towns = []
-        self.ny_towns = []
-        self.ct_towns = []
-        self.emer_name = ''
-        self.emer_relation = ''
-        self.emer_cell = ''
-        
 
 
 def choose_frames(user):
@@ -1077,13 +1062,10 @@ def resetAll():
     window.destroy()
     global i
     i = 0
+    
 
 def run(): 
-    global user
-    user = User()
-
     checkjumpdb()
-
     global window
     window = tk.Toplevel()
     window.title("JumpWizard")
@@ -1136,9 +1118,9 @@ def run():
     drawframe(user)
     
 
+
 def drawframe(user):
     """draws current frame""" 
-    #print("i is " + str(i) + " limit is " + str(self.limit))
     current_frame = frames[i](window, user, padx=30, pady=30, width=400)        
     current_frame.grid(row=0,column=1)
 
