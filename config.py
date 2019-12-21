@@ -1,5 +1,11 @@
 import tkinter as tk
 
+currentframe = ''
+imgpath = 'jump.pbm'
+
+def access():
+	print("accessed config.py")
+
 ### USER CLASS
 class User():
     """A class to hold the User's data """
@@ -7,9 +13,10 @@ class User():
     def __init__(self, *args, **kwargs):
         #super().__init__(*args, **kwargs)
 
-        ##print("A user has been created")
+        #print("A user has been created")
         self.firstname = ''
         self.lastname = ''
+        self.nickname = ''
         self.email = ''
         self.jvemail = ''
         self.phone = ''
@@ -33,6 +40,6 @@ class User():
         self.emer_name = ''
         self.emer_relation = ''
         self.emer_cell = ''
-        self.name = (self.firstname + ' ' + self.lastname)
-       
-newuser = User()
+        self.name = ''
+
+newuser = ''

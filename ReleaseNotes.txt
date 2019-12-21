@@ -1,13 +1,21 @@
 JumpVisualDB Release Notes
 
+4.1 - 4/3/2019
+- Added the ability to easily export a photographer's coverage to a file
+- Changing a photographers name will now update that name in the roster list
+- verbiage changed in JumpWizard
+
+
 4.0 - 2/7/2019 MAJOR CHANGES! :D
 - Searching a city will no longer return results to the console screen (redundant)
-- Can now double click on Team Member to view profile (instead of hitting View Profile button)
-- Added visible fields for Notes and Associated Realtors
+- Can now double click on Team Member to view profile (instead of hitting View Profile button which has been removed)
+- Added fields for Notes, Associated Realtors, and Nickname
 - GUI changes
 - A backup of jump.db will be automatically made once a day the first time you open the program - in case you screw up!
 	- the last 30 days of backups will be stored in the backups folder
-
+- Can now edit photographer information and coverage from inside the main program
+- Can add and delete photographers from inside the main program (jumpwizard is obsolete!)
+- Photographer list is now in alphabetical order by first name
 
 
 3.1w - 1/23/2019
