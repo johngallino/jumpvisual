@@ -13,14 +13,13 @@ import otherframes
 ## Created by John Gallino
 ## December, 2018
 
-#TO DO LIST
-# Add editing capability
+# Last edited 6/19/2020
 
 conn = sqlite3.connect('jump.db')
 c = conn.cursor()
 files = []
 path = "photographers"
-version = "version 4.1"
+version = "version 4.2"
 
 # with conn:
 #     c.execute("SELECT id FROM UScities WHERE state_id=? AND county_name=? AND city=?",('NJ', 'Bergen', 'Emerson'))
@@ -74,7 +73,7 @@ class root(tk.Tk):
         #self.geometry("720x575")
         self.resizable(width=False, height=False)
         self.columnconfigure(1, weight=1)
-        self.wm_iconbitmap('jvdb.ico')
+        self.wm_iconbitmap('graphics/jvdb.ico')
         #self.overrideredirect(1)
         # self.bind('<Button-1>',self.clickwin)
         # self.bind('<B1-Motion>',self.dragwin)
@@ -82,7 +81,7 @@ class root(tk.Tk):
         self.p_notes = ''
         self.p_realtors = ''
     ## TOP IMAGE
-        self.headimg = tk.PhotoImage(file="dispatch.pbm")
+        self.headimg = tk.PhotoImage(file="graphics/dispatch.pbm")
         self.banner = tk.Label(self,bg='white', image=self.headimg)
         
         self.banner.image = self.headimg
@@ -282,7 +281,7 @@ class root(tk.Tk):
         def cov_popup(first, last):
             window = tk.Toplevel()
             window.title("Coverage for " + first + " " + last)
-            window.wm_iconbitmap('jvdb.ico')
+            window.wm_iconbitmap('graphics/jvdb.ico')
             boxframe = tk.Frame(window)
             boxframe.grid(row=1, column=0, padx=15, ipady=15)
             cov_box = tk.Listbox(boxframe, width=40, height=30)
@@ -333,7 +332,7 @@ class root(tk.Tk):
         def emer_popup(first, last):
             window = tk.Toplevel()
             window.title("Emergency Contact Info for " + first + " " + last)
-            window.wm_iconbitmap('jvdb.ico')
+            window.wm_iconbitmap('graphics/jvdb.ico')
             c.execute("SELECT emer_name, emer_rel, emer_cell FROM Photographers WHERE first=? AND last=?", (first, last))
             emer_results = c.fetchone()
             if emer_results is not None:
@@ -366,7 +365,7 @@ class root(tk.Tk):
                         i.append('')
             editWindow = tk.Toplevel()
             editWindow.title("Edit info for " + first + " " + last)
-            editWindow.wm_iconbitmap('jvdb.ico')
+            editWindow.wm_iconbitmap('graphics/jvdb.ico')
             tk.Label(editWindow, text="Edit Info for " + first + " " + last, font="TKDefaultFont 14").grid(padx=(30,0), pady=10, sticky='nw', columnspan=5)
 
             info = tk.Frame(editWindow)
@@ -611,7 +610,7 @@ class root(tk.Tk):
 
             def confirm_removeGuy(self, first, last):
                 confirm = tk.Toplevel(padx=15, pady=15)
-                confirm.wm_iconbitmap('jvdb.ico')
+                confirm.wm_iconbitmap('graphics/jvdb.ico')
                 center(confirm)
                 confirm.title("Are you sure?")
                 tk.Label(confirm, text="Are you sure you want to remove " + first + " " + last + "?\nThis cannot be undone!").grid(row=0, columnspan=2, column=0, pady=(0,15), sticky='ew')
@@ -677,7 +676,7 @@ class root(tk.Tk):
                     self.newabilities += "InsLiability/"
                 if self.fname_entry.get() != first or self.lname_entry.get() != last:
                     flag = True
-                c.execute('UPDATE photographers SET first=?, last=?, nickname=?, phone=?, email=?, jv_email=?, address=?, city=?, state=?, zip=?, birthday=?, faa_num=?, realtors=?, notes=?, emer_name=?, emer_rel=?, emer_cell=?, abilities=? where first=? AND last=?''',(self.fname_entry.get(), self.lname_entry.get(), self.nick_entry.get(), self.phone_entry.get(), self.email_entry.get(), self.jvemail_entry.get(), self.address_entry.get(), self.city_entry.get(), self.statevar.get(), self.zip_entry.get(), self.birthday_entry.get(), self.faa_num_entry.get(), self.realtors_entry.get('1.0', tk.END), self.notes_entry.get('1.0', tk.END), self.emer_name_entry.get(), self.emer_relation_entry.get(), self.emer_cell_entry.get(), self.newabilities, first, last))
+                c.execute('UPDATE photographers SET first=?, last=?, nickname=?, phone=?, email=?, jv_email=?, address=?, city=?, state=?, zip=?, birthday=?, faa_num=?, realtors=?, notes=?, emer_name=?, emer_rel=?, emer_cell=?, abilities=? where first=? AND last=?',(self.fname_entry.get(), self.lname_entry.get(), self.nick_entry.get(), self.phone_entry.get(), self.email_entry.get(), self.jvemail_entry.get(), self.address_entry.get(), self.city_entry.get(), self.statevar.get(), self.zip_entry.get(), self.birthday_entry.get(), self.faa_num_entry.get(), self.realtors_entry.get('1.0', tk.END), self.notes_entry.get('1.0', tk.END), self.emer_name_entry.get(), self.emer_relation_entry.get(), self.emer_cell_entry.get(), self.newabilities, first, last))
 
                 c.execute('SELECT employee_id from photographers where first=? and last=?', (first, last))
                 tar_id = str(c.fetchone()[0])

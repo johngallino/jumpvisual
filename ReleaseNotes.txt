@@ -1,5 +1,9 @@
 JumpVisualDB Release Notes
 
+4.2 - 6/19/2020
+- Fixed a bug where towns from Essex County NY were being mixed up with Essex County NJ
+- When adding a new photographer, final "Export" button changed to "Confirm New Photographer" for clarity
+
 4.1 - 4/3/2019
 - Added the ability to easily export a photographer's coverage to a file
 - Changing a photographers name will now update that name in the roster list
