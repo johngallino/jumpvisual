@@ -54,24 +54,66 @@ def writeNewGuy(user):
         c.execute("SELECT employee_ID FROM photographers WHERE first=? AND last=?", (user.firstname, user.lastname))
         photoID = c.fetchone()
         photoID = str(photoID[0])
-        print("ID of new guy is " + str(photoID))
+        print("ID of new photographer is " + str(photoID))
         print(user.nj_towns)
-        for town in user.nj_towns:
-            print('town is ' + town)
-            gix = town.split(' | ')
-            county = gix[0]
-            city = gix[1]
-            print('county is ' + county)
-            print('city is ' + city)
-            c.execute("SELECT id FROM UScities WHERE state_id=? AND county_name=? AND city=?",('NJ', county.rstrip(), city.rstrip()))
-            townID = c.fetchone()
-            townID = str(townID[0])
-            print('townID is ' + townID)
-            c.execute("INSERT INTO Coverage (employee_ID, city_id) VALUES (?, ?)", (photoID, townID))
-            conn.commit()
+        if user.nj_towns:
+            print("ADDING NJ TOWNS...")
+            for town in user.nj_towns:
+                #print('town is ' + town)
+                gix = town.split(' | ')
+                county = gix[0]
+                city = gix[1]
+                #print('county is ' + county)
+                #print('city is ' + city)
+                try:
+                    c.execute("SELECT id FROM UScities WHERE state_id=? AND county_name=? AND city=?",('NJ', county.rstrip(), city.rstrip()))
+                    townID = c.fetchone()
+                    townID = str(townID[0])
+                    #print('townID is ' + townID)
+                    c.execute("INSERT INTO Coverage (employee_ID, city_id) VALUES (?, ?)", (photoID, townID))
+                except:
+                    print("Error with", "NJ |", county, "County", city)
+            print("DONE.")
+        if user.ny_towns:
+            print("ADDING NY TOWNS...")
+            for town in user.ny_towns:
+                #print('town is ' + town)
+                gix = town.split(' | ')
+                county = gix[0]
+                city = gix[1]
+                #print('county is ' + county)
+                #print('city is ' + city)
+                try:
+                    c.execute("SELECT id FROM UScities WHERE state_id=? AND county_name=? AND city=?",('NY', county.rstrip(), city.rstrip()))
+                    townID = c.fetchone()
+                    townID = str(townID[0])
+                    #print('townID is ' + townID)
+                    c.execute("INSERT INTO Coverage (employee_ID, city_id) VALUES (?, ?)", (photoID, townID))
+                except:
+                    print("Error with", "NY |", county, "County", city)
+            print("DONE.")
+        if user.ct_towns:
+            print("ADDING CT TOWNS...")
+            for town in user.ct_towns:
+                #print('town is ' + town)
+                gix = town.split(' | ')
+                county = gix[0]
+                city = gix[1]
+                #print('county is ' + county)
+                #print('city is ' + city)
+                try:
+                    c.execute("SELECT id FROM UScities WHERE state_id=? AND county_name=? AND city=?",('CT', county.rstrip(), city.rstrip()))
+                    townID = c.fetchone()
+                    townID = str(townID[0])
+                    #print('townID is ' + townID)
+                    c.execute("INSERT INTO Coverage (employee_ID, city_id) VALUES (?, ?)", (photoID, townID))
+                except:
+                    print("Error with", "CT |", county, "County", city)
+            print("DONE.")
+        conn.commit()
 
 
- 
+
 
 class wizardpop(): 
 
@@ -82,16 +124,19 @@ class wizardpop():
         global win
         win = window
         window.title("JumpWizard")
-        window.wm_iconbitmap('jvdb.ico')
+        window.wm_iconbitmap('graphics/jvdb.ico')
         #window.wm_iconbitmap('jwicon.ico')
         window.title("JumpVisual Photographer Coverage Wizard")
         window.resizable(width=False, height=False)
 
-        baseimage = tk.PhotoImage(file=config.imgpath)
+        baseimage = self.baseimage = tk.PhotoImage(file='graphics/jump.pbm')
+        njimage = self.njimage = tk.PhotoImage(file='graphics/s_nj.pbm')
+#        nyimage = tk.PhotoImage(file='graphics/s_ny.pbm')
+#        ctimage = tk.PhotoImage(file='graphics/s_ct.pbm')
 
         leftframe = tk.Frame(window, width=600)
         leftframe.grid(row=0, column=0, sticky='news', rowspan=4)
-
+        
         sidebar = tk.Label(leftframe, image=baseimage)
         sidebar.image = baseimage
         sidebar.grid(row=0, column=0, sticky='ns')
@@ -109,11 +154,21 @@ class wizardpop():
         limit = len(frames)
         
         def drawframe(user, i):
-            """draws current frame"""
+            """draws parent frame"""
+            
             config.current_frame = infoframe.InfoFrame(win, user, padx=30, pady=30, width=400)
             # current_frame = frames[i](win, user, i, frames, padx=30, pady=30, width=400)
-            # if current_frame == NJCounties:
-            #     sidebar.image = njimage        
+           
+#            if type(config.current_frame) == NJCounties:
+#                sidebar.image = njimage
+#            elif config.current_frame == NYCounties:
+#                sidebar.image = nyimage
+#            elif config.current_frame == CTCounties:
+#                sidebar.image = ctimage
+#            else:
+#                print("config.current_frame is not NJ, Ny, or CT")
+#                sidebar.image = baseimage
+#            sidebar.grid(row=0, column=0, sticky='ns')
             config.current_frame.grid(row=0,column=1)
 
         drawframe(user, i)
