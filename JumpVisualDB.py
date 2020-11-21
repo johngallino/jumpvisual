@@ -1,33 +1,28 @@
 import sqlite3
 import os
+import sys
 import shutil
-import hashlib
+#import hashlib
 import datetime
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 import dateformat
-import wizardpop
+import wizardpop as w
 import backerupper
 import config
-import otherframes
 ## Created by John Gallino
 ## December, 2018
 
-# Last edited 6/19/2020
+# Last edited 11/20/2020
 
-conn = sqlite3.connect('jump.db')
-c = conn.cursor()
-files = []
-path = "photographers"
-version = "version 4.2"
+# KNOWN BUGS TO FIX AND STUFF TO ADD
+#### Add a confirmation dialog if wizard window is closed on last screen without Exporting
+#### Improve error handling and exceptions
+#### Add unit testing
+#### Allow for names with spaces or hyphens
 
-# with conn:
-#     c.execute("SELECT id FROM UScities WHERE state_id=? AND county_name=? AND city=?",('NJ', 'Bergen', 'Emerson'))
-#     townID = c.fetchone()
-#     print('townID is ' + str(townID[0]))
-
-def access():
-    print("accessed jumpvisualdb")
+version = "version 4.22"
 
 def center(win):
     """
@@ -48,35 +43,63 @@ def clearPhotographers():
     c.execute("DELETE FROM photographers")
     conn.commit()
 
+def checkjumpdb():
+    """see if jump.db file is present"""
+    try: 
+        open('jump.db')
+    except:
+        messagebox.showerror("Uh Oh!", "Cannot find jump.db file! Program must close!")
+        return
+    else:
+        global conn
+        conn = sqlite3.connect('jump.db')
+        global c 
+        c = conn.cursor()
 
-def wizard():
-    '''opens the New Guy wizard screen'''
-    config.newuser = ''
-    wizard = wizardpop.wizardpop()
-    root.wait_window(wizard.window)
-    wizard.window.destroy()
-    otherframes.i = 0
-    rosterbox.insert('end', config.newuser)
-    rosterbox.grid(row=1,column=0, padx=(20,0), rowspan=5, columnspan=2, sticky=tk.W+tk.N)
+def checkjumpdbbak(self):
+    """see if jump.db file is present"""
+    found = os.path.isfile('jump.db')
+    if not found:
+        dberror = tk.Toplevel(self, padx=15, pady=15)
+        tk.Label(dberror, text="Missing jump.db file").grid(padx=20, pady=20, sticky='ew')
+        def shutdown():
+            raise SystemExit
+        tk.Button(dberror, text="OK", command=shutdown).grid(row=1, column=0, sticky='ew', ipadx=15)
     
-def bye():
-    quit(1)
+       
     
 ### ROOT SCREEN
 class root(tk.Tk):
     """ JazzSoft root window """
+
+    def wizard(self):
+        '''opens the New Guy/Gal wizard screen'''
+        config.newuser = ''
+        config.wizardpop = w.Wizardpop()
+        app.wait_window(config.wizardpop.window)
+        config.wizardpop.window.destroy()
+        # clear rosterlist and repopulate it
+        self.rosterbox.delete(0,'end')
+        c.execute("SELECT first, last from Photographers")
+        allguys = c.fetchall()
+        theRoster = []
+        for guy in allguys:
+            name = str(guy[0] + ' ' + guy[1])
+            theRoster.append(name)
+
+        for guy in sorted(theRoster):
+            self.rosterbox.insert(tk.END, guy.title())
+        
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        checkjumpdb()
       ##MAIN WINDOW  
         self.title("JumpVisual Dispatch Protocol " + version)
         self.configure(bg="WHITE")
-        #self.geometry("720x575")
         self.resizable(width=False, height=False)
         self.columnconfigure(1, weight=1)
         self.wm_iconbitmap('graphics/jvdb.ico')
-        #self.overrideredirect(1)
-        # self.bind('<Button-1>',self.clickwin)
-        # self.bind('<B1-Motion>',self.dragwin)
         self.p_abilities = ''
         self.p_notes = ''
         self.p_realtors = ''
@@ -87,24 +110,23 @@ class root(tk.Tk):
         self.banner.image = self.headimg
         self.banner.grid(row=0, column=0, columnspan=10, sticky=tk.W+tk.E)
 
-        #tk.Label(self, text=version, bg="WHITE").grid(row=0, column=1, ipadx=15, sticky='es') #version label
-        #tk.Button(self, text="X", fg="DARK RED", font='Verdana 10', relief=tk.FLAT, bg="WHITE", command=bye).grid(row=0, column=1, padx=10, pady=(5,0), sticky='ne')
     ## LEFT FRAME
         leftframe = tk.Frame(self, bg="WHITE")
         leftframe.grid(row=1, column=0, sticky='nw', rowspan=8)
         tk.Label(leftframe, text="Team Members", font=("TKDefaultFont", 14), bg="WHITE", fg="DARK RED").grid(row=0, column=0, sticky=tk.W+tk.N, padx=20)
 
     ## ADD A GUY
-        tk.Button(leftframe, text="+", relief=tk.FLAT, cursor="hand2", bd=1, bg="WHITE", activebackground="WHITE", font="TKDefaultFont 8", command=wizard).grid(row=0, column=1, sticky='e', ipadx=4)
-        global rosterbox
-        rosterbox = tk.Listbox(leftframe, width=20, height=13, activestyle='none', font=("TKDefaultFont"))
-        rosterbox_scroll = tk.Scrollbar(leftframe, orient=tk.VERTICAL)
-        rosterbox['yscrollcommand'] = rosterbox_scroll.set
-        rosterbox_scroll['command'] = rosterbox.yview
-        rosterbox.grid(row=1,column=0, padx=(20,0), rowspan=5, columnspan=2, sticky=tk.W+tk.N)
-        rosterbox_scroll.grid(row=1, column=1, rowspan=5, sticky=tk.N+tk.S+tk.E)
-        #tk.Label(leftframe, text=version, bg="WHITE", fg="GRAY").grid(row=7, column=0, padx=5, pady=6, sticky='swe')
+        tk.Button(leftframe, text="+", relief=tk.FLAT, cursor="hand2", bd=1, bg="WHITE", activebackground="WHITE", font="TKDefaultFont 8", command=self.wizard).grid(row=0, column=1, sticky='e', ipadx=4)
+        
+    ## ROSTERBOX
+        self.rosterbox = tk.Listbox(leftframe, width=20, height=11, activestyle='none', font=("TKDefaultFont"))
+        self.rosterbox_scroll = tk.Scrollbar(leftframe, orient=tk.VERTICAL)
+        self.rosterbox['yscrollcommand'] = self.rosterbox_scroll.set
+        self.rosterbox_scroll['command'] = self.rosterbox.yview
+        self.rosterbox.grid(row=1,column=0, padx=(20,0), rowspan=6, columnspan=2, sticky=tk.W+tk.N)
+        self.rosterbox_scroll.grid(row=1, column=1, rowspan=6, sticky=tk.N+tk.S+tk.E)
 
+    ## just some variables we'll be needing
         self.p_first = tk.StringVar()
         self.p_last = tk.StringVar()
         self.p_nickname = tk.StringVar()
@@ -119,28 +141,28 @@ class root(tk.Tk):
         self.p_zip = tk.StringVar()
         self.p_birthday = tk.StringVar()
         self.p_faanum = tk.StringVar()
-        self.p_emername = tk.StringVar()
-        self.p_emerrel = tk.StringVar()
-        self.p_emercell = tk.StringVar()
+        # self.p_emername = tk.StringVar()
+        # self.p_emerrel = tk.StringVar()
+        # self.p_emercell = tk.StringVar()
         #abilities
-        self.p_weekends = tk.StringVar()
-        self.p_floor = tk.StringVar()
-        self.p_mat = tk.StringVar()
-        self.p_dusk = tk.StringVar()
-        self.p_teaser = tk.StringVar()
-        self.p_premium = tk.StringVar()
-        self.p_luxury = tk.StringVar()
-        self.p_vedit = tk.StringVar()
-        self.p_aes = tk.StringVar()
-        self.p_aev = tk.StringVar()
-        self.p_faa = tk.StringVar()
-        self.p_ains = tk.StringVar()
-        self.p_lins = tk.StringVar()
+        # self.p_weekends = tk.StringVar()
+        # self.p_floor = tk.StringVar()
+        # self.p_mat = tk.StringVar()
+        # self.p_dusk = tk.StringVar()
+        # self.p_teaser = tk.StringVar()
+        # self.p_premium = tk.StringVar()
+        # self.p_luxury = tk.StringVar()
+        # self.p_vedit = tk.StringVar()
+        # self.p_aes = tk.StringVar()
+        # self.p_aev = tk.StringVar()
+        # self.p_faa = tk.StringVar()
+        # self.p_ains = tk.StringVar()
+        # self.p_lins = tk.StringVar()
 
     
         def viewProfile(event):
             """ Reads profile of the selected photographer """
-            target = rosterbox.get(tk.ACTIVE).rstrip('\n')
+            target = self.rosterbox.get(tk.ACTIVE).rstrip('\n')
             name = target.split(" ")
             self.p_first.set(name[0])
             self.p_last.set(name[1].rstrip('\n'))
@@ -159,10 +181,9 @@ class root(tk.Tk):
                 self.p_birthday.set(info[6])
                 self.p_faanum.set(info[7])
                 self.p_abilities = info[8].lower()
-                #print("p_abilities is " + self.p_abilities) 
-                self.p_emername.set(info[9])
-                self.p_emerrel.set(info[10])
-                self.p_emercell.set(info[11])
+                # self.p_emername.set(info[9])
+                # self.p_emerrel.set(info[10])
+                # self.p_emercell.set(info[11])
                 self.p_zip.set(info[12])
                 self.p_nickname.set(info[15])
                     
@@ -177,19 +198,18 @@ class root(tk.Tk):
             theRoster.append(name)
 
         for guy in sorted(theRoster):
-            rosterbox.insert(tk.END, guy.title())
+            self.rosterbox.insert(tk.END, guy.title())
                
 
-        rosterbox.bind("<Double-Button-1>", viewProfile)  
+        self.rosterbox.bind("<Double-Button-1>", viewProfile)  
 
         #View Profile button that I disabled  
         #tk.Button(leftframe, text="View Profile", font=("TKDefaultFont"), command=lambda:viewProfile(self)).grid(row=6, column=0, ipadx=30, padx=(20,0), sticky='nw')
 
 
         def updateProfileBox(self):
-            """ updates the dang ole profile box """
+            """ updates the photographer profile box """
             self.namelabel.destroy()
-            #print("p_nickname is " + self.p_nickname.get())
             if self.p_nickname.get() == 'None' or self.p_nickname.get() == '':
                 self.namelabel = tk.Label(infoFrame, text=(self.p_first.get() + " "  + self.p_last.get()), font=("TKDefaultFont 14"))  
             else:
@@ -295,7 +315,7 @@ class root(tk.Tk):
             cov_list=list()
             count = 0
             for result in cov_results:
-                gix = (result[0] + " | " + result[1] + ", " + result[2] + " County")
+                gix = (result[0] + " | " + result[2] + " County | " + result[1])
                 #print("gix is " + gix)
                 cov_list.append(gix)
                 count += 1
@@ -313,7 +333,6 @@ class root(tk.Tk):
 
                     file = open(filename, 'w')
                     file.write("Coverage for " + first + ' ' + last + '\n\n')
-                    #file.write("DO NOT add towns to this list that did not\n#\tappear in the wizard. Please notify johngallino@gmail.com or\n#\t@gallino on Slack about any missing towns.\n")
                     for line in cov_list:
                         file.write(line + "\n")
                     file.close()
@@ -321,7 +340,7 @@ class root(tk.Tk):
                     print('\''+ filename + '\'' + ' has been exported to the same directory as this program')
                 except:
                     export_fail.place(relx=.46, rely=.99, anchor='s')
-                    print('Export of coverage file failed. What the hell?')
+                    print('Export of coverage file failed!')
 
             export_button = ttk.Button(boxframe, text = "Export Coverage", command=export_cov)
             export_success = tk.Label(boxframe, text="Export successful", fg='GREEN')
@@ -559,7 +578,7 @@ class root(tk.Tk):
             column4 = tk.Frame(editWindow)
             column4.grid(row=1, column=4, sticky='nsw', padx=(5,20), rowspan=25)
             tk.Label(column4, text="Current Coverage").grid(row=7, column=0, sticky='w')
-            self.userlistbox = tk.Listbox(column4, height=28, width=40)
+            self.userlistbox = tk.Listbox(column4, height=28, width=40, selectmode=tk.EXTENDED)
             self.userlistbox_scroll = tk.Scrollbar(column4, orient=tk.VERTICAL)
             self.userlistbox['yscrollcommand'] = self.userlistbox_scroll.set
             self.userlistbox_scroll['command'] = self.userlistbox.yview
@@ -585,7 +604,7 @@ class root(tk.Tk):
             column6 = tk.Frame(editWindow)
             column6.grid(row=1, column=6, sticky='nsw', padx=(0,50), rowspan=25)
             tk.Label(column6, text="All Other Towns").grid(row=7, column=0, sticky='w')
-            self.alltownbox = tk.Listbox(column6, height=28, width=40)
+            self.alltownbox = tk.Listbox(column6, height=28, width=40, selectmode=tk.EXTENDED)
             self.alltownbox_scroll = tk.Scrollbar(column6, orient=tk.VERTICAL)
             self.alltownbox['yscrollcommand'] = self.alltownbox_scroll.set
             self.alltownbox_scroll['command'] = self.alltownbox.yview
@@ -609,7 +628,7 @@ class root(tk.Tk):
 
 
             def confirm_removeGuy(self, first, last):
-                confirm = tk.Toplevel(padx=15, pady=15)
+                confirm = tk.Toplevel(padx=20, pady=15)
                 confirm.wm_iconbitmap('graphics/jvdb.ico')
                 center(confirm)
                 confirm.title("Are you sure?")
@@ -628,13 +647,12 @@ class root(tk.Tk):
                         try:
                             editWindow.destroy()
                         except:
-                            print("weird error but everything is okay. just close the Edit window")
-                    rosterbox.delete(tk.ACTIVE)
-                    rosterbox.grid(row=1,column=0, padx=(20,0), rowspan=5, columnspan=2, sticky=tk.W+tk.N)
+                            pass
+                    self.rosterbox.delete(tk.ACTIVE)
+                    self.rosterbox.grid(row=1,column=0, padx=(20,0), rowspan=5, columnspan=2, sticky=tk.W+tk.N)
                 
                 tk.Button(confirm, text="Cancel", command=confirm.destroy).grid(row=1, column=1, ipadx=5, padx=(0, 50), sticky='w')
-                tk.Button(confirm, text="Yes", command=lambda:removeGuy(self, first, last)).grid(row=1, column=0, ipadx=10, padx=(50, 10))
-        
+                tk.Button(confirm, text="Yes", command=lambda:removeGuy(self, first, last)).grid(row=1, column=0, ipadx=10, padx=(60, 0))
 
             def makeChanges(self):
                 flag = False
@@ -676,11 +694,10 @@ class root(tk.Tk):
                     self.newabilities += "InsLiability/"
                 if self.fname_entry.get() != first or self.lname_entry.get() != last:
                     flag = True
-                c.execute('UPDATE photographers SET first=?, last=?, nickname=?, phone=?, email=?, jv_email=?, address=?, city=?, state=?, zip=?, birthday=?, faa_num=?, realtors=?, notes=?, emer_name=?, emer_rel=?, emer_cell=?, abilities=? where first=? AND last=?',(self.fname_entry.get(), self.lname_entry.get(), self.nick_entry.get(), self.phone_entry.get(), self.email_entry.get(), self.jvemail_entry.get(), self.address_entry.get(), self.city_entry.get(), self.statevar.get(), self.zip_entry.get(), self.birthday_entry.get(), self.faa_num_entry.get(), self.realtors_entry.get('1.0', tk.END), self.notes_entry.get('1.0', tk.END), self.emer_name_entry.get(), self.emer_relation_entry.get(), self.emer_cell_entry.get(), self.newabilities, first, last))
+                c.execute('UPDATE photographers SET first=?, last=?, nickname=?, phone=?, email=?, jv_email=?, address=?, city=?, state=?, zip=?, birthday=?, faa_num=?, realtors=?, notes=?, emer_name=?, emer_rel=?, emer_cell=?, abilities=? where first=? AND last=?',(self.fname_entry.get().rstrip().replace(' ', '_'), self.lname_entry.get().rstrip().replace(' ', '_'), self.nick_entry.get(), self.phone_entry.get(), self.email_entry.get(), self.jvemail_entry.get(), self.address_entry.get(), self.city_entry.get(), self.statevar.get(), self.zip_entry.get(), self.birthday_entry.get(), self.faa_num_entry.get(), self.realtors_entry.get('1.0', tk.END), self.notes_entry.get('1.0', tk.END), self.emer_name_entry.get(), self.emer_relation_entry.get(), self.emer_cell_entry.get(), self.newabilities, first, last))
 
                 c.execute('SELECT employee_id from photographers where first=? and last=?', (first, last))
                 tar_id = str(c.fetchone()[0])
-                print('tar_id is ' + tar_id)
                 c.execute('DELETE from Coverage WHERE employee_id =?',(tar_id,))
                 usertowns = self.userlistbox.get(0, tk.END)
                 for town in usertowns:
@@ -693,34 +710,39 @@ class root(tk.Tk):
                     tarcounty = bix[1]
                     c.execute('SELECT id from UScities where state_id=? and county_name=? and city=?',(tarstate, tarcounty, tartown))
                     tar_cityid = str(c.fetchone()[0])
-                    #print('tar_cityid for ' + tartown + ' is ' + tar_cityid)
-                    # print('state is ' + tarstate + '!   town is ' + tartown + '!   county is ' + tarcounty + '!')
                     c.execute('INSERT INTO Coverage (employee_ID, city_id) VALUES (?, ?)', (tar_id, tar_cityid))
 
                 conn.commit()
-                print("Edits made to " + first + " " + last)
+                print("Edits made to " + self.fname_entry.get() + " " + self.lname_entry.get())
                 
                 if flag: #if there's been a change made to the name, update the name in the roster list
-                    global rosterbox
-                    index = rosterbox.index(tk.ACTIVE)
-                    rosterbox.delete(index)
-                    rosterbox.insert(index, self.fname_entry.get() + ' ' + self.lname_entry.get())
-                    rosterbox.grid(row=1,column=0, padx=(20,0), rowspan=5, columnspan=2, sticky=tk.W+tk.N)
+                    index = self.rosterbox.index(tk.ACTIVE)
+                    self.rosterbox.delete(index)
+                    self.rosterbox.insert(index, self.fname_entry.get() + ' ' + self.lname_entry.get())
+                    self.rosterbox.grid(row=1,column=0, padx=(20,0), rowspan=5, columnspan=2, sticky=tk.W+tk.N)
                 editWindow.destroy()
             
-            delbutton = ttk.Button(editWindow, text="Delete Photographer", command=lambda:confirm_removeGuy(self, first, last)).grid(row=5, column=0, padx=(30,0), pady=(10, 15), ipadx=8, sticky='nw')
-            okbutton = ttk.Button(editWindow, text="Make Changes",  command=lambda:makeChanges(self)).grid(row=5, column=6, padx=(0,30), pady=(10, 15), ipadx=8, sticky='ne')
+            ttk.Button(editWindow, text="Delete Photographer", command=lambda:confirm_removeGuy(self, first, last)).grid(row=5, column=0, padx=(30,0), pady=(10, 15), ipadx=8, sticky='nw')
+            ttk.Button(editWindow, text="Save Changes",  command=lambda:makeChanges(self)).grid(row=5, column=6, padx=(0,30), pady=(10, 15), ipadx=8, sticky='ne')
             
-            
-
             def add_town():
-                self.userlistbox.insert(tk.END, self.alltownbox.get(tk.ACTIVE))
-                self.alltownbox.delete(tk.ACTIVE)
-        
+                if len(self.alltownbox.curselection()) > 1:
+                    for val in self.alltownbox.curselection():
+                        self.userlistbox.insert(tk.END, self.alltownbox.get(val))
+                    for i in range(len(self.alltownbox.curselection())):
+                        self.alltownbox.delete(self.alltownbox.curselection()[0])
+                else:
+                    self.userlistbox.insert(tk.END, self.alltownbox.get(tk.ACTIVE))
+                    self.alltownbox.delete(tk.ACTIVE)
+            
                 
             def del_town():
-                self.alltownbox.insert(tk.END, self.userlistbox.get(tk.ACTIVE))
-                self.userlistbox.delete(tk.ACTIVE)
+                if len(self.userlistbox.curselection()) > 1:
+                    for i in range(len(self.userlistbox.curselection())):
+                        self.userlistbox.delete(self.userlistbox.curselection()[0])
+                else:
+                    self.alltownbox.insert(tk.END, self.userlistbox.get(tk.ACTIVE))
+                    self.userlistbox.delete(tk.ACTIVE)
 
             ### TRANSFER BUTTONS
             column5 = tk.Frame(editWindow)
@@ -763,9 +785,6 @@ class root(tk.Tk):
         ttk.Button(buttons, text="Edit", command=lambda:editPop(self, self.p_first.get(), self.p_last.get())).grid(row=0,column=2, sticky='ws', ipadx=5, pady=(45,0))
         
         self.citylabel = tk.Label(infoFrame, text=self.p_city.get() +", " + self.p_state.get() + " " + self.p_zip.get())
-        #self.citylabel.grid(row=1, column=3, sticky='es', padx=6)
-        #tk.Button(checks, font=("TKDefaultFont", 8), text="Remove",bg="PINK", command=lambda:confirm_removeGuy(p_first.get(), p_last.get())).grid(row=9,  column=2, sticky='se', padx=(0,5), pady=6, ipadx=2)
-
 
         #services list
         services = tk.Frame(topFrame)
@@ -838,14 +857,10 @@ class root(tk.Tk):
             
         
         ab_check(self.p_abilities)
-        if (rosterbox.get(tk.ACTIVE) == ''):
-            rosterbox.insert(tk.END, 'No Photographers!')
+        if (self.rosterbox.get(tk.ACTIVE) == ''):
+            self.rosterbox.insert(tk.END, 'No Photographers!')
         else:
             viewProfile(self)
-                
-    ## DIVIDER
-        #tk.Frame(self, height=1, width=500 ,bg="black").grid(row=2, column=1, columnspan=2, sticky=tk.N, pady=20)
-
     
     ## BOTTOM FRAME
         bottomFrame = tk.Frame(self,bd=2, relief=tk.RAISED)
@@ -863,6 +878,7 @@ class root(tk.Tk):
         
         
         def dupePop(results, city, state):
+            """ Pops up a window if there are two towns with the same name in that state (eg. Monroe NJ)"""
             count = len(results)
             count = str(count)
             window = tk.Toplevel()
@@ -876,10 +892,8 @@ class root(tk.Tk):
                 
             def pickTown():
                 picked = duperesultsBox.get(tk.ACTIVE)
-                #print(picked)
                 choice = picked.split(', ')
                 choice[1] = choice[1].replace(' County', '')
-                #print(choice)
                 window.destroy()
                 c.execute("SELECT first, last, photographers.city, abilities FROM photographers LEFT JOIN coverage ON photographers.employee_ID=coverage.employee_ID LEFT JOIN USCities on coverage.city_id=UScities.id WHERE UScities.city = ? AND UScities.county_name=? AND UScities.state_id=?", (choice[0], choice[1], state))
                 whatigot = c.fetchall()
@@ -897,6 +911,7 @@ class root(tk.Tk):
             
             
         def searchcity(state_int):
+            """ search photographer coverage by city """
             if state_int.get()==0:
                 searchstate = "NJ"
             elif state_int.get()==1:
@@ -959,24 +974,22 @@ class root(tk.Tk):
         resultsBox_scroll2['command'] = resultsBox.xview
         resultsBox_scroll2.grid(row=3, column=0, sticky='news', columnspan=5)
     
-    # def dragwin(self,event):
-    #     x = self.winfo_pointerx() - self._offsetx
-    #     y = self.winfo_pointery() - self._offsety
-    #     self.geometry('+{x}+{y}'.format(x=x,y=y))
+    ## LOG FRAME
+        """ Maybe for a future version """
+        logFrame = tk.Frame(self, height=20)
+        logMessage = tk.Label(logFrame, text="Hello!")
+        #logFrame.grid(row=4, column=0, sticky='ew', columnspan=2, pady=5, padx=15, ipadx=5, ipady=4)
+        #logMessage.pack()
 
-    # def clickwin(self,event):
-    #     self._offsetx = event.x
-    #     self._offsety = event.y    
 
-        
+
 
           
 ### START PROGRAM
 if __name__ == '__main__': #if this file is being run directly from the terminal (instead of from another py script), run mainloop()
-
     app = root()
     app.mainloop()
-    quit(1)
+    sys.exit(0)
     
 
     

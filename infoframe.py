@@ -3,6 +3,9 @@ from tkinter import ttk
 import config
 import os
 import otherframes
+import townframe
+import countyframe
+import finalframe
 
 found = os.path.isfile('jump.db')
 
@@ -206,7 +209,8 @@ class InfoFrame(tk.Frame):
         tk.Checkbutton(videoframe, text="Video Editing", variable=self.veditvar).grid(row=5, column=0, sticky=tk.W)
         
         
-        #tk.Label(services, text=user.abilities).grid(row=4, column=0, sticky=tk.W)
+        #Error message
+        self.error = tk.Label(self, text="error goes here", fg="red")
 
         nav = tk.Frame(self)
         nav.grid(row=8, column=0, sticky=tk.E + tk.S)
@@ -225,92 +229,139 @@ class InfoFrame(tk.Frame):
 
     def drawnext(self, parent, user):
         win = parent
-        config.current_frame = otherframes.frames[0](win, user, padx=30, pady=30, width=400)
+        config.current_frame = config.frames[0](win, user, padx=30, pady=30, width=400)
         config.current_frame.grid(row=0,column=1)
 
     def choose_frames(self, user, parent):
             """appends frames for appropriate states"""
             ##print(self.frames)
-            frames = otherframes.frames
+            frames = config.frames
             frames.clear()
             if user.nj_bool:
-                frames.append(otherframes.NJCounties)
-                frames.append(otherframes.NJTowns)
+                frames.append(countyframe.CountyFrame(parent, user, 'NJ'))
+                frames.append(townframe.TownFrame(parent, user, 'NJ'))
             if user.ny_bool:
                 frames.append(otherframes.NYCounties)
                 frames.append(otherframes.NYTowns)
             if user.ct_bool:
                 frames.append(otherframes.CTCounties)
                 frames.append(otherframes.CTTowns)   
-            frames.append(otherframes.FinalFrame)   
+            frames.append(finalframe.FinalFrame)   
             
             self.drawnext(parent, user)
         
     def nxt(self, user, parent):
-        user.firstname = self.fname_entry.get().rstrip().title()
-        user.lastname = self.lname_entry.get().rstrip().title()
-        user.nj_bool = self.njvar.get()
-        user.ny_bool = self.nyvar.get()
-#        user.man_bool = self.manvar.get()
-        user.ct_bool = self.ctvar.get()
-        user.phone = parsePhone(self.phone.get())
-        user.email = self.email.get().rstrip()
-        user.jvemail = self.jvemail.get().rstrip()
-        user.address = self.address.get().rstrip()
-        user.birthday = self.birthday.get().rstrip()
-        user.faa_num = self.faa_num.get()
-        user.emer_name = self.emer_name.get().rstrip()
-        user.emer_relation = self.emer_relation.get().rstrip()
-        user.emer_cell = self.emer_cell.get().rstrip()
-        user.hometown = self.city.get().rstrip()
-        user.homestate = self.statevar.get()
-        user.zip = self.zip.get().rstrip()
-        user.abilities = ""
-        if self.weekendsvar.get() == 1:
-            user.abilities += "WkEnds/"
-            ##print("Video added to abilities")
-        if self.floorvar.get() == 1:
-            user.abilities += "FP/"
-            ##print("Floorplans added to abilities")
-        if self.duvar.get() == 1:
-            user.abilities += "Pdusk/"
-            ##print("Dusk photography added to abilities")
-        if self.aesvar.get() == 1:
-            user.abilities += "Paerial/"
-            ##print("Aerial Stills added to abilities")
-        if self.faavar.get() == 1:
-            user.abilities += "FAA/"
-            ##print("FAA Certification added to abilities")
-        if self.matvar.get() == 1:
-            user.abilities += "Vmatter/"
-            ##print("Matterport added to abilities")
-        if self.teaservar.get() == 1:
-            user.abilities += "Vteaser/"
-            ##print("Teaser video added to abilities")
-        if self.premvar.get() == 1:
-            user.abilities += "Vpremium/"
-            ##print("Premium Video added to abilities")
-        if self.luxvar.get() == 1:
-            user.abilities += "Vluxury/"
-            ##print("Luxury Video added to abilities")
-        if self.aevvar.get() == 1:
-            user.abilities += "Vaerial/"
-            ##print("Aerial Video added to abilities")
-        if self.veditvar.get() == 1:
-            user.abilities += "Vediting/"
-        if self.a_insvar.get() == 1:
-            user.abilities += "InsAerial/"
-        if self.l_insvar.get() == 1:
-            user.abilities += "InsLiability/"
 
-        # if user.firstname == "" or user.lastname == "" or user.phone == "" or user.email == "" or user.hometown == "":
-        if user.firstname == '' or user.lastname == '':
-            tk.Label(self, text="You must fill out name, phone, email, & city to proceed!", fg="red").grid(row=5, column=0, sticky=tk.W)
+        ### ENTRY VALIDATION
+        if len(self.fname_entry.get()) == 0 or len(self.lname_entry.get()) == 0: # Name cannot be blank
+            self.error.config(text="You must fill out the name field to proceed")
+            self.error.grid(row=5, column=0, sticky=tk.W)
+
+        elif len(self.fname_entry.get()) > 20 or len(self.lname_entry.get()) > 50: # Name length check
+            self.error.config(text="Name is too long!")
+            self.error.grid(row=5, column=0, sticky=tk.W)
         
-        elif not user.nj_bool and not user.ny_bool and not user.ct_bool:
-            tk.Label(self, text="You must check at lease one state!", fg="red").grid(row=6, column=0, sticky=tk.W)
+        elif not self.fname_entry.get().isalpha() or not self.lname_entry.get().isalpha(): # Invalid characters in name field
+            self.error.config(text="Name cannot contain spaces, numbers, or symbols")
+            self.error.grid(row=5, column=0, sticky=tk.W)
+
+        elif len(self.address.get()) > 50: # Address length check
+            self.error.config(text="Address is too long!")
+            self.error.grid(row=5, column=0, sticky=tk.W)
+
+        elif len(self.phone.get()) > 14: # Phone length check
+            self.error.config(text="Phone number is too long!")
+            self.error.grid(row=5, column=0, sticky=tk.W)
+
+        elif len(self.city.get()) > 30: # City length check
+            self.error.config(text="City name is too long!")
+            self.error.grid(row=5, column=0, sticky=tk.W)
+
+        elif len(self.zip.get()) > 5: # Zip code length check
+            self.error.config(text="Zip code is too long!")
+            self.error.grid(row=5, column=0, sticky=tk.W)
+
+        elif len(self.email.get()) > 25 or len(self.jvemail.get()) >25: # email length check
+            self.error.config(text="Email address is too long!")
+            self.error.grid(row=5, column=0, sticky=tk.W)
+
+        elif len(self.email.get()) > 0 and (not '@' in self.email.get() or not '.' in self.email.get()): # email must contain @ symbol
+            self.error.config(text="Invalid email address")
+            self.error.grid(row=5, column=0, sticky=tk.W)
+
+        elif len(self.birthday.get()) > 5: # Birthday length check
+            self.error.config(text="Birthday must be in MM/DD format")
+            self.error.grid(row=5, column=0, sticky=tk.W)
+
+        elif len(self.faa_num.get()) > 6: # FAA length check
+            self.error.config(text="FAA Certification # is too long")
+            self.error.grid(row=5, column=0, sticky=tk.W)
+        
+        elif not self.njvar.get() and not self.nyvar.get() and not self.ctvar.get(): # Must check at least one state
+            self.error.config(text="You must check at least one state!")
+            self.error.grid(row=5, column=0, sticky=tk.W)
+
+        ### END VALIDATION
         else:
+            # If all looks good, write data to user object
+            user.firstname = self.fname_entry.get().rstrip().title()
+            user.lastname = self.lname_entry.get().rstrip().title()
+            user.nj_bool = self.njvar.get()
+            user.ny_bool = self.nyvar.get()
+            user.ct_bool = self.ctvar.get()
+            user.phone = parsePhone(self.phone.get())
+            user.email = self.email.get().rstrip()
+            user.jvemail = self.jvemail.get().rstrip()
+            user.address = self.address.get().rstrip()
+            user.birthday = self.birthday.get().rstrip()
+            user.faa_num = self.faa_num.get()
+            user.emer_name = self.emer_name.get().rstrip()
+            user.emer_relation = self.emer_relation.get().rstrip()
+            user.emer_cell = self.emer_cell.get().rstrip()
+            user.hometown = self.city.get().rstrip()
+            user.homestate = self.statevar.get()
+            user.zip = self.zip.get().rstrip()
+            user.abilities = ""
+            if self.weekendsvar.get() == 1:
+                user.abilities += "WkEnds/"
+                ##print("Video added to abilities")
+            if self.floorvar.get() == 1:
+                user.abilities += "FP/"
+                ##print("Floorplans added to abilities")
+            if self.duvar.get() == 1:
+                user.abilities += "Pdusk/"
+                ##print("Dusk photography added to abilities")
+            if self.aesvar.get() == 1:
+                user.abilities += "Paerial/"
+                ##print("Aerial Stills added to abilities")
+            if self.faavar.get() == 1:
+                user.abilities += "FAA/"
+                ##print("FAA Certification added to abilities")
+            if self.matvar.get() == 1:
+                user.abilities += "Vmatter/"
+                ##print("Matterport added to abilities")
+            if self.teaservar.get() == 1:
+                user.abilities += "Vteaser/"
+                ##print("Teaser video added to abilities")
+            if self.premvar.get() == 1:
+                user.abilities += "Vpremium/"
+                ##print("Premium Video added to abilities")
+            if self.luxvar.get() == 1:
+                user.abilities += "Vluxury/"
+                ##print("Luxury Video added to abilities")
+            if self.aevvar.get() == 1:
+                user.abilities += "Vaerial/"
+                ##print("Aerial Video added to abilities")
+            if self.veditvar.get() == 1:
+                user.abilities += "Vediting/"
+            if self.a_insvar.get() == 1:
+                user.abilities += "InsAerial/"
+            if self.l_insvar.get() == 1:
+                user.abilities += "InsLiability/"
+
             self.choose_frames(user, parent)
+
+        
 
 
     

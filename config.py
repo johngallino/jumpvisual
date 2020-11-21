@@ -1,10 +1,7 @@
-import tkinter as tk
 
 currentframe = ''
 imgpath = 'graphics/jump.pbm'
-
-def access():
-    print("accessed config.py")
+frames = []
 
 ### USER CLASS
 class User():

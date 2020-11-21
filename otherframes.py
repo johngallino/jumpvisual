@@ -27,9 +27,8 @@ class NJCounties(tk.Frame):
         
         #print("User abilities are saved as " + user.abilities)
         #print("next frame is " + str(frames[i+1]))
-        njimage = tk.PhotoImage(file='graphics/s_nj.pbm')
-        w.baseimage = njimage
-        win = parent
+        config.wizardpop.sidebar.config(image=config.wizardpop.njimage)
+        config.wizardpop.sidebar.grid(row=0, column=0, sticky='ns')
         
         self.header_string = "Step 2 - New Jersey Counties"
         self.top_string = ("Next we are going to review the counties in the states selected as part of the photographer's coverage zone. Please select the counties that the photographer's coverage zone extends into. \n\nNOTE: checking a county below does NOT necessarily mean covering the entire county")
@@ -63,10 +62,10 @@ class NJCounties(tk.Frame):
                 self.userlistbox.insert(tk.END, county.title())
         
         #next button
-        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, win))
+        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, parent))
         self.next_button.grid(row=0, column=1, sticky=tk.E, padx=10, pady=10)
         #back button
-        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user, win))
+        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user, parent))
         self.back_button.grid(row=0, column=0, sticky=tk.E, padx=10, pady=10)
 
 
@@ -86,19 +85,19 @@ class NJCounties(tk.Frame):
         user.nj_counties.remove(self.userlistbox.get(tk.ACTIVE))
         self.userlistbox.delete(tk.ACTIVE)
         
-    def nxt(self, user, win):
+    def nxt(self, user, parent):
         ##print(user.nj_counties)
         if self.userlistbox.get(0) == "":
             tk.Label(self, text="You must add at least one county to the photographer's coverage zone", fg="red").grid(row=3, column=0, sticky=tk.W+tk.E)
         else:
             global i
             i += 1
-            config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
+            config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
             config.current_frame.grid(row=0,column=1)
 
-    def back(self, user, win):
+    def back(self, user, parent):
         ##print(user.nj_counties)
-            config.current_frame = infoframe.InfoFrame(win, user, padx=30, pady=30, width=400)
+            config.current_frame = infoframe.InfoFrame(parent, user, padx=30, pady=30, width=400)
             config.current_frame.grid(row=0,column=1)
             
             
@@ -108,7 +107,7 @@ class NJTowns(tk.Frame):
 
     def __init__(self, parent, user, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
-        win = parent
+        
         #print("next frame is " + str(frames[i+1]))
         self.header_string = "Step 3 - NJ Towns"
         self.top_string = ("Next we're going to select the towns inside of each county you selected. Select each county to view the towns in that county, then add the towns to the photographer's coverage zone.\n\nPulling up a map is highly recommended for this part!")
@@ -175,10 +174,10 @@ class NJTowns(tk.Frame):
                 self.userlistbox.insert(tk.END, town.title())
                 
         #next button
-        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, win))
+        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, parent))
         self.next_button.grid(row=0, column=2, sticky=tk.E, padx=10, pady=10)
         #back button
-        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user, win))
+        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user, parent))
         self.back_button.grid(row=0, column=1, sticky=tk.E, padx=10, pady=10)
         #tk.Label(nav, text="If you notice a town is missing, please notify @gallino").grid(row=0, column=0, sticky=tk.W)
 
@@ -216,7 +215,7 @@ class NJTowns(tk.Frame):
         for town in holder:
             self.townbox.insert(tk.END, town.title())
         
-    def nxt(self, user, win):
+    def nxt(self, user, parent):
         ##print(user.nj_counties)
         ##print(user.nj_towns)
         if self.userlistbox.get(0) == "":
@@ -224,13 +223,13 @@ class NJTowns(tk.Frame):
         else:
             global i
             i += 1
-            config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
+            config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
             config.current_frame.grid(row=0,column=1)
 
-    def back(self, user, win):
+    def back(self, user, parent):
         global i
         i -= 1
-        config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
+        config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
         config.current_frame.grid(row=0,column=1)
         
 ### NY COUNTIES
@@ -240,7 +239,7 @@ class NYCounties(tk.Frame):
         super().__init__(parent, *args, **kwargs)
         ##print("User abilities are saved as " + user.abilities)
         #print("next frame is " + str(frames[i+1]))
-        win = parent
+        
         config.imgpath = 'graphics/s_ny.pbm'
         
         self.header_string = "Step 2 - New York Counties"
@@ -276,10 +275,10 @@ class NYCounties(tk.Frame):
                 self.userlistbox.insert(tk.END, county.title())
         
         #next button
-        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, win))
+        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, parent))
         self.next_button.grid(row=0, column=1, sticky=tk.E, padx=10, pady=10)
         #back button
-        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user, win))
+        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user, parent))
         self.back_button.grid(row=0, column=0, sticky=tk.E, padx=10, pady=10)
 
 
@@ -299,20 +298,20 @@ class NYCounties(tk.Frame):
         user.ny_counties.remove(self.userlistbox.get(tk.ACTIVE))
         self.userlistbox.delete(tk.ACTIVE)
         
-    def nxt(self, user, win):
+    def nxt(self, user, parent):
         ##print(user.ny_counties)
         if self.userlistbox.get(0) == "":
             tk.Label(self, text="You must add at least one county to the photographer's coverage zone", fg="red").grid(row=3, column=0, sticky=tk.W+tk.E)
         else:
             global i
             i += 1
-            config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
+            config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
             config.current_frame.grid(row=0,column=1)
 
-    def back(self, user, win):
+    def back(self, user, parent):
         global i
         i -= 1
-        config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
+        config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
         config.current_frame.grid(row=0,column=1)
         
 ### NY TOWNS
@@ -327,7 +326,7 @@ class NYTowns(tk.Frame):
                                   font=("TKDefaultFont", 16),justify="left", wraplength=500)
         self.top_string_label = tk.Label(self, text=self.top_string, anchor=tk.W,
                                      font=("TKDefaultFont", 10), justify="left", wraplength=500)
-        win = parent
+        
         
         
         nav = tk.Frame(self)
@@ -392,10 +391,10 @@ class NYTowns(tk.Frame):
                 self.userlistbox.insert(tk.END, town.title())
                 
         #next button
-        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, win))
+        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, parent))
         self.next_button.grid(row=0, column=2, sticky=tk.E, padx=10, pady=10)
         #back button
-        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user, win))
+        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user, parent))
         self.back_button.grid(row=0, column=1, sticky=tk.E, padx=10, pady=10)
         #tk.Label(nav, text="If you notice a town is missing, please notify @gallino").grid(row=0, column=0, sticky=tk.W)
 
@@ -426,7 +425,7 @@ class NYTowns(tk.Frame):
         for town in holder:
             self.townbox.insert(tk.END, town.title())
         
-    def nxt(self, user, win):
+    def nxt(self, user, parent):
         ##print(user.ny_counties)
         ##print(user.ny_towns)
         if self.userlistbox.get(0) == "":
@@ -434,13 +433,13 @@ class NYTowns(tk.Frame):
         else:
             global i
             i += 1
-            config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
+            config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
             config.current_frame.grid(row=0,column=1)
 
-    def back(self, user, win):
+    def back(self, user, parent):
         global i
         i -= 1
-        config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
+        config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
         config.current_frame.grid(row=0,column=1)
             
 ## CONNECTICUT            
@@ -449,7 +448,7 @@ class CTCounties(tk.Frame):
     def __init__(self, parent, user, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
         ##print("User abilities are saved as " + user.abilities)
-        win = parent
+        
         self.header_string = "Step 2 - Connecticut Counties"
         self.top_string = ("Next we are going to review the counties in the states that you selected as part of the photographer's coverage zone. Please select the counties that the photographer's coverage zone extends into. \n\nNOTE: checking a county below does NOT mean you have to cover the entire county")
         self.header_label = tk.Label(self, text=self.header_string, justify="left", anchor=tk.W,
@@ -483,10 +482,10 @@ class CTCounties(tk.Frame):
                 self.userlistbox.insert(tk.END, county.title())
         
         #next button
-        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, win))
+        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, parent))
         self.next_button.grid(row=0, column=1, sticky=tk.E, padx=10, pady=10)
         #back button
-        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user,win))
+        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user,parent))
         self.back_button.grid(row=0, column=0, sticky=tk.E, padx=10, pady=10)
 
 
@@ -506,27 +505,27 @@ class CTCounties(tk.Frame):
         user.ct_counties.remove(self.userlistbox.get(tk.ACTIVE))
         self.userlistbox.delete(tk.ACTIVE)
         
-    def nxt(self, user, win):
+    def nxt(self, user, parent):
         ##print(user.ct_counties)
         if self.userlistbox.get(0) == "":
             tk.Label(self, text="You must add at least one county to the photographer's coverage zone", fg="red").grid(row=3, column=0, sticky=tk.W+tk.E)
         else:
             global i
             i += 1
-            config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
+            config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
             config.current_frame.grid(row=0,column=1)
     
-    def back(self, user, win):
+    def back(self, user, parent):
         global i
         i -= 1
-        config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
+        config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
         config.current_frame.grid(row=0,column=1)
 
 class CTTowns(tk.Frame):
 
     def __init__(self, parent, user, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
-        win = parent
+        
         #print("next frame is " + str(frames[i+1]))
         self.header_string = "Step 3 - CT Towns"
         self.top_string = ("Next we're going to select the towns inside of each county you selected. Select each county to view the towns in that county, then add the towns to the photographer's coverage zone. \n\nPulling up a map is highly recommended for this part!")
@@ -601,10 +600,10 @@ class CTTowns(tk.Frame):
                 self.userlistbox.insert(tk.END, town.title())
                 
         #next button
-        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, win))
+        self.next_button = ttk.Button(nav, text="Next >>", command=lambda:self.nxt(user, parent))
         self.next_button.grid(row=0, column=2, sticky=tk.E, padx=10, pady=10)
         #back button
-        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user, win))
+        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user, parent))
         self.back_button.grid(row=0, column=1, sticky=tk.E, padx=10, pady=10)
         #tk.Label(nav, text="If you notice a town is missing, please notify @gallino").grid(row=0, column=0, sticky=tk.W)
 
@@ -635,7 +634,7 @@ class CTTowns(tk.Frame):
         for town in holder:
             self.townbox.insert(tk.END, town.title())
         
-    def nxt(self, user, win):
+    def nxt(self, user, parent):
         ##print(user.ct_counties)
         ##print(user.ct_towns)
         if self.userlistbox.get(0) == "":
@@ -643,94 +642,12 @@ class CTTowns(tk.Frame):
         else:
             global i
             i += 1
-            config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
+            config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
             config.current_frame.grid(row=0,column=1)
 
-    def back(self, user, win):
+    def back(self, user, parent):
         global i
         i -= 1
-        config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
+        config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
         config.current_frame.grid(row=0,column=1)
         
-class FinalFrame(tk.Frame):
-
-    def __init__(self, parent, user, *args, **kwargs):
-        super().__init__(parent, *args, **kwargs)
-        #update sidebar
-        win = parent
-        self.header_string = "Finishing Up!"
-
-        self.top_string = ("You're done! Check out the information below and make sure it's correct. When you hit the Confirm button, the new team member will be added to jump.db")
-        
-
-        self.header_label = tk.Label(self, text=self.header_string, anchor=tk.W,
-                                 font=("TKDefaultFont", 16), wraplength=500)
-        self.top_string_label = tk.Label(self, text=self.top_string, justify="left", anchor=tk.W,
-                                     font=("TKDefaultFont",10), wraplength=500)
-        # Proof
-        report = tk.Frame(self)
-        report.grid(row=3, column=0, sticky=tk.W+tk.E)
-
-        self.proof = tk.Text(report, height=21, width=60)
-        self.proof.tag_configure('proof', font='TKDefaultFont 10', lmargin1=3, justify='left')
-        self.proof_scroll = tk.Scrollbar(report, orient=tk.VERTICAL)
-        self.proof['yscrollcommand'] = self.proof_scroll.set
-        self.proof_scroll['command'] = self.proof.yview
-        self.proof_scroll.grid(row=0, column=1, sticky=tk.E+tk.N+tk.S)
-        self.proof.insert(tk.END, "Name:\t" + user.firstname.title() + " " + user.lastname.title() + "\n", 'proof')
-        self.proof.insert(tk.END, "Phone:\t" + user.phone + "\n", 'proof')
-        self.proof.insert(tk.END, "Personal Email:\t" + user.email + "\n", 'proof')
-        self.proof.insert(tk.END, "JumpVisual Email:\t" + user.jvemail + "\n", 'proof')
-        self.proof.insert(tk.END, "Address:\t" + user.address + "\n", 'proof')
-        self.proof.insert(tk.END, "City:\t" + user.hometown + ", " + user.homestate+ "\n", 'proof')
-        self.proof.insert(tk.END, "Birthday:\t" + user.birthday + "\n", 'proof')
-        self.proof.insert(tk.END, "FAA Cert#:\t" + user.faa_num + "\n", 'proof')
-        self.proof.insert(tk.END, "Services:\t" + user.abilities + "\n", 'proof')
-        self.proof.insert(tk.END, "Emergency Contact:\t{x} ({y}) {z}\n".format(x=user.emer_name, y=user.emer_relation, z=user.emer_cell), 'proof')
-        self.proof.insert(tk.END, "\n### COVERAGE ZONE ###\n", 'proof')
-        self.usertowns = user.nj_towns + user.ny_towns + user.ct_towns
-        
-        for town in self.usertowns:
-            self.proof.insert(tk.END, town + "\n", 'proof')
-        self.proof.config(state=tk.DISABLED)
-        self.proof.grid(row=0, column=0, columnspan=2, sticky=tk.W+tk.E)
-        
-        nav = tk.Frame(self)
-        nav.grid(row=5, column=0, sticky=tk.E)
-        
-        self.finlabelgood = tk.Label(report, fg="GREEN", text="Team Member successfully added to database! You may now close this wizard.", anchor=tk.W)
-        self.finlabelbad = tk.Label(report, fg="RED", text="Uh oh! Something went wrong!", anchor=tk.W)
-
-        self.export_button = ttk.Button(report, text="Confirm New Photographer", command=lambda:self.export(user))
-        self.export_button.grid(row=2, column=1, sticky=tk.E, pady=10, ipadx=10)
-        
-        #back button
-        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:self.back(user, win))
-        self.back_button.grid(row=0, column=0, sticky=tk.E, padx=10, pady=10)
-
-        #placing the widgets inside Frame1
-        self.header_label.grid(row=0, column=0, sticky=tk.W)
-        self.top_string_label.grid(row=1, column=0, sticky=tk.W, columnspan=2, ipady=8)
-        
-    def export(self, user):
-        try:
-            w.writeNewGuy(user)
-            self.finlabelgood.grid(row=2, column=0, sticky=tk.W)
-        except IOError:
-            print("Error: problem writing data to file")
-            self.finlabelbad.grid(row=2, column=0, sticky=tk.W)
-        except ValueError:
-            print('Error: problem with the data entered')
-        except:
-            print("Error: some other error occured")
-            self.finlabelbad.grid(row=2, column=0, sticky=tk.W)
-        finally:
-            user.name = (user.firstname + ' ' + user.lastname).title()
-            config.newuser = user.name
-
-
-    def back(self, user, win):
-        global i
-        i -= 1
-        config.current_frame = frames[i](win, user, padx=30, pady=30, width=400)
-        config.current_frame.grid(row=0,column=1)

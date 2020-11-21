@@ -1,5 +1,9 @@
 JumpVisualDB Release Notes
 
+4.22 - 11/20/2020
+- Better entry validation on adding a new photographer
+- Unfortunately lost some progress and some things under the hood need to be redone
+
 4.2 - 6/19/2020
 - Fixed a bug where towns from Essex County NY were being mixed up with Essex County NJ
 - When adding a new photographer, final "Export" button changed to "Confirm New Photographer" for clarity

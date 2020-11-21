@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import config
-from jumpvisualdb import c
+from jumpvisualdb import checkjumpdb
 
 class TownFrame(tk.Frame):
     _STATE = ''
@@ -21,6 +21,8 @@ class TownFrame(tk.Frame):
             self._STATELONG = 'Connecticut'
         else: 
             self._STATELONG = 'ERROR'
+
+        checkjumpdb()
         
         self.header_string = "Step 3 - " + _STATE + " Towns"
         self.top_string = ("Next we're going to select the towns inside of each county you selected. Select each county to view the towns in that county, then add the towns to the photographer's coverage zone.\n\nPulling up a map is highly recommended for this part!")

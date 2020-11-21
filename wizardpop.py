@@ -4,13 +4,9 @@ import tkinter as tk
 from tkinter import ttk
 import config
 import infoframe
-from otherframes import *
-
-def access():
-    print("accessed wizardpop")
 
 found = os.path.isfile('jump.db')
-c = 0 #global variable
+c = 0 
 name = ''
 
 i = 0
@@ -72,6 +68,7 @@ def writeNewGuy(user):
                     #print('townID is ' + townID)
                     c.execute("INSERT INTO Coverage (employee_ID, city_id) VALUES (?, ?)", (photoID, townID))
                 except:
+    # ERROR SHOULD BE LOGGED TO LOG FILE
                     print("Error with", "NJ |", county, "County", city)
             print("DONE.")
         if user.ny_towns:
@@ -90,6 +87,7 @@ def writeNewGuy(user):
                     #print('townID is ' + townID)
                     c.execute("INSERT INTO Coverage (employee_ID, city_id) VALUES (?, ?)", (photoID, townID))
                 except:
+    # ERROR SHOULD BE LOGGED TO LOG FILE
                     print("Error with", "NY |", county, "County", city)
             print("DONE.")
         if user.ct_towns:
@@ -108,6 +106,7 @@ def writeNewGuy(user):
                     #print('townID is ' + townID)
                     c.execute("INSERT INTO Coverage (employee_ID, city_id) VALUES (?, ?)", (photoID, townID))
                 except:
+    # ERROR SHOULD BE LOGGED TO LOG FILE
                     print("Error with", "CT |", county, "County", city)
             print("DONE.")
         conn.commit()
@@ -115,43 +114,38 @@ def writeNewGuy(user):
 
 
 
-class wizardpop(): 
+class Wizardpop(): 
 
     def __init__(self):
         checkjumpdb()
         user = config.User()
-        window = self.window = tk.Toplevel()
+        self.window = tk.Toplevel()
+        self.window.title("JumpWizard")
+        self.window.wm_iconbitmap('graphics/jvdb.ico')
+        self.window.wm_iconbitmap('graphics/jwicon.ico')
+        self.window.title("JumpVisual Photographer Coverage Wizard")
+        self.window.resizable(width=False, height=False)
         global win
-        win = window
-        window.title("JumpWizard")
-        window.wm_iconbitmap('graphics/jvdb.ico')
-        #window.wm_iconbitmap('jwicon.ico')
-        window.title("JumpVisual Photographer Coverage Wizard")
-        window.resizable(width=False, height=False)
+        win = self.window # is this neccesary?
 
-        baseimage = self.baseimage = tk.PhotoImage(file='graphics/jump.pbm')
-        njimage = self.njimage = tk.PhotoImage(file='graphics/s_nj.pbm')
-#        nyimage = tk.PhotoImage(file='graphics/s_ny.pbm')
-#        ctimage = tk.PhotoImage(file='graphics/s_ct.pbm')
+        self.baseimage = tk.PhotoImage(file='graphics/jump.pbm')
+        self.njimage = tk.PhotoImage(file='graphics/s_nj.pbm')
+        self.nyimage = tk.PhotoImage(file='graphics/s_ny.pbm')
+        self.ctimage = tk.PhotoImage(file='graphics/s_ct.pbm')
 
-        leftframe = tk.Frame(window, width=600)
-        leftframe.grid(row=0, column=0, sticky='news', rowspan=4)
+        self.leftframe = tk.Frame(self.window, width=600)
+        self.leftframe.grid(row=0, column=0, sticky='news', rowspan=4)
         
-        sidebar = tk.Label(leftframe, image=baseimage)
-        sidebar.image = baseimage
-        sidebar.grid(row=0, column=0, sticky='ns')
-
-        # current_frame = frames[i](win, user, i, padx=30, pady=30, width=400)
-        # current_frame.grid(row=0,column=1)
+        self.sidebar = tk.Label(self.leftframe, image=self.baseimage)
+        self.sidebar.grid(row=0, column=0, sticky='ns')
 
         #styling
-        window.grid_propagate(True) 
-        leftframe.rowconfigure(0, weight=1)
-        leftframe.columnconfigure(0, weight=0)
-        window.rowconfigure(1, weight=1)
+        self.window.grid_propagate(True) 
+        self.leftframe.rowconfigure(0, weight=1)
+        self.leftframe.columnconfigure(0, weight=0)
+        self.window.rowconfigure(1, weight=1)
         
-        frames = [infoframe.InfoFrame]
-        limit = len(frames)
+        config.frames = [infoframe.InfoFrame]
         
         def drawframe(user, i):
             """draws parent frame"""
