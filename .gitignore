@@ -1,3 +1,4 @@
+### Directories
 _pycache_/
 backups/
 build/
@@ -5,4 +6,7 @@ mac/
 old stuff/
 dist/backups/*
 
+### Files
+dist/Info.plist
 jumpvisualdb.spec
+.DS_Store
