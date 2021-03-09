@@ -1,13 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 import config
-import os
-import otherframes
-import townframe
-import countyframe
-import finalframe
-
-found = os.path.isfile('jump.db')
 
 def parsePhone(phone):
     """ takes whatever fucked up phone number and formats it nice """
@@ -24,9 +17,6 @@ class InfoFrame(tk.Frame):
     def __init__(self, parent, user,  *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
         self.header_string = "Step 1"
-
-        if not found:
-            tk.Label(self, text="Uh oh! Can't find the jump.db file. Please place it in the same folder as the .exe file and start the program again.", fg="RED", wraplength=300).grid(row=3, column=0, sticky='ew')
             
         self.top_string = ("Enter the name, contact information, services provided by the new photographer.")
         self.header_label = tk.Label(self, text=self.header_string, anchor=tk.W,
@@ -219,35 +209,37 @@ class InfoFrame(tk.Frame):
         
         self.next_button.grid(row=0, column=1, sticky=tk.E, padx=10, pady=10)
 
-        if not found:
-            tk.Label(self, text="Uh oh! Can't find the jump.db file. Please place it in the same folder as the .exe file and start the program again.",
-                     fg="RED", wraplength=300).grid(row=9, column=0, sticky='ew')
-            self.next_button.destroy()
         #back button
 #        self.back_button = ttk.Button(nav, text="<< Back", command=lambda:prev_frame(current_frame))
 #        self.back_button.grid(row=0, column=0, sticky=tk.E, padx=10, pady=10)
 
     def drawnext(self, parent, user):
-        win = parent
-        config.current_frame = config.frames[0](win, user, padx=30, pady=30, width=400)
-        config.current_frame.grid(row=0,column=1)
+        config.i += 1
+        print('i is', str(config.i))
+        config.drawframe(parent, user)
+
 
     def choose_frames(self, user, parent):
             """appends frames for appropriate states"""
-            ##print(self.frames)
-            frames = config.frames
-            frames.clear()
+            config.frames = ['infoframe']
+
             if user.nj_bool:
-                frames.append(countyframe.CountyFrame(parent, user, 'NJ'))
-                frames.append(townframe.TownFrame(parent, user, 'NJ'))
+                config.frames.append('njcounties')
+                config.frames.append('njtowns')
+                # config.frames.append(countyframe.CountyFrame(parent, user, 'NJ'))
+                # config.frames.append(townframe.TownFrame(parent, user, 'NJ'))
             if user.ny_bool:
-                frames.append(otherframes.NYCounties)
-                frames.append(otherframes.NYTowns)
+                config.frames.append('nycounties')
+                config.frames.append('nytowns')
+                # config.frames.append(otherframes.NYCounties)
+                # config.frames.append(otherframes.NYTowns)
             if user.ct_bool:
-                frames.append(otherframes.CTCounties)
-                frames.append(otherframes.CTTowns)   
-            frames.append(finalframe.FinalFrame)   
-            
+                config.frames.append('ctcounties')
+                config.frames.append('cttowns')
+                # config.frames.append(otherframes.CTCounties)
+                # config.frames.append(otherframes.CTTowns)   
+            config.frames.append('finalframe')
+            # config.frames.append(finalframe.FinalFrame)   
             self.drawnext(parent, user)
         
     def nxt(self, user, parent):

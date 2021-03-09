@@ -1,0 +1,4 @@
+INFO 2021-03-08 23:06:20,220 - JumpVisual Dispatch version 4.3
+INFO 2021-03-08 23:06:20,244 - JumpVisual Dispatch version 4.3
+INFO 2021-03-08 23:06:20,330 - A backup of jump.db has already been made for today
+INFO 2021-03-08 23:06:29,125 - Edits made to Michael Mckenna

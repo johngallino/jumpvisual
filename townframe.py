@@ -1,7 +1,11 @@
 import tkinter as tk
-from tkinter import ttk
+import sqlite3
 import config
+from tkinter import ttk
 from jumpvisualdb import checkjumpdb
+
+conn = sqlite3.connect('jump.db') 
+c = conn.cursor()
 
 class TownFrame(tk.Frame):
     _STATE = ''
@@ -22,7 +26,7 @@ class TownFrame(tk.Frame):
         else: 
             self._STATELONG = 'ERROR'
 
-        checkjumpdb()
+        
         
         self.header_string = "Step 3 - " + _STATE + " Towns"
         self.top_string = ("Next we're going to select the towns inside of each county you selected. Select each county to view the towns in that county, then add the towns to the photographer's coverage zone.\n\nPulling up a map is highly recommended for this part!")
@@ -182,12 +186,10 @@ class TownFrame(tk.Frame):
         if self.userlistbox.get(0) == "":
             tk.Label(self, text="You must add at least one town to the photographer's coverage zone", fg="red").grid(row=3, column=0, sticky=tk.W+tk.E)
         else:
-            user.i += 1
-            config.current_frame = config.frameController.frameSwitcher(user, win)
-            config.current_frame.grid(row=0,column=1)
+            config.i += 1
+            config.drawframe(win, user)
             
     def back(self, user, win):
         # Go back one frame in wizard
-        user.i -= 1
-        config.current_frame = config.frameController.frameSwitcher(user, win)
-        config.current_frame.grid(row=0,column=1)
+        config.i -= 1
+        config.drawframe(win, user)

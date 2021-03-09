@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-import config
 from jumpvisualdb import checkjumpdb
+import inspect
+import config
 
 nj_counties = ('atlantic', 'bergen', 'burlington', 'camden', 'cape may', 'cumberland', 'essex', 'gloucester', 'hudson', 'hunterdon', 
     'mercer', 'middlesex', 'monmouth', 'morris', 'ocean', 'passaic', 'salem', 'somerset', 'sussex', 'union', 'warren')
@@ -25,18 +26,18 @@ class CountyFrame(tk.Frame):
         checkjumpdb()
         if _STATE == 'NJ': 
             self._STATELONG = 'New Jersey'
-            config.wizardpop.sidebar.config(image=config.wizardpop.njimage)
-            config.wizardpop.sidebar.grid(row=0, column=0, sticky='ns')
-        elif _STATE == 'NY': 
-            self._STATELONG = 'New York'
-            config.wizardpop.sidebar.config(image=config.wizardpop.nyimage)
-            config.wizardpop.sidebar.grid(row=0, column=0, sticky='ns')
-        elif _STATE == 'CT': 
-            self._STATELONG = 'Connecticut'
-            config.wizardpop.sidebar.config(image=config.wizardpop.ctimage)
-            config.wizardpop.sidebar.grid(row=0, column=0, sticky='ns')
-        else: 
-            self._STATELONG = 'ERROR'
+            #parent.sidebar.config(image=parent.njimage)
+        #     config.wizardpop.sidebar.grid(row=0, column=0, sticky='ns')
+        # elif _STATE == 'NY': 
+        #     self._STATELONG = 'New York'
+        #     config.wizardpop.sidebar.config(image=config.wizardpop.nyimage)
+        #     config.wizardpop.sidebar.grid(row=0, column=0, sticky='ns')
+        # elif _STATE == 'CT': 
+        #     self._STATELONG = 'Connecticut'
+        #     config.wizardpop.sidebar.config(image=config.wizardpop.ctimage)
+        #     config.wizardpop.sidebar.grid(row=0, column=0, sticky='ns')
+        # else: 
+        #     self._STATELONG = 'ERROR'
 
         self.header_string = "Step 2 - " + _STATE + " Counties"
         self.top_string = ("Next we are going to review the counties in the states selected as part of the photographer's coverage zone. Please select the counties that the photographer's coverage zone extends into. \n\nNOTE: checking a county below does NOT necessarily mean covering the entire county")
@@ -124,12 +125,10 @@ class CountyFrame(tk.Frame):
         if self.userlistbox.get(0) == "":
             tk.Label(self, text="You must add at least one county to the photographer's coverage zone", fg="red").grid(row=3, column=0, sticky=tk.W+tk.E)
         else:
-            global i
-            i += 1
-            config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
-            config.current_frame.grid(row=0,column=1)
+            config.i += 1
+            config.drawframe(parent, user)
 
     def back(self, user, parent):
-        config.current_frame = infoframe.InfoFrame(parent, user, padx=30, pady=30, width=400)
-        config.current_frame.grid(row=0,column=1)
+            config.i -= 1
+            config.drawframe(parent, user)
         

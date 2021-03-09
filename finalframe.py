@@ -1,7 +1,81 @@
 import tkinter as tk
-from tkinter import ttk
 import config
+import sqlite3
+from tkinter import ttk
 from jumpvisualdb import checkjumpdb
+
+
+def writeNewGuy(user):
+    """ Takes a user object and adds them to the database """
+    conn = sqlite3.connect('jump.db')
+    c = conn.cursor()
+    with conn:
+        print("Adding new photographer to jump.db...")
+        c.execute("INSERT INTO photographers (first, last, phone, email, jv_email, address, city, state, zip, birthday, faa_num, abilities, emer_name, emer_rel, emer_cell) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (user.firstname, user.lastname, user.phone, user.email, user.jvemail, user.address,  user.hometown, user.homestate, user.zip, user.birthday, user.faa_num, user.abilities, user.emer_name, user.emer_relation, user.emer_cell))
+        conn.commit()
+        c.execute("SELECT employee_ID FROM photographers WHERE first=? AND last=?", (user.firstname, user.lastname))
+        empID = c.fetchone()
+        empID = str(empID[0])
+        print("ID of new photographer is " + str(empID))
+        
+        if user.nj_towns:
+            print("ADDING NJ TOWNS...")
+            for town in user.nj_towns:
+                #print('town is ' + town)
+                gix = town.split(' | ')
+                county = gix[0]
+                city = gix[1]
+                #print('county is ' + county)
+                #print('city is ' + city)
+                try:
+                    c.execute("SELECT id FROM UScities WHERE state_id=? AND county_name=? AND city=?",('NJ', county.rstrip(), city.rstrip()))
+                    townID = c.fetchone()
+                    townID = str(townID[0])
+                    #print('townID is ' + townID)
+                    c.execute("INSERT INTO Coverage (employee_ID, city_id) VALUES (?, ?)", (empID, townID))
+                except:
+    # ERROR SHOULD BE LOGGED TO LOG FILE
+                    print("Error with", "NJ |", county, "County", city)
+            print("DONE.")
+        if user.ny_towns:
+            print("ADDING NY TOWNS...")
+            for town in user.ny_towns:
+                #print('town is ' + town)
+                gix = town.split(' | ')
+                county = gix[0]
+                city = gix[1]
+                #print('county is ' + county)
+                #print('city is ' + city)
+                try:
+                    c.execute("SELECT id FROM UScities WHERE state_id=? AND county_name=? AND city=?",('NY', county.rstrip(), city.rstrip()))
+                    townID = c.fetchone()
+                    townID = str(townID[0])
+                    #print('townID is ' + townID)
+                    c.execute("INSERT INTO Coverage (employee_ID, city_id) VALUES (?, ?)", (empID, townID))
+                except:
+    # ERROR SHOULD BE LOGGED TO LOG FILE
+                    print("Error with", "NY |", county, "County", city)
+            print("DONE.")
+        if user.ct_towns:
+            print("ADDING CT TOWNS...")
+            for town in user.ct_towns:
+                #print('town is ' + town)
+                gix = town.split(' | ')
+                county = gix[0]
+                city = gix[1]
+                #print('county is ' + county)
+                #print('city is ' + city)
+                try:
+                    c.execute("SELECT id FROM UScities WHERE state_id=? AND county_name=? AND city=?",('CT', county.rstrip(), city.rstrip()))
+                    townID = c.fetchone()
+                    townID = str(townID[0])
+                    #print('townID is ' + townID)
+                    c.execute("INSERT INTO Coverage (employee_ID, city_id) VALUES (?, ?)", (empID, townID))
+                except:
+    # ERROR SHOULD BE LOGGED TO LOG FILE
+                    print("Error with", "CT |", county, "County", city)
+            print("DONE.")
+        conn.commit()
 
 class FinalFrame(tk.Frame):
 
@@ -67,7 +141,7 @@ class FinalFrame(tk.Frame):
         
     def export(self, user):
         try:
-            w.writeNewGuy(user)
+            writeNewGuy(user)
             self.finlabelgood.grid(row=2, column=0, sticky=tk.W)
         except IOError:
             print("Error: problem writing data to file")
@@ -83,7 +157,5 @@ class FinalFrame(tk.Frame):
 
 
     def back(self, user, parent):
-        global i
-        i -= 1
-        config.current_frame = frames[i](parent, user, padx=30, pady=30, width=400)
-        config.current_frame.grid(row=0,column=1)
+        config.i -= 1
+        config.drawframe(parent, user)

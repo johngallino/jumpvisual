@@ -1,5 +1,5 @@
 ### Directories
-_pycache_/
+__pycache__/
 backups/
 build/
 mac/
@@ -10,3 +10,4 @@ dist/backups/*
 dist/Info.plist
 jumpvisualdb.spec
 .DS_Store
+*.pyc
