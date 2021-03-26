@@ -8,3 +8,9 @@ In the upper half of the program, the dispatcher can view every photographer's p
 Photographer information can be easily added, deleted or edited from within the main program. When onboarding a new photographer, coverage area is first narrowed down by state(s), then counties, and finally cities.
 
 All information is retained in the jump.db database file. The software uses SQLite, with a many-to-many relationship between photographers and towns.
+
+
+![Screenshot of JumpVisual Dispatch Protocol](https://github.com/johngallino/jumpvisual/blob/master/screenshot1.jpg)
+![Screenshot of JumpVisual Dispatch Protocol](https://github.com/johngallino/jumpvisual/blob/master/screenshot2.jpg)
+![Screenshot of JumpVisual Dispatch Protocol](https://github.com/johngallino/jumpvisual/blob/master/screenshot3.jpg)
+![Screenshot of JumpVisual Dispatch Protocol](https://github.com/johngallino/jumpvisual/blob/master/screenshot4.jpg)
