@@ -1,4 +1,4 @@
-# Jumpvisual Dispatch Protocol
+# Jumpvisual Dispatch Protocol 4.1
 JumpVisual provides real estate photography services to real estate agencies in New Jersey, New York and Connecticut. This is a python application designed to help dispatch staff photographers to jobs in their preferred areas.
 
 The main program is jumpvisualdb.exe, located in the 'dist 'directory. Only Windows is supported currently. Latest development is in the 2020-branch
